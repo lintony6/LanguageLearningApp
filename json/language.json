@@ -1,0 +1,61 @@
+{
+    "languages": [
+      {
+        "language": "Spanish",
+        "code": "es-ES",
+        "difficulty": "Intermediate",
+        "phrases": [
+          {
+            "id": 1,
+            "text": "Hola, me encanta el dropshipping",
+            "translation": "Hello, I love dropshipping"
+          },
+          {
+            "id": 2,
+            "text": "¿Cómo estás?",
+            "translation": "How are you?"
+          },
+          {
+            "id": 3,
+            "text": "Buenos días",
+            "translation": "Good morning"
+          }
+        ]
+      },
+      {
+        "language": "English",
+        "code": "en-US",
+        "difficulty": "Beginner",
+        "phrases": [
+          {
+            "id": 1,
+            "text": "Hello, I love e-commerce",
+            "translation": "Hola, me encanta el comercio electrónico"
+          },
+          {
+            "id": 2,
+            "text": "Good morning",
+            "translation": "Buenos días"
+          }
+        ]
+      },
+      {
+        "language": "French",
+        "code": "fr-FR",
+        "difficulty": "Advanced",
+        "phrases": [
+          {
+            "id": 1,
+            "text": "Bonjour, j'adore le commerce en ligne",
+            "translation": "Hello, I love e-commerce"
+          },
+          {
+            "id": 2,
+            "text": "Comment ça va?",
+            "translation": "How are you?"
+          }
+        ]
+      }
+    ]
+  }
+  

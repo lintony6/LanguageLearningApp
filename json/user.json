@@ -1,0 +1,12 @@
+{
+    "user": {
+      "id": 1,
+      "name": "John Doe",
+      "username": "john_doe123",
+      "email": "john.doe@example.com",
+      "phoneNumber": "+1234567890",
+      "password": "securePassword123",
+      "preferredLanguage": "es-ES"
+    }
+  }
+  
