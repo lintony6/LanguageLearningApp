@@ -14,7 +14,13 @@
           "text": "Sample phrase 2",
           "translation": "Translated phrase 2"
         }
-      ]
+      ],
+      "progress": {
+        "languageProgress": "Progress Percentage",
+        "lessonsCompleted": "Number of Completed Lessons",
+        "currentLesson": "Current Lesson Number",
+        "totalLessons": "Total Number of Lessons"
+      }
     },
     {
       "language": "Language 2",
@@ -30,7 +36,13 @@
           "text": "Sample phrase 2",
           "translation": "Translated phrase 2"
         }
-      ]
+      ],
+      "progress": {
+        "languageProgress": "Progress Percentage",
+        "lessonsCompleted": "Number of Completed Lessons",
+        "currentLesson": "Current Lesson Number",
+        "totalLessons": "Total Number of Lessons"
+      }
     }
   ]
 }
