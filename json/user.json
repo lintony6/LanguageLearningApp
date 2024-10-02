@@ -5,35 +5,24 @@
     "username": "john_doe123",
     "email": "john.doe@example.com",
     "phoneNumber": "+1234567890",
-    "password": "securePassword123",
+    "password": "password",
     "preferredLanguage": "es-ES",
-
-      "user": {
-        "uuid": 2,
-        "name": "Jane Smith",
-        "username": "jane_smith456",
-        "email": "jane.smith@example.com",
-        "phoneNumber": "+9876543210",
-        "password": "anotherSecurePassword789",
-        "preferredLanguage": "fr-FR",
-      
     
-      
     "friends": [
       {
         "id": "Friend_ID_1",
         "username": "friend_username_1",
-        "status": "active / inactive"
+        "status": "active"
       },
       {
         "id": "Friend_ID_2",
         "username": "friend_username_2",
-        "status": "active / inactive"
+        "status": "inactive"
       },
       {
         "id": "Friend_ID_3",
         "username": "friend_username_3",
-        "status": "active / inactive"
+        "status": "active"
       }
     ],
     
@@ -42,14 +31,42 @@
         "emailNotifications": "enabled/disabled",
         "pushNotifications": "enabled/disabled"
       },
-      "privacy": {
-        "profileVisibility": "public/private",
-        "lastSeen": "visible/hidden"
+      "theme": {
+        "darkMode": "enabled/disabled"
+      }
+    }
+  },
+
+  "user2": {
+    "uuid": 2,
+    "name": "Doe John",
+    "username": "doe_john123",
+    "email": "doe.john@example.com",
+    "phoneNumber": "+9876543210",
+    "password": "password",
+    "preferredLanguage": "fr-FR",
+    
+    "friends": [
+      {
+        "id": "Friend_ID_4",
+        "username": "friend_username_4",
+        "status": "inactive"
+      },
+      {
+        "id": "Friend_ID_5",
+        "username": "friend_username_5",
+        "status": "active"
+      }
+    ],
+    
+    "userSettings": {
+      "notifications": {
+        "emailNotifications": "enabled/disabled",
+        "pushNotifications": "enabled/disabled"
       },
       "theme": {
         "darkMode": "enabled/disabled"
       }
     }
   }
-}
 }
