@@ -1,12 +1,28 @@
 {
-    "user": {
-      "uuid": 1,
-      "name": "John Doe",
-      "username": "john_doe123",
-      "email": "john.doe@example.com",
-      "phoneNumber": "+1234567890",
-      "password": "securePassword123",
-      "preferredLanguage": "es-ES"
-    }
+  "user": {
+    "uuid": 1,
+    "name": "John Doe",
+    "username": "john_doe123",
+    "email": "john.doe@example.com",
+    "phoneNumber": "+1234567890",
+    "password": "securePassword123",
+    "preferredLanguage": "es-ES",
+    "friends": [
+      {
+        "id": "Friend_ID_1",
+        "username": "friend_username_1",
+        "status": "active / inactive"
+      },
+      {
+        "id": "Friend_ID_2",
+        "username": "friend_username_2",
+        "status": "active / inactive"
+      },
+      {
+        "id": "Friend_ID_3",
+        "username": "friend_username_3",
+        "status": "active / inactive"
+      }
+    ]
   }
-  
+}
