@@ -8,6 +8,17 @@
     "password": "securePassword123",
     "preferredLanguage": "es-ES",
 
+      "user": {
+        "uuid": 2,
+        "name": "Jane Smith",
+        "username": "jane_smith456",
+        "email": "jane.smith@example.com",
+        "phoneNumber": "+9876543210",
+        "password": "anotherSecurePassword789",
+        "preferredLanguage": "fr-FR",
+      
+    
+      
     "friends": [
       {
         "id": "Friend_ID_1",
@@ -40,4 +51,5 @@
       }
     }
   }
+}
 }
