@@ -16,10 +16,17 @@
         }
       ],
       "progress": {
-        "languageProgress": "Progress Percentage",
-        "lessonsCompleted": "Number of Completed Lessons",
-        "currentLesson": "Current Lesson Number",
-        "totalLessons": "Total Number of Lessons"
+        "languageProgress": {
+          "overallCompletion": "Progress Percentage",
+          "totalLessons": "Total Number of Lessons",
+          "lessonsCompleted": "Number of Lessons Completed"
+        },
+        "lessonProgress": {
+          "currentLesson": "Current Lesson Number",
+          "currentLessonStatus": "In Progress / Completed",
+          "totalPhrases": "Total Number of Phrases in Lesson",
+          "phrasesLearned": "Number of Phrases Learned"
+        }
       }
     },
     {
@@ -38,10 +45,17 @@
         }
       ],
       "progress": {
-        "languageProgress": "Progress Percentage",
-        "lessonsCompleted": "Number of Completed Lessons",
-        "currentLesson": "Current Lesson Number",
-        "totalLessons": "Total Number of Lessons"
+        "languageProgress": {
+          "overallCompletion": "Progress Percentage",
+          "totalLessons": "Total Number of Lessons",
+          "lessonsCompleted": "Number of Lessons Completed"
+        },
+        "lessonProgress": {
+          "currentLesson": "Current Lesson Number",
+          "currentLessonStatus": "In Progress / Completed",
+          "totalPhrases": "Total Number of Phrases in Lesson",
+          "phrasesLearned": "Number of Phrases Learned"
+        }
       }
     }
   ]
