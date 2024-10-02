@@ -1,0 +1,62 @@
+{
+  "languages": [
+    {
+      "language": "Language 1",
+      "code": "xx-XX",
+      "phrases": [
+        {
+          "id": 1,
+          "text": "Sample phrase 1",
+          "translation": "Translated phrase 1"
+        },
+        {
+          "id": 2,
+          "text": "Sample phrase 2",
+          "translation": "Translated phrase 2"
+        }
+      ],
+      "progress": {
+        "languageProgress": {
+          "overallCompletion": "Progress Percentage",
+          "totalLessons": "Total Number of Lessons",
+          "lessonsCompleted": "Number of Lessons Completed"
+        },
+        "lessonProgress": {
+          "currentLesson": "Current Lesson Number",
+          "currentLessonStatus": "In Progress / Completed",
+          "totalPhrases": "Total Number of Phrases in Lesson",
+          "phrasesLearned": "Number of Phrases Learned"
+        }
+      }
+    },
+    {
+      "language": "Language 2",
+      "code": "yy-YY",
+      "phrases": [
+        {
+          "id": 1,
+          "text": "Sample phrase 1",
+          "translation": "Translated phrase 1"
+        },
+        {
+          "id": 2,
+          "text": "Sample phrase 2",
+          "translation": "Translated phrase 2"
+        }
+      ],
+      "progress": {
+        "languageProgress": {
+          "overallCompletion": "Progress Percentage",
+          "totalLessons": "Total Number of Lessons",
+          "lessonsCompleted": "Number of Lessons Completed"
+        },
+        "lessonProgress": {
+          "currentLesson": "Current Lesson Number",
+          "currentLessonStatus": "In Progress / Completed",
+          "totalPhrases": "Total Number of Phrases in Lesson",
+          "phrasesLearned": "Number of Phrases Learned"
+        }
+      }
+    }
+  ]
+}
