@@ -22,6 +22,10 @@ public class Language {
     return " ";   //to finish later
   }
 
+//   public ForeignLanguage getForeignLanguage() {  to finish later
+
+//   }
+
 //   public Lesson getLesson(Topic topic) {   to finish later
 
 //   }
