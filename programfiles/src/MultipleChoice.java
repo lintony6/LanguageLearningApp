@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * with a list of words for thequestion, an array of lists of words
  * for the answer choices, and an integer to track the index of
  * the correct answer.
- * @author Tony Lin
+ * @author Tony Lin 
  */
 public class MultipleChoice {
   private ArrayList<Word> question;
