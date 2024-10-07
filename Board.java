@@ -7,7 +7,6 @@ public class Board {
     private int columns;
     private int grid;
 
-    
     public Board(){
         return ;
     }
