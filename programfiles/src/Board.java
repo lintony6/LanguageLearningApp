@@ -7,13 +7,13 @@ public class Board {
     private int columns;
     private int grid;
 
-    
     public Board(){
         return ;
     }
     public boolean setup(){
         return true;
     }
+    //
     public int getSize(){
         return 0;
     }

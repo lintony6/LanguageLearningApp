@@ -8,9 +8,14 @@ Word word;
 public Flashcard(Word word){
 return 0;
 }
+public boolean setFront(Word word){
+    return true;
+}
+
 public static void flipCard(){
     return 0;
 }
+
 public boolean setFront(Word word){
     return true;
 }
