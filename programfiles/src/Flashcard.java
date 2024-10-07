@@ -19,7 +19,6 @@ public static void flipCard(){
 public boolean setFront(Word word){
     return true;
 }
-
 public boolean setBack(Word word){
     return true;
 }
