@@ -19,4 +19,5 @@ public HashMap<Word,Word>getContent(){
 public boolean isCorrect(Word word1, Word word2){
     return true; 
 }
+
 }
