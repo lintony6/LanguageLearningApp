@@ -12,7 +12,6 @@ public BoardGame getInstance(){
 }
 public static void loadGame(int languageProgress){
     return 0;
-
 }
 public static void startGame(){
     return 0;
