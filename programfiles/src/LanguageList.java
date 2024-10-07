@@ -30,7 +30,7 @@ public class LanguageList {
     return language;
     }
 
-//   public Language getLanguage(UUID userID, ForeignLanguage language) {  needs ForeignLanguage Enum
+//   public Language getLanguage(UUID userID, ForeignLanguage language) {needs ForeignLanguage Enum
 //     Language toReturn;
 //     for(int i = 0; i < userLanguages.get(userID).size(); ++i) {
 //       if(userLanguages.get(userID).get(i).getForeignLanguage().equals(language))

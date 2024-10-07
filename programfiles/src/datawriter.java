@@ -16,8 +16,8 @@ public class DataWriter {
         writer.newLine();
     }
 
-    public void openFile(String filePath) throws IOException {
-        this.filePath = filePath;
+    public void openFile() throws IOException {
+        this.filePath = "programfiles/src/data.txt";
         writer = new BufferedWriter(new FileWriter(filePath));
     }
 

@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 public class DataLoader {
     private String filePath;
     private String fileFormat;
@@ -19,8 +18,8 @@ public class DataLoader {
         return parseData(content.toString());
     }
 
-    public void openFile(String filePath) throws IOException {
-        this.filePath = filePath;
+    public void openFile() throws IOException {
+        this.filePath = "programfiles/src/data.txt";
         reader = new BufferedReader(new FileReader(filePath));
     }
 
