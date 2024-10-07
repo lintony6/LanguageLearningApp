@@ -18,10 +18,10 @@ public static void startGame(){
     return 0;
 }
 public static void endGame(){
-    return 0;
+    return null;
 }
 public static void nextSpace(){
-    return 0;
+    return null;
 }
 public static void saveBoard(){
     return 0;
