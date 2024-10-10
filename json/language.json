@@ -5,12 +5,12 @@
       "code": "xx-XX",
       "phrases": [
         {
-          "id": 1,
+          "uuid": 1,
           "text": "Sample phrase 1",
           "translation": "Translated phrase 1"
         },
         {
-          "id": 2,
+          "uuid": 2,
           "text": "Sample phrase 2",
           "translation": "Translated phrase 2"
         }
@@ -34,12 +34,12 @@
       "code": "yy-YY",
       "phrases": [
         {
-          "id": 1,
+          "uuid": 1,
           "text": "Sample phrase 1",
           "translation": "Translated phrase 1"
         },
         {
-          "id": 2,
+          "uuid": 2,
           "text": "Sample phrase 2",
           "translation": "Translated phrase 2"
         }

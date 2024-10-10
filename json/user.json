@@ -10,17 +10,17 @@
     
     "friends": [
       {
-        "id": "Friend_ID_1",
+        "uuid": "Friend_ID_1",
         "username": "friend_username_1",
         "status": "active"
       },
       {
-        "id": "Friend_ID_2",
+        "uuid": "Friend_ID_2",
         "username": "friend_username_2",
         "status": "inactive"
       },
       {
-        "id": "Friend_ID_3",
+        "uuid": "Friend_ID_3",
         "username": "friend_username_3",
         "status": "active"
       }
