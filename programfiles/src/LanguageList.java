@@ -70,4 +70,11 @@ public class LanguageList {
   public ArrayList<Language> getAllLanguages(UUID userID) {
     return userLanguages.get(userID);
   }
+
+  /**
+   * Calls the DataWriter to save all of the languages
+   */
+  public void saveLanguages() {
+    DataWriter.saveLanguages();
+  }
 }
