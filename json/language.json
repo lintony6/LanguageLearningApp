@@ -18,8 +18,8 @@
       "progress": {
         "languageProgress": {
           "overallCompletion": "Progress Percentage",
-          "totalLessons": "Total Number of Lessons",
-          "lessonsCompleted": "Number of Lessons Completed"
+          "totalLessons": "25",
+          "lessonsCompleted": "5"
         },
         "lessonProgress": {
           "currentLesson": "Current Lesson Number",
@@ -47,8 +47,8 @@
       "progress": {
         "languageProgress": {
           "overallCompletion": "Progress Percentage",
-          "totalLessons": "Total Number of Lessons",
-          "lessonsCompleted": "Number of Lessons Completed"
+          "totalLessons": "25",
+          "lessonsCompleted": "15"
         },
         "lessonProgress": {
           "currentLesson": "Current Lesson Number",
