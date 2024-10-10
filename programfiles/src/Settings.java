@@ -20,7 +20,6 @@ public class Settings {
     this.textToSpeech = false;
     this.fontSize = 10;
   }
-
   
   /** Changes the notification setting to the boolean argument passed
    * in
@@ -30,7 +29,6 @@ public class Settings {
     this.notifications = on;
   }
 
-  
   /** Changes the light mode setting to the boolean argument passed
    * in
    * @param on the new setting for light mode
@@ -38,7 +36,6 @@ public class Settings {
   public void setLightMode(boolean on) {
     this.lightMode = on;
   }
-
   
   /** Changes the text-to-speech setting to the boolean argument 
    * passed in
@@ -47,7 +44,6 @@ public class Settings {
   public void setTextToSpeech(boolean on) {
     this.textToSpeech = on;
   }
-
   
   /** Changes the font size setting to the boolean argument passed in
    * @param size the new setting for font size
@@ -57,7 +53,6 @@ public class Settings {
       this.fontSize = size;
   }
 
-  
   /** Returns a string of all of a user's current settings
    * in formatted manner
    * @return String of all datamembers of settings class
