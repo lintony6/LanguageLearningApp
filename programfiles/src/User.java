@@ -35,7 +35,6 @@ public class User {
     this.friendList = new ArrayList<User>();
     this.settings = new Settings();
   }
-
   
   /** Returns this user's userid
    * @return UUID of this user
@@ -53,7 +52,6 @@ public class User {
       this.firstName = firstName;
   }
 
-  
   /** Returns this users first name
    * @return String first name of this user
    */
@@ -61,7 +59,6 @@ public class User {
     return this.firstName;
   }
 
-  
   /** Sets this user's last name to the argument last name if
    * it is non-null
    * @param lastName to be set as user's last name
@@ -70,7 +67,6 @@ public class User {
     if(lastName != null)
       this.lastName = lastName;
   }
-
   
   /** Returns this user's last name
    * @return String last name of this user
@@ -87,7 +83,6 @@ public class User {
     if(userName != null)
       this.userName = userName;
   }
-  
   
   /** Returns this user's username
    * @return String username of this user
@@ -108,7 +103,6 @@ public class User {
     }
     return false;
   }
- 
   
   /** Returns this user's password
    * @return String password of this user
@@ -123,7 +117,6 @@ public class User {
   public ArrayList<User> getFriendList() {
     return this.friendList;
   }
-
   
   /** Adds the argument user onto this user's friendlist if the
    * argument user is non-null and not this user.
@@ -139,7 +132,6 @@ public class User {
     return false;
   }
 
-  
   /** Checks if the argument user is a friend in the friend list and
    * removes it from the list if on there
    * @param user to be removed from the friend list
@@ -156,7 +148,6 @@ public class User {
       return false;
   }
 
-  
   /** Returns this user's current settings
    * @return Settings of this user
    */
@@ -178,5 +169,4 @@ public class User {
       }
     }
   }
-
 }
