@@ -1,23 +1,28 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import com.google.gson.Gson;
 
 public class DataWriter {
     private String filePath;
-    private String fileFormat;
     private BufferedWriter writer;
+    private Gson gson;
 
-    public void writeData(Object data) throws IOException {
+    public DataWriter() {
+        gson = new Gson();
+    }
+
+    public void writeData(User user) throws IOException {
         if (writer == null) {
             throw new IOException("File is not open.");
         }
-        String formattedData = formatData(data);
-        writer.write(formattedData);
+        String jsonData = gson.toJson(user);
+        writer.write(jsonData);
         writer.newLine();
     }
 
-    public void openFile(String filePath) throws IOException {
-        this.filePath = filePath;
+    public void openFile() throws IOException {
+        this.filePath = "programfiles/src/data.txt";
         writer = new BufferedWriter(new FileWriter(filePath));
     }
 
@@ -27,16 +32,19 @@ public class DataWriter {
         }
     }
 
-    public String formatData(Object data) {
-        // Implement your data formatting logic here
-        return data.toString();
-    }
-
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
-    public void setFileFormat(String fileFormat) {
-        this.fileFormat = fileFormat;
+    public static void main(String[] args) {
+        DataWriter dataWriter = new DataWriter();
+        User user = new User("John Doe", 30, "john.doe@example.com");
+        try {
+            dataWriter.openFile(DataConstants.DEFAULT_FILE_PATH);
+            dataWriter.writeData(user);
+            dataWriter.closeFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
