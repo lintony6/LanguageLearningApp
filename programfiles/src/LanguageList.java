@@ -38,12 +38,17 @@ public class LanguageList {
    * @param language To be added to the user
    * @return Language back to the user for them to complete
    */
-  public Language addLanguage(UUID userID, Language language) {
-    if(!this.userLanguages.keySet().contains(userID))
+  public Language addLanguage(UUID userID, ForeignLanguage language,
+                              LanguageDifficulty difficulty) {
+    Language toReturn = new Language(language,difficulty);
+    if(!this.userLanguages.keySet().contains(userID)) {
       userLanguages.put(userID, new ArrayList<Language>());
-    else
-      this.userLanguages.get(userID).add(language);
-    return language;
+      userLanguages.get(userID).add(toReturn);
+    }
+    else {
+      this.userLanguages.get(userID).add(toReturn);
+    }
+    return toReturn;
     }
 
   /** Goes through the list of a user's languages and if the user

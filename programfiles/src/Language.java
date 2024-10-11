@@ -18,7 +18,7 @@ public class Language {
    * @param difficulty of the Language
    * @param language What language should the instance be of (Spanish)
    */
-  public Language(LanguageDifficulty difficulty, ForeignLanguage language) {
+  public Language(ForeignLanguage language, LanguageDifficulty difficulty) {
     this.lessons = new ArrayList<Lesson>();
     this.difficulty = difficulty;
     this.progress = new Progress();
