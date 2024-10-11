@@ -1,62 +1,37 @@
-{
-  "languages": [
-    {
-      "language": "Language 1",
-      "code": "xx-XX",
-      "phrases": [
-        {
-          "uuid": 1,
-          "text": "Sample phrase 1",
-          "translation": "Translated phrase 1"
-        },
-        {
-          "uuid": 2,
-          "text": "Sample phrase 2",
-          "translation": "Translated phrase 2"
-        }
-      ],
-      "progress": {
-        "languageProgress": {
-          "overallCompletion": "Progress Percentage",
-          "totalLessons": "25",
-          "lessonsCompleted": "5"
-        },
-        "lessonProgress": {
-          "currentLesson": "Current Lesson Number",
-          "currentLessonStatus": "In Progress / Completed",
-          "totalPhrases": "Total Number of Phrases in Lesson",
-          "phrasesLearned": "Number of Phrases Learned"
-        }
+[
+  {
+    "language": "Spanish",
+    "users": [
+      {
+        "uuid": "54cd719c-6bdf-4877-9b33-b247ea8dce8e",
+        "totalLessons": 25,
+        "lessonsCompleted": 22,
+        "progress": [
+          {
+            "lessontopic": "school",
+            "incomplete": ["flashcard", "matching", "story"]
+          }
+        ]
+      },
+      {
+        "uuid": "add4e359-5591-4cb8-a2f8-4196ece7ccc9",
+        "totalLessons": 25,
+        "lessonsCompleted": 15,
+        "progress": [
+          {
+            "lessontopic": "school",
+            "incomplete": ["flashcard", "matching", "story", "multiplechoice", "fillblank"]
+          },
+          {
+            "lessontopic": "family",
+            "incomplete": ["flashcard", "matching", "story", "multiplechoice", "fillblank"]
+          },
+          {
+            "lessontopic": "school",
+            "incomplete": ["flashcard", "matching", "story", "multiplechoice", "fillblank"]
+          }
+        ]
       }
-    },
-    {
-      "language": "Language 2",
-      "code": "yy-YY",
-      "phrases": [
-        {
-          "uuid": 1,
-          "text": "Sample phrase 1",
-          "translation": "Translated phrase 1"
-        },
-        {
-          "uuid": 2,
-          "text": "Sample phrase 2",
-          "translation": "Translated phrase 2"
-        }
-      ],
-      "progress": {
-        "languageProgress": {
-          "overallCompletion": "Progress Percentage",
-          "totalLessons": "25",
-          "lessonsCompleted": "15"
-        },
-        "lessonProgress": {
-          "currentLesson": "Current Lesson Number",
-          "currentLessonStatus": "In Progress / Completed",
-          "totalPhrases": "Total Number of Phrases in Lesson",
-          "phrasesLearned": "Number of Phrases Learned"
-        }
-      }
-    }
-  ]
-}
+    ]
+  }
+]
