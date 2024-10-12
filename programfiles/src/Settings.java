@@ -4,9 +4,9 @@
  * @author Tony Lin
  */
 public class Settings {
-  private boolean notifications;
-  private boolean lightMode;
-  private boolean textToSpeech;
+  private int notifications;
+  private int lightMode;
+  private int textToSpeech;
   private int fontSize;
 
   /**
@@ -15,9 +15,9 @@ public class Settings {
    * and font size of 10.
    */
   public Settings() {
-    this.notifications = false;
-    this.lightMode = true;
-    this.textToSpeech = false;
+    this.notifications = 0;
+    this.lightMode = 1;
+    this.textToSpeech = 0;
     this.fontSize = 10;
   }
   
@@ -25,32 +25,64 @@ public class Settings {
    * in
    * @param on the new setting for notifications
    */
-  public void setNotifications(boolean on) {
+  public void setNotifications(int on) {
     this.notifications = on;
+  }
+
+  /**
+   * Returns the value of notifications
+   * @return 1 if on or 0 if off
+   */
+  public int getNotifications() {
+    return this.notifications;
   }
 
   /** Changes the light mode setting to the boolean argument passed
    * in
    * @param on the new setting for light mode
    */
-  public void setLightMode(boolean on) {
+  public void setLightMode(int on) {
     this.lightMode = on;
   }
   
+  /**
+   * Returns the value of light mode
+   * @return 1 if on or 0 if off
+   */
+  public int getLightMode() {
+    return this.lightMode;
+  }
+
   /** Changes the text-to-speech setting to the boolean argument 
    * passed in
    * @param on the new setting for text-to-speech
    */
-  public void setTextToSpeech(boolean on) {
+  public void setTextToSpeech(int on) {
     this.textToSpeech = on;
   }
   
+/**
+ * Returns the value of text-to-speech
+ * @return 1 if on or 0 if off
+ */
+  public int getTextToSpeech() {
+    return this.textToSpeech;
+  }
+
   /** Changes the font size setting to the boolean argument passed in
    * @param size the new setting for font size
    */
   public void setFontSize(int size) {
     if(size > 0)
       this.fontSize = size;
+  }
+
+  /**
+   * Returns the value of font size
+   * @return Integer of font size
+   */
+  public int getFontSize() {
+    return this.fontSize;
   }
 
   /** Returns a string of all of a user's current settings
