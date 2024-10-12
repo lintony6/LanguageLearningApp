@@ -1,17 +1,12 @@
-import java.util.ArrayList;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 public class Driver {
 
   private static LanguageLearningSystemFacade facade;
-  private static String filePath = "CSCE247/LanguageLearningApp/json/user.json";   //enter your file path here
-  private static UserList userList;
   private static Scanner keyboard;
   public static void startDemo() {
     if(facade == null)
       facade = LanguageLearningSystemFacade.getInstance();
-    userList = UserList.getInstance();
     keyboard = new Scanner(System.in);
     System.out.println("Enter 1 to login\nEnter 2 to signup");
   }
@@ -46,8 +41,7 @@ public class Driver {
         signUp();
         return;
       }
-      UUID newUserID = UUID.randomUUID();
-      facade.signUp(firstName, lastName, userName, password, newUserID);
+      facade.signUp(firstName, lastName, userName, password, UUID.randomUUID());
       System.out.println("Welcome " + facade.getUser().getFirstName());
     } catch (Exception e) {
       System.out.println(e);
