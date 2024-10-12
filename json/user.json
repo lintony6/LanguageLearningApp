@@ -4,7 +4,6 @@
     "first-name": "John",
     "last-name": "Doe",
     "username": "john_doe123",
-    "phone-number": "1234567890",
     "password": "extremelysecure",
     "friends": [
       {
@@ -32,7 +31,6 @@
     "first-name": "Doe",
     "last-name": "John",
     "username": "doe_john123",
-    "phone-number": "9876543210",
     "password": "secure_password",
     "friends": [
       {
