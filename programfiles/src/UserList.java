@@ -1,6 +1,8 @@
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collection;
 /**
  * The class UserList maintains a collection of Users using a 
  * HashMap with UUID as the key and the User as the value;
@@ -79,9 +81,19 @@ public class UserList {
     return null;
   }
   public void saveUsers() {
-  
+    DataWriter.saveUsers();
   }
+  
   public Integer getSize() {
     return this.size;
+  }
+
+  public ArrayList<User> getAllUsers() {
+    ArrayList<User> toReturn = new ArrayList<User>();
+    Collection<User> userCollection = this.users.values();
+    for(User user : userCollection) {
+      toReturn.add(user);
+    }
+    return toReturn;
   }
 }
