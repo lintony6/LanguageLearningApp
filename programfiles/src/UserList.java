@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.Map;
-
+import java.util.UUID;;
 /**
  * The class UserList maintains a collection of Users using a 
  * HashMap with UUID as the key and the User as the value;
@@ -23,8 +23,9 @@ public class UserList {
 
   public User addUser(String firstName, String lastName,
                       String userName, String password) {
-    User toAdd = new User(firstName, lastName, userName, password);
-    users.put(toAdd.getUserID(), toAdd);
+    UUID userID = UUID.randomUUID();
+    User toAdd = new User(firstName, lastName, userName, password, userID);
+    users.put(userID, toAdd);
     return toAdd;
     }
 
