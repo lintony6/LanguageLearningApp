@@ -1,6 +1,6 @@
 
 public class DataConstants {
-  protected static final String FILE_PATH = "../../json/user.json";
+  protected static final String FILE_PATH = "CSCE247/LanguageLearningApp/json/user.json";
   protected static final String USER_ID = "uuid";
   protected static final String USER_FIRST_NAME = "first-name";
   protected static final String USER_LAST_NAME = "last-name";
