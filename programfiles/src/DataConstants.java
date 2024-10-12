@@ -9,4 +9,10 @@ public class DataConstants {
   protected static final String USER_PHONE_NUMBER = "phone-number";
   protected static final String USER_LANGUAGE = "language";
   protected static final String USER_LESSONPROGRESS = "15";
+  protected static final String USER_SETTINGS = "user-settings";
+  protected static final String USER_NOTIFICATIONS = "notifications";
+  protected static final String USER_LIGHT_MODE = "light-mode";
+  protected static final String USER_TEXT_TO_SPEECH = "text-to-speech";
+  protected static final String USER_FONT_SIZE = "font-size";
+  protected static final String USER_FRIENDS = "friends";
 }
