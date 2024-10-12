@@ -8,7 +8,8 @@ public class Driver {
     if(facade == null)
       facade = LanguageLearningSystemFacade.getInstance();
     keyboard = new Scanner(System.in);
-    System.out.println("Enter 1 to login\nEnter 2 to signup");
+    System.out.println("Enter 1 to login\nEnter 2 to signup"
+    + "\nEnter 9 to logout");
   }
 
   public static void login() {
@@ -48,6 +49,11 @@ public class Driver {
     }
   }
 
+
+  public static void logout() {
+    facade.logout();
+  }
+
   public static void action() {
     try {
       int action = keyboard.nextInt();
@@ -55,11 +61,11 @@ public class Driver {
       switch(action) {
       case 1: login(); break;
       case 2: signUp(); break;
-      case 9: System.exit(0);
-      default: System.out.println("Please enter 1 or 2");
+      case 9: logout(); break;
+      default: System.out.println("Please enter 1, 2, or 9");
       }
     } catch (Exception e) {
-      System.out.println("Please enter 1 or 2");
+      System.out.println(e);
     }
     keyboard.nextLine();
   }
@@ -67,5 +73,6 @@ public class Driver {
   public static void main(String[] args) {
     startDemo();
     action();
+
  }
 }
