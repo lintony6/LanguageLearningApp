@@ -5,7 +5,7 @@ public class Driver {
         String filePath = "";   //enter your file path here
         ArrayList<User> userList = DataLoader.loadUsers(filePath);
         for(User user : userList) {
-          System.out.println(user.getFirstName());
+          System.out.println(user.getFirstName() + " " +user.getUserID());
         }
     } catch (Exception e) {
         System.out.println("File not found");
