@@ -2,22 +2,22 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
- * The DataLoader class is responsible for loading data from a file.
- * It reads the file, parses the data, and returns a list of User objects.
+ * The DataLoader class is responsible for loading in all user data
+ * including their personal data, their saved settings, and their 
+ * friends list from a user.json file. This class is also responsible
+ * for loading all of the user's languages, their progress in the 
+ * languages, and the incomplete lessons remaining
+ * @author Tony Lin
  */
 public class DataLoader extends DataConstants{
 
     /**
-     * Loads data from the opened file.
-     * 
-     * @return A list of User objects.
-     * @throws IOException If the file is not open or an I/O error occurs.
+     * Loads all users, their user settings, and their friends
+     * list into a UserList and returns the full UserList
+     * @return UserList containing all information from JSON file
      */
   public static UserList loadUsers(String filePath) {
     try {
@@ -63,6 +63,8 @@ public class DataLoader extends DataConstants{
         return null;
       }
     }
+
+
 }
 
     
