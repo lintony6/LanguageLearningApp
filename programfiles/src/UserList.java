@@ -10,9 +10,10 @@ import java.util.UUID;;
 public class UserList {
   private HashMap<UUID, User> users;
   private static UserList userList;
-
+  private int size;
   private UserList() {
     users = new HashMap<UUID, User>();
+    size = 0;
   }
 
   public static UserList getInstance() {
@@ -22,10 +23,10 @@ public class UserList {
   }
 
   public User addUser(String firstName, String lastName,
-                      String userName, String password) {
-    UUID userID = UUID.randomUUID();
+                      String userName, String password, UUID userID) {
     User toAdd = new User(firstName, lastName, userName, password, userID);
     users.put(userID, toAdd);
+    ++size;
     return toAdd;
     }
 
@@ -46,6 +47,7 @@ public class UserList {
   public boolean removeUser(UUID userID) {
     try {
       users.remove(userID);
+      --size;
       return true;
     } catch(Exception e) {
       return false;
@@ -78,6 +80,9 @@ public class UserList {
     return null;
   }
   public void saveUsers() {
-
+  
+  }
+  public Integer getSize() {
+    return this.size;
   }
 }
