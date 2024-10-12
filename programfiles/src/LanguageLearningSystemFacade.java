@@ -27,7 +27,8 @@ public class LanguageLearningSystemFacade {
   private LanguageLearningSystemFacade() {
     userList = UserList.getInstance();
     languageList = LanguageList.getInstance();
-    boardGame = BoardGame.getInstance();
+    userList = DataLoader.loadUsers(DataConstants.FILE_PATH);
+    //boardGame = BoardGame.getInstance();
   }
 
   
@@ -71,6 +72,9 @@ public class LanguageLearningSystemFacade {
 
   }
 
+  public User getUser() {
+    return this.user;
+  }
   
   /** Creates a new user and adds them into the userList while also
    * setting this user to the new user created
@@ -81,8 +85,8 @@ public class LanguageLearningSystemFacade {
    * @return User that was just created
    */
   public User signUp(String firstName, String lastName,
-                     String userName, String password) {
-    userList.addUser(firstName, lastName, userName, password);
+                     String userName, String password, UUID userID) {
+    userList.addUser(firstName, lastName, userName, password, userID);
     this.user = userList.getUser(userList.getUserID(userName));
     return user;
   }
@@ -209,7 +213,7 @@ public ArrayList<User> getFriendList() {
    */
   public boolean endLesson(ForeignLanguage language, Lesson lesson) {
     try {
-      languageList.getLanguage(this.user.getUserID(), language).completeLesson(lesson.getTopic());
+      //languageList.getLanguage(this.user.getUserID(), language).completeLesson(lesson.getTopic());
       return true;
     } catch (Exception e) {
       return false;
