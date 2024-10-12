@@ -1,50 +1,47 @@
-import java.io.BufferedWriter;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import java.io.FileWriter;
 import java.io.IOException;
-import com.google.gson.Gson;
+import java.util.UUID;
+import java.util.ArrayList;
 
-public class DataWriter {
-    private String filePath;
-    private BufferedWriter writer;
-    private Gson gson;
-
-    public DataWriter() {
-        gson = new Gson();
+public class DataWriter extends DataConstants{
+  public static void saveUsers() {
+    UserList users = UserList.getInstance();
+    ArrayList<User> userList = users.getAllUsers();
+    JSONArray usersJSON = new JSONArray();
+    for(User user : userList) {
+      JSONObject userJSON = new JSONObject();
+      userJSON.put(USER_ID, user.getUserID().toString());
+      userJSON.put(USER_FIRST_NAME, user.getFirstName());
+      userJSON.put(USER_LAST_NAME, user.getLastName());
+      userJSON.put(USER_USERNAME, user.getUserName());
+      userJSON.put(USER_PASSWORD, user.getPassword());
+      JSONArray friendsJSON = new JSONArray();
+      ArrayList<User> friendList = user.getFriendList();
+      for(User friend : friendList) {
+        JSONObject friendJSON = new JSONObject();
+        friendJSON.put(USER_ID, friend.getUserID().toString());
+        friendJSON.put(USER_USERNAME, friend.getUserName());
+        friendsJSON.add(friendJSON);
+      }
+      userJSON.put(USER_FRIENDS, friendsJSON);
+      JSONObject userSettings = new JSONObject();
+      userSettings.put(USER_NOTIFICATIONS, Integer.valueOf(user.getSettings().getNotifications()));
+      userSettings.put(USER_LIGHT_MODE, Integer.valueOf(user.getSettings().getLightMode()));
+      userSettings.put(USER_TEXT_TO_SPEECH, Integer.valueOf(user.getSettings().getTextToSpeech()));
+      userSettings.put(USER_FONT_SIZE, Integer.valueOf(user.getSettings().getFontSize()));
+      userJSON.put(USER_SETTINGS, userSettings);
+      usersJSON.add(userJSON);
+    }    
+    try {
+      FileWriter writer = new FileWriter(FILE_PATH);
+      writer.write(usersJSON.toJSONString());
+      writer.flush();
+    } catch (Exception e) {
+        System.out.println(e);
     }
+  }
 
-    public void writeData(User user) throws IOException {
-        if (writer == null) {
-            throw new IOException("File is not open.");
-        }
-        String jsonData = gson.toJson(user);
-        writer.write(jsonData);
-        writer.newLine();
-    }
-
-    public void openFile() throws IOException {
-        this.filePath = "programfiles/src/data.txt";
-        writer = new BufferedWriter(new FileWriter(filePath));
-    }
-
-    public void closeFile() throws IOException {
-        if (writer != null) {
-            writer.close();
-        }
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public static void main(String[] args) {
-        DataWriter dataWriter = new DataWriter();
-        User user = new User("John Doe", 30, "john.doe@example.com");
-        try {
-            dataWriter.openFile(DataConstants.DEFAULT_FILE_PATH);
-            dataWriter.writeData(user);
-            dataWriter.closeFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
