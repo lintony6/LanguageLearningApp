@@ -162,9 +162,9 @@ public class User {
   public void changeSetting(int setting, int updated) {
     if((setting >= 0 && setting <= 3) && (updated >= 0)) {
       switch(setting) {
-        case 0:this.settings.setNotifications(updated != 0); break;
-        case 1:this.settings.setLightMode(updated != 0); break;
-        case 2:this.settings.setTextToSpeech(updated != 0); break;
+        case 0:this.settings.setNotifications(updated); break;
+        case 1:this.settings.setLightMode(updated); break;
+        case 2:this.settings.setTextToSpeech(updated); break;
         case 3:this.settings.setFontSize(updated);
       }
     }
