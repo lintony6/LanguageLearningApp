@@ -1,14 +1,14 @@
-
+import java.util.ArrayList;
 public class Driver {
   public static void main(String[] args) {
-    DataLoader loader = new DataLoader();
-    try {
-      loader.openFile();
-      String data = (String) loader.loadData();
-      loader.closeFile();
-      System.out.println(data);
+      try {
+        String filePath = "";   //enter your file path here
+        ArrayList<User> userList = DataLoader.loadUsers(filePath);
+        for(User user : userList) {
+          System.out.println(user.getFirstName());
+        }
     } catch (Exception e) {
-      System.out.println("File not found");
-    }
+        System.out.println("File not found");
   }
+ }
 }
