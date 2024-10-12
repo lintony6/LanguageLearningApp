@@ -26,8 +26,8 @@ public class User {
  * @param password Password of the user
  */
   public User(String firstName, String lastName, String userName,
-              String password) {
-    this.userID = UUID.randomUUID();
+              String password, UUID userID) {
+    this.userID = userID;
     this.firstName = firstName;
     this.lastName = lastName;
     this.userName = userName;
