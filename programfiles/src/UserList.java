@@ -1,99 +1,113 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.Collection;
+
 /**
  * The class UserList maintains a collection of Users using a 
  * HashMap with UUID as the key and the User as the value;
- * @author Tony Lin
+ * @author Tony Lin and Ishaan Cheema
  */
+
 public class UserList {
   private HashMap<UUID, User> users;
   private static UserList userList;
   private int size;
+
   private UserList() {
-    users = new HashMap<UUID, User>();
+    users = new HashMap<>();
     size = 0;
   }
 
-  public static UserList getInstance() {
-    if(userList == null)
+  public static synchronized UserList getInstance() {
+    if (userList == null) {
       userList = new UserList();
+    }
     return userList;
   }
 
   public User addUser(String firstName, String lastName,
                       String userName, String password, UUID userID) {
+    if (users.containsKey(userID)) {
+      System.out.println("User with this ID already exists.");
+      return null;
+    }
     User toAdd = new User(firstName, lastName, userName, password, userID);
     users.put(userID, toAdd);
     ++size;
     return toAdd;
-    }
+  }
 
   public User getUser(UUID userID) {
     return users.get(userID);
   }
 
   public User editUser(UUID userID, int change, String updated) {
-    switch(change) {
-      case 0: users.get(userID).setFirstName(updated); break;
-      case 1: users.get(userID).setLastName(updated); break;
-      case 2: users.get(userID).setUserName(updated); break;
-      case 3: users.get(userID).setPassword(updated); break;
+    User user = users.get(userID);
+    if (user == null) {
+      System.out.println("User not found.");
+      return null;
     }
-    return users.get(userID);
+
+    switch (change) {
+      case 0:
+        user.setFirstName(updated);
+        break;
+      case 1:
+        user.setLastName(updated);
+        break;
+      case 2:
+        user.setUserName(updated);
+        break;
+      case 3:
+        user.setPassword(updated);
+        break;
+      default:
+        System.out.println("Invalid field to change.");
+        return null;
+    }
+    return user;
   }
 
   public boolean removeUser(UUID userID) {
-    try {
+    if (users.containsKey(userID)) {
       users.remove(userID);
       --size;
       return true;
-    } catch(Exception e) {
+    } else {
+      System.out.println("User not found.");
       return false;
     }
   }
 
   public User login(String userName, String password) {
-    try {
-    for(Map.Entry<UUID, User> entry : users.entrySet()) {
-      if(entry.getValue().getUserName().equals(userName) && 
-      entry.getValue().getPassword().equals(password)) {
-        User user = entry.getValue();
+    for (User user : users.values()) {
+      if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
         return user;
       }
     }
-} catch(Exception e) {
-    System.out.println("Incorrect username/password" );
-}
+    System.out.println("Incorrect username/password.");
     return null;
   }
 
   public UUID getUserID(String userName) {
-    for(Map.Entry<UUID, User> entry : users.entrySet()) {
-      if(entry.getValue().getUserName().equals(userName)) {
-        UUID toReturn = entry.getValue().getUserID();
-        return toReturn;
+    for (User user : users.values()) {
+      if (user.getUserName().equals(userName)) {
+        return user.getUserID();
       }
     }
-    System.out.println("User not found");
+    System.out.println("User not found.");
     return null;
   }
+
   public void saveUsers() {
     DataWriter.saveUsers();
   }
-  
+
   public Integer getSize() {
     return this.size;
   }
 
   public ArrayList<User> getAllUsers() {
-    ArrayList<User> toReturn = new ArrayList<User>();
-    Collection<User> userCollection = this.users.values();
-    for(User user : userCollection) {
-      toReturn.add(user);
-    }
-    return toReturn;
+    return new ArrayList<>(users.values());
   }
 }

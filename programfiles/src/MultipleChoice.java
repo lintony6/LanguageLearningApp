@@ -2,10 +2,10 @@ import java.util.ArrayList;
 
 /**
  * The class `MultipleChoice` represents a multiple choice question
- * with a list of words for thequestion, an array of lists of words
+ * with a list of words for the question, an array of lists of words
  * for the answer choices, and an integer to track the index of
  * the correct answer.
- * @author Tony Lin 
+ * @author Tony Lin and Ishaan Cheema
  */
 public class MultipleChoice {
   private ArrayList<Word> question;
@@ -23,13 +23,13 @@ public class MultipleChoice {
     return this.question;
   }
 
-  public ArrayList<Word>[] getAnswers() [
+  public ArrayList<Word>[] getAnswers() {
     return this.answers;
-}
+  }
 
   public boolean isCorrect(int userAnswer) {
     return this.correct == userAnswer;
-}
+  }
 
   public ArrayList<Word> getCorrect() {
     return answers[correct];
