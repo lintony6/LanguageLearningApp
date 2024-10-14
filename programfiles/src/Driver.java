@@ -1,15 +1,11 @@
 import java.util.Scanner;
 import java.util.UUID;
 public class Driver {
-
   private static LanguageLearningSystemFacade facade;
   private static Scanner keyboard;
   public static void startDemo() {
-    if(facade == null)
-      facade = LanguageLearningSystemFacade.getInstance();
+    facade = LanguageLearningSystemFacade.getInstance();
     keyboard = new Scanner(System.in);
-    System.out.println("Enter 1 to login\nEnter 2 to signup"
-    + "\nEnter 9 to logout");
   }
 
   public static void login() {
@@ -56,23 +52,24 @@ public class Driver {
 
   public static void action() {
     try {
+      System.out.println("Enter 1 to login\nEnter 2 to signup"
+      + "\nEnter 9 to logout");
       int action = keyboard.nextInt();
       keyboard.nextLine();
       switch(action) {
       case 1: login(); break;
       case 2: signUp(); break;
-      case 9: logout(); break;
+      case 9: logout(); System.exit(0); break;
       default: System.out.println("Please enter 1, 2, or 9");
       }
     } catch (Exception e) {
       System.out.println(e);
     }
-    keyboard.nextLine();
   }
 
   public static void main(String[] args) {
     startDemo();
     action();
-
+    action();
  }
 }
