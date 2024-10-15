@@ -26,18 +26,9 @@ public class UserList {
   }
 
   public User addUser(String firstName, String lastName,
-<<<<<<< HEAD
-                      String userName, String password, UUID userID) {
-    if (users.containsKey(userID)) {
-      System.out.println("User with this ID already exists.");
-      return null;
-    }
-    User toAdd = new User(firstName, lastName, userName, password, userID);
-=======
                       String userName, String password, String email,
                       UUID userID) {
     User toAdd = new User(firstName, lastName, userName, password, email, userID);
->>>>>>> tony
     users.put(userID, toAdd);
     ++size;
     return toAdd;
