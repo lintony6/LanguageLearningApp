@@ -1,72 +1,40 @@
-{
-  "user": {
-    "uuid": 1,
-    "name": "John Doe",
+[
+  {
+    "uuid": "54cd719c-6bdf-4877-9b33-b247ea8dce8e",
+    "first-name": "John",
+    "last-name": "Doe",
     "username": "john_doe123",
-    "email": "john.doe@example.com",
-    "phoneNumber": "+1234567890",
-    "password": "password",
-    "preferredLanguage": "es-ES",
-    
+    "password": "extremelysecure",
     "friends": [
       {
-        "id": "Friend_ID_1",
-        "username": "friend_username_1",
-        "status": "active"
-      },
-      {
-        "id": "Friend_ID_2",
-        "username": "friend_username_2",
-        "status": "inactive"
-      },
-      {
-        "id": "Friend_ID_3",
-        "username": "friend_username_3",
-        "status": "active"
+        "uuid": "add4e359-5591-4cb8-a2f8-4196ece7ccc9",
+        "username": "friend_username_1"
       }
     ],
-    
-    "userSettings": {
-      "notifications": {
-        "emailNotifications": "enabled/disabled",
-        "pushNotifications": "enabled/disabled"
-      },
-      "theme": {
-        "darkMode": "enabled/disabled"
-      }
+    "user-settings": {
+      "notifications": 1,
+      "light-mode": 1,
+      "text-to-speech": 0,
+      "font-size": 10
     }
   },
-
-  "user2": {
-    "uuid": 2,
-    "name": "Doe John",
+  {
+    "uuid": "add4e359-5591-4cb8-a2f8-4196ece7ccc9",
+    "first-name": "Doe",
+    "last-name": "John",
     "username": "doe_john123",
-    "email": "doe.john@example.com",
-    "phoneNumber": "+9876543210",
-    "password": "password",
-    "preferredLanguage": "fr-FR",
-    
+    "password": "secure_password",
     "friends": [
       {
-        "id": "Friend_ID_4",
-        "username": "friend_username_4",
-        "status": "inactive"
-      },
-      {
-        "id": "Friend_ID_5",
-        "username": "friend_username_5",
-        "status": "active"
+        "uuid": "54cd719c-6bdf-4877-9b33-b247ea8dce8e",
+        "username": "john_doe123"
       }
     ],
-    
-    "userSettings": {
-      "notifications": {
-        "emailNotifications": "enabled/disabled",
-        "pushNotifications": "enabled/disabled"
-      },
-      "theme": {
-        "darkMode": "enabled/disabled"
-      }
+    "user-settings": {
+      "notifications": 0,
+      "light-mode": 0,
+      "text-to-speech": 1,
+      "font-size": 20
     }
   }
-}
+]

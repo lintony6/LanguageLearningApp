@@ -3,30 +3,34 @@ import java.util.ArrayList;
 /**
  * The Word class in Java represents a word with its foreign and
  * English translations, along with a list of similar words.
- * @author Tony Lin
+ * This class allows for storing translations and checking word correctness.
+ * It also supports managing a list of similar words.
+ * 
+ * @author Tony Lin and Ishaan Cheema
  */
+
 public class Word {
   private String foreign;
   private String english;
-  //private WordType type;
+  // private WordType type;
   private ArrayList<Word> similar;
 
-  public Word(String foreign, String english) {//WordType type) {
+  public Word(String foreign, String english) {
+    if (foreign == null || english == null) {
+      throw new IllegalArgumentException("Foreign and English words cannot be null.");
+    }
     this.foreign = foreign;
     this.english = english;
-    //this.type = type;
-    similar = new ArrayList<Word>();
+    // this.type = type;
+    this.similar = new ArrayList<>();
   }
 
-  public boolean isCorrect(String foreign, String english){
-    if(this.foreign.equals(foreign) && this.english.equals(english))
-      return true;
-    return false;
+  public boolean isCorrect(String foreign, String english) {
+    if (foreign == null || english == null) {
+      return false;
+    }
+    return this.foreign.equals(foreign) && this.english.equals(english);
   }
-
-//   public WordType getType() {
-//     return this.type;
-//   }
 
   public String getForeign() {
     return this.foreign;
@@ -36,4 +40,39 @@ public class Word {
     return this.english;
   }
 
+  // Add a similar word
+  public void addSimilarWord(Word word) {
+    if (word != null) {
+      similar.add(word);
+    }
+  }
+
+  // Remove a similar word
+  public boolean removeSimilarWord(Word word) {
+    return similar.remove(word);
+  }
+
+  // Get the list of similar words
+  public ArrayList<Word> getSimilarWords() {
+    return this.similar;
+  }
+
+  // Optional: Override toString for better string representation
+  @Override
+  public String toString() {
+    return "Word [foreign=" + foreign + ", english=" + english + "]";
+  }
+
+  // Optional: Override equals for equality check based on foreign and english words
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+    Word other = (Word) obj;
+    return foreign.equals(other.foreign) && english.equals(other.english);
+  }
 }
