@@ -134,15 +134,15 @@ public class LanguageLearningSystemUI {
         String password = new String(passwordField.getPassword());
 
         // Perform login using the facade
-        User user = facade.login(userName, password);
-        if (user != null) {
-            JOptionPane.showMessageDialog(frame, "Login Successful!");
+        try {
+            User user = facade.login(userName, password);
             loadUserFriends();
             loadUserLanguages();
             loadLesson();
-        } else {
+            JOptionPane.showMessageDialog(frame, "Login Successful!");
+        } catch(Exception e) {
             JOptionPane.showMessageDialog(frame, "Login Failed! Please try again.");
-        }
+        }      
     }
 
     /**
@@ -156,18 +156,16 @@ public class LanguageLearningSystemUI {
         String userName = signUpUserNameField.getText();
         String password = new String(signUpPasswordField.getPassword());
 
-        // Perform sign-up using the facade
-        if(password.length() < 8) {
-            JOptionPane.showMessageDialog(frame, "Sign-Up Failed! Please try again.");
-        }
-        else {
+        // Use try catch blocks when catching errors instead of if else
+        try {
             User newUser = facade.signUp(firstName, lastName, userName, password, UUID.randomUUID());
             JOptionPane.showMessageDialog(frame, "Sign-Up Successful!");
             loadUserFriends();
             loadUserLanguages();
             loadLesson();
-            
-        } 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(frame, "Sign-Up Failed! Please try again.");
+        }
     }
 
     /**
