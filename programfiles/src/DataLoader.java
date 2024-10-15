@@ -32,7 +32,8 @@ public class DataLoader extends DataConstants{
         String lastName = (String) userJSON.get(USER_LAST_NAME);
         String userName = (String) userJSON.get(USER_USERNAME);
         String password = (String) userJSON.get(USER_PASSWORD);
-        userList.addUser(firstName, lastName, userName, password,userID);
+        String email = (String) userJSON.get(USER_EMAIL);
+        userList.addUser(firstName, lastName, userName, password, email, userID);
         User user = userList.getUser(userID);
         Long longNum = (Long) userSETTINGS.get(USER_NOTIFICATIONS);
         int updated = longNum.intValue();

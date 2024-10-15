@@ -18,6 +18,7 @@ public class DataWriter extends DataConstants{
       userJSON.put(USER_LAST_NAME, user.getLastName());
       userJSON.put(USER_USERNAME, user.getUserName());
       userJSON.put(USER_PASSWORD, user.getPassword());
+      userJSON.put(USER_EMAIL, user.getEmail());
       JSONArray friendsJSON = new JSONArray();
       ArrayList<User> friendList = user.getFriendList();
       for(User friend : friendList) {
@@ -43,5 +44,4 @@ public class DataWriter extends DataConstants{
         System.out.println(e);
     }
   }
-
 }
