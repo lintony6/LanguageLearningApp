@@ -24,8 +24,9 @@ public class UserList {
   }
 
   public User addUser(String firstName, String lastName,
-                      String userName, String password, UUID userID) {
-    User toAdd = new User(firstName, lastName, userName, password, userID);
+                      String userName, String password, String email,
+                      UUID userID) {
+    User toAdd = new User(firstName, lastName, userName, password, email, userID);
     users.put(userID, toAdd);
     ++size;
     return toAdd;
