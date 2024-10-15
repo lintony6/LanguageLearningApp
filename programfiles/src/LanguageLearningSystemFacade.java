@@ -82,6 +82,8 @@ public class LanguageLearningSystemFacade {
    * @param lastName of the new user
    * @param userName of the new user
    * @param password of the new user
+   * @param email of the new user
+   * @param userID UUID of the new user
    * @return User that was just created
    */
   public User signUp(String firstName, String lastName,
