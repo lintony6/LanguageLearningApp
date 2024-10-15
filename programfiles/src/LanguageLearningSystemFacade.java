@@ -85,8 +85,8 @@ public class LanguageLearningSystemFacade {
    * @return User that was just created
    */
   public User signUp(String firstName, String lastName,
-                     String userName, String password, UUID userID) {
-    userList.addUser(firstName, lastName, userName, password, userID);
+                     String userName, String password, String email, UUID userID) {
+    userList.addUser(firstName, lastName, userName, password, email, userID);
     this.user = userList.getUser(userList.getUserID(userName));
     return user;
   }
