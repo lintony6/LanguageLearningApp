@@ -42,6 +42,7 @@ public class UserList {
       case 1: users.get(userID).setLastName(updated); break;
       case 2: users.get(userID).setUserName(updated); break;
       case 3: users.get(userID).setPassword(updated); break;
+      case 4: users.get(userID).setEmail(updated); break;
     }
     return users.get(userID);
   }
