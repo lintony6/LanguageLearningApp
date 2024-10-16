@@ -13,6 +13,7 @@ public class User {
   private String lastName;
   private String userName;
   private String password;
+  private String email;
   private ArrayList<User> friendList;
   private Settings settings;
 
@@ -26,16 +27,16 @@ public class User {
  * @param password Password of the user
  */
   public User(String firstName, String lastName, String userName,
-              String password) {
-    this.userID = UUID.randomUUID();
+              String password, String email, UUID userID) {
+    this.userID = userID;
     this.firstName = firstName;
     this.lastName = lastName;
     this.userName = userName;
     this.password = password;
+    this.email = email;
     this.friendList = new ArrayList<User>();
     this.settings = new Settings();
   }
-
   
   /** Returns this user's userid
    * @return UUID of this user
@@ -53,7 +54,6 @@ public class User {
       this.firstName = firstName;
   }
 
-  
   /** Returns this users first name
    * @return String first name of this user
    */
@@ -61,7 +61,6 @@ public class User {
     return this.firstName;
   }
 
-  
   /** Sets this user's last name to the argument last name if
    * it is non-null
    * @param lastName to be set as user's last name
@@ -70,7 +69,6 @@ public class User {
     if(lastName != null)
       this.lastName = lastName;
   }
-
   
   /** Returns this user's last name
    * @return String last name of this user
@@ -87,7 +85,6 @@ public class User {
     if(userName != null)
       this.userName = userName;
   }
-  
   
   /** Returns this user's username
    * @return String username of this user
@@ -108,7 +105,6 @@ public class User {
     }
     return false;
   }
- 
   
   /** Returns this user's password
    * @return String password of this user
@@ -123,7 +119,6 @@ public class User {
   public ArrayList<User> getFriendList() {
     return this.friendList;
   }
-
   
   /** Adds the argument user onto this user's friendlist if the
    * argument user is non-null and not this user.
@@ -139,7 +134,6 @@ public class User {
     return false;
   }
 
-  
   /** Checks if the argument user is a friend in the friend list and
    * removes it from the list if on there
    * @param user to be removed from the friend list
@@ -156,7 +150,14 @@ public class User {
       return false;
   }
 
-  
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getEmail() {
+    return this.email;
+  }
+
   /** Returns this user's current settings
    * @return Settings of this user
    */
@@ -171,12 +172,11 @@ public class User {
   public void changeSetting(int setting, int updated) {
     if((setting >= 0 && setting <= 3) && (updated >= 0)) {
       switch(setting) {
-        case 0:this.settings.setNotifications(updated != 0); break;
-        case 1:this.settings.setLightMode(updated != 0); break;
-        case 2:this.settings.setTextToSpeech(updated != 0); break;
+        case 0:this.settings.setNotifications(updated); break;
+        case 1:this.settings.setLightMode(updated); break;
+        case 2:this.settings.setTextToSpeech(updated); break;
         case 3:this.settings.setFontSize(updated);
       }
     }
   }
-
 }

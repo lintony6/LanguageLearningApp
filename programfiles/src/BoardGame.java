@@ -3,7 +3,6 @@
  * this class has all the functionality and implementation of the board game 
  * @author Michael Carson 
  */
-
 public class BoardGame {
     //singleton instance 
 private static BoardGame instance;
@@ -21,15 +20,16 @@ public static BoardGame getInstance(){
 }
 public static void loadGame(int languageProgress){
     return 0;
+
 }
 public static void startGame(){
     return 0;
 }
 public static void endGame(){
-    return null;
+    return 0;
 }
 public static void nextSpace(){
-    return null;
+    return 0;
 }
 public static void saveBoard(){
     return 0;

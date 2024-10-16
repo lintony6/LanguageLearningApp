@@ -7,6 +7,7 @@ public class Board {
     private int columns;
     private int [][] grid;
 
+    
     public Board(int rows, int columns){
         this.rows = rows; 
         this.columns = columns;
@@ -16,7 +17,6 @@ public class Board {
     public boolean setup(){
         return true;
     }
-    //
     public int getSize(){
         return rows * columns;
     }
