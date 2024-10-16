@@ -17,7 +17,6 @@ this.front = frontWord;
 this.back = backWord;
 this.isFlipped = false;
 }
-<<<<<<< HEAD
 public boolean setFront(Word word){
     this.front = frontWord;
     return true;
@@ -27,14 +26,6 @@ public void flipCard(){
     isFlipped = !isFlipped;
 }
 
-=======
-public static void flipCard(){
-    return 0;
-}
-public boolean setFront(Word word){
-    return true;
-}
->>>>>>> a2e46d8717ef73b639777a509e9816c26c497007
 public boolean setBack(Word word){
     this.back = backWord;
     return true;
