@@ -4,19 +4,20 @@
  * @author Michael Carson 
  */
 public class BoardGame {
-    //singleton instance 
 private static BoardGame instance;
 private Board boardgame;
-private User player;
+private Player player;
+private User user;
 
 private BoardGame(){
-    boardgame = new Board(25, 25);  
+    this.boardgame = new Board();
+    this.player = new Player(user);
 }
 public static BoardGame getInstance(){
-    if(instance == null){
+    if (instance == null){
         instance = new BoardGame();
-    }
-    return instance;
+        }
+        return instance;
 }
 public static void loadGame(int languageProgress){
     return 0;
@@ -28,8 +29,11 @@ public static void startGame(){
 public static void endGame(){
     return 0;
 }
-public static void nextSpace(){
-    return 0;
+public static void nextSpace(int steps){
+    player.move(steps, 15 * 15);
+    boardgame.updateBoard(player);
+    startLesson();
+    
 }
 public static void saveBoard(){
     return 0;
