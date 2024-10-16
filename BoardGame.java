@@ -5,11 +5,20 @@
  */
 
 public class BoardGame {
-private BoardGame boardgame;
-private User player;
+private static BoardGame instance;
+private Board boardgame;
+private Player player;
+private User user;
 
-public BoardGame getInstance(){
-    return boardgame;
+private BoardGame(){
+    this.boardgame = new Board();
+    this.player = new Player(user);
+}
+public static BoardGame getInstance(){
+    if (instance == null){
+        instance = new BoardGame();
+        }
+        return instance;
 }
 public static void loadGame(int languageProgress){
     return 0;
@@ -21,6 +30,9 @@ public static void endGame(){
     return null;
 }
 public static void nextSpace(){
+    player.move(steps, boardgame.getColumns() * boardgame.getRows());
+    boardgame.updateBoard(player);
+    startLesson();
     return null;
 }
 public static void saveBoard(){
