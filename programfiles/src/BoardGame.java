@@ -5,11 +5,19 @@
  */
 
 public class BoardGame {
-private BoardGame boardgame;
+    //singleton instance 
+private static BoardGame instance;
+private Board boardgame;
 private User player;
 
-public BoardGame getInstance(){
-    return boardgame;
+private BoardGame(){
+    boardgame = new Board(25, 25);  
+}
+public static BoardGame getInstance(){
+    if(instance == null){
+        instance = new BoardGame();
+    }
+    return instance;
 }
 public static void loadGame(int languageProgress){
     return 0;

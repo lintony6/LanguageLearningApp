@@ -5,9 +5,12 @@
 public class Board {
     private int rows;
     private int columns;
-    private int grid;
+    private int [][] grid;
 
-    public Board(){
+    public Board(int rows, int columns){
+        this.rows = rows; 
+        this.columns = columns;
+        this.grid = new int [rows][columns];
         return ;
     }
     public boolean setup(){
@@ -15,6 +18,6 @@ public class Board {
     }
     //
     public int getSize(){
-        return 0;
+        return rows * columns;
     }
 }
