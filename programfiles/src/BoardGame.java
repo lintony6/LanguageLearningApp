@@ -1,3 +1,4 @@
+import LanguageLearningApp.programfiles.src.Board;
 
 /**
  * this class has all the functionality and implementation of the board game 
@@ -29,13 +30,19 @@ public class BoardGame {
     public static void endGame(){
         return null;
     }
+    //checks if the user completes the lesson
     //steps the player forward on the board
     //updates the player position 
     //starts new lesson 
     public void nextSpace(int steps){
-        player.move(steps, 15 * 15);
-        boardgame.updateBoard(player);
-        startLesson();
+         if(completeLesson == true){
+            player.move(steps, 15 * 15);
+            boardgame.updateBoard(player);
+            startLesson();
+       } 
+       else {
+        return;
+       }
     }
     public static void saveBoard(){
         return 0;
