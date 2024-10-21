@@ -1,0 +1,11 @@
+{
+  "java.debug.settings.onBuildFailureProceed": true,
+  "java.project.sourcePaths": [
+    "programfiles/src",
+    "programfiles"
+  ],
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "programfiles/lib/json-simple-1.1.1.jar"
+  ]
+}
