@@ -50,14 +50,9 @@ public class UserList {
   }
 
   public boolean removeUser(UUID userID) {
-    if (users.containsKey(userID)) {
-      users.remove(userID);
-      --size;
-      return true;
-    } else {
-      System.out.println("User not found.");
-      return false;
-    }
+    users.remove(userID);
+    --size;
+    return true;
   }
 
   public User login(String userName, String password) {
@@ -66,7 +61,6 @@ public class UserList {
         return user;
       }
     }
-    System.out.println("Incorrect username/password.");
     return null;
   }
 
@@ -76,7 +70,6 @@ public class UserList {
         return user.getUserID();
       }
     }
-    System.out.println("User not found.");
     return null;
   }
 
