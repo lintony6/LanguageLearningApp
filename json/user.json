@@ -5,7 +5,7 @@
     "last-name": "Doe",
     "username": "john_doe123",
     "password": "extremelysecure",
-    "email":"johndoe123@gmail.com",
+    "email": "johndoe123@gmail.com",
     "friends": [
       {
         "uuid": "add4e359-5591-4cb8-a2f8-4196ece7ccc9",
@@ -17,7 +17,23 @@
       "light-mode": 1,
       "text-to-speech": 0,
       "font-size": 10
-    }
+    },
+    "languages": [
+      {
+        "foreignlanguage": "spanish",
+        "lessonsCompleted": 22,
+        "progress": [
+          {
+            "lessontopic": "school",
+            "incomplete": [
+              "flashcard",
+              "matching",
+              "story"
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     "uuid": "add4e359-5591-4cb8-a2f8-4196ece7ccc9",
@@ -37,6 +53,44 @@
       "light-mode": 0,
       "text-to-speech": 1,
       "font-size": 20
-    }
+    },
+    "languages": [
+      {
+        "foreignlanguage": "Spanish",
+        "lessonsCompleted": 15,
+        "progress": [
+          {
+            "lessontopic": "school",
+            "incomplete": [
+              "flashcard",
+              "matching",
+              "story",
+              "multiplechoice",
+              "fillblank"
+            ]
+          },
+          {
+            "lessontopic": "family",
+            "incomplete": [
+              "flashcard",
+              "matching",
+              "story",
+              "multiplechoice",
+              "fillblank"
+            ]
+          },
+          {
+            "lessontopic": "school",
+            "incomplete": [
+              "flashcard",
+              "matching",
+              "story",
+              "multiplechoice",
+              "fillblank"
+            ]
+          }
+        ]
+      }
+    ]
   }
 ]
