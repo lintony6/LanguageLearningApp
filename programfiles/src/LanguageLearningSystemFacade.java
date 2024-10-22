@@ -82,11 +82,13 @@ public class LanguageLearningSystemFacade {
    * @param lastName of the new user
    * @param userName of the new user
    * @param password of the new user
+   * @param email of the new user
+   * @param userID UUID of the new user
    * @return User that was just created
    */
   public User signUp(String firstName, String lastName,
-                     String userName, String password, UUID userID) {
-    userList.addUser(firstName, lastName, userName, password, userID);
+                     String userName, String password, String email, UUID userID) {
+    userList.addUser(firstName, lastName, userName, password, email, userID);
     this.user = userList.getUser(userList.getUserID(userName));
     return user;
   }

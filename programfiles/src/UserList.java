@@ -26,12 +26,9 @@ public class UserList {
   }
 
   public User addUser(String firstName, String lastName,
-                      String userName, String password, UUID userID) {
-    if (users.containsKey(userID)) {
-      System.out.println("User with this ID already exists.");
-      return null;
-    }
-    User toAdd = new User(firstName, lastName, userName, password, userID);
+                      String userName, String password, String email,
+                      UUID userID) {
+    User toAdd = new User(firstName, lastName, userName, password, email, userID);
     users.put(userID, toAdd);
     ++size;
     return toAdd;
@@ -42,41 +39,20 @@ public class UserList {
   }
 
   public User editUser(UUID userID, int change, String updated) {
-    User user = users.get(userID);
-    if (user == null) {
-      System.out.println("User not found.");
-      return null;
+    switch(change) {
+      case 0: users.get(userID).setFirstName(updated); break;
+      case 1: users.get(userID).setLastName(updated); break;
+      case 2: users.get(userID).setUserName(updated); break;
+      case 3: users.get(userID).setPassword(updated); break;
+      case 4: users.get(userID).setEmail(updated); break;
     }
-
-    switch (change) {
-      case 0:
-        user.setFirstName(updated);
-        break;
-      case 1:
-        user.setLastName(updated);
-        break;
-      case 2:
-        user.setUserName(updated);
-        break;
-      case 3:
-        user.setPassword(updated);
-        break;
-      default:
-        System.out.println("Invalid field to change.");
-        return null;
-    }
-    return user;
+    return users.get(userID);
   }
 
   public boolean removeUser(UUID userID) {
-    if (users.containsKey(userID)) {
-      users.remove(userID);
-      --size;
-      return true;
-    } else {
-      System.out.println("User not found.");
-      return false;
-    }
+    users.remove(userID);
+    --size;
+    return true;
   }
 
   public User login(String userName, String password) {
@@ -85,7 +61,6 @@ public class UserList {
         return user;
       }
     }
-    System.out.println("Incorrect username/password.");
     return null;
   }
 
@@ -95,7 +70,6 @@ public class UserList {
         return user.getUserID();
       }
     }
-    System.out.println("User not found.");
     return null;
   }
 

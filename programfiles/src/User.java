@@ -13,6 +13,7 @@ public class User {
   private String lastName;
   private String userName;
   private String password;
+  private String email;
   private ArrayList<User> friendList;
   private Settings settings;
 
@@ -26,12 +27,13 @@ public class User {
  * @param password Password of the user
  */
   public User(String firstName, String lastName, String userName,
-              String password, UUID userID) {
+              String password, String email, UUID userID) {
     this.userID = userID;
     this.firstName = firstName;
     this.lastName = lastName;
     this.userName = userName;
     this.password = password;
+    this.email = email;
     this.friendList = new ArrayList<User>();
     this.settings = new Settings();
   }
@@ -146,6 +148,14 @@ public class User {
         }
       }
       return false;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getEmail() {
+    return this.email;
   }
 
   /** Returns this user's current settings

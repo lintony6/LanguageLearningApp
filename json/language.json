@@ -1,35 +1,72 @@
 [
   {
-    "language": "Spanish",
-    "users": [
+    "language": "spanish",
+    "lessons": [
       {
-        "uuid": "54cd719c-6bdf-4877-9b33-b247ea8dce8e",
-        "totalLessons": 25,
-        "lessonsCompleted": 22,
-        "progress": [
+        "lessontopic": "school",
+        "questions": [
           {
-            "lessontopic": "school",
-            "incomplete": ["flashcard", "matching", "story"]
+            "questiontype": "flashcard",
+            "prompt": "escuela",
+            "answer": "school"
+          },
+          {
+            "questiontype": "matching",
+            "prompt": [
+              "escuela",
+              "profesora",
+              "lapiz",
+              "papel",
+              "libro"
+            ],
+            "answer": [
+              "school",
+              "professor",
+              "pencil",
+              "paper",
+              "book"
+            ]
+          },
+          {
+            "questiontype": "story",
+            "prompt": "text of the story"
+          },
+          {
+            "questiontype": "multiplechoice",
+            "prompt": "What word means school?",
+            "options": [
+              "escuela",
+              "manzana",
+              "gato",
+              "arbol"
+            ],
+            "answer": 1
+          },
+          {
+            "questiontype": "fillblank",
+            "prompt": "what word finishes this sentence?, \"Mañana tengo _\" (Tomorrow I have school)",
+            "answer": "escuela"
           }
         ]
       },
       {
-        "uuid": "add4e359-5591-4cb8-a2f8-4196ece7ccc9",
-        "totalLessons": 25,
-        "lessonsCompleted": 15,
-        "progress": [
-          {
-            "lessontopic": "school",
-            "incomplete": ["flashcard", "matching", "story", "multiplechoice", "fillblank"]
-          },
-          {
-            "lessontopic": "family",
-            "incomplete": ["flashcard", "matching", "story", "multiplechoice", "fillblank"]
-          },
-          {
-            "lessontopic": "school",
-            "incomplete": ["flashcard", "matching", "story", "multiplechoice", "fillblank"]
-          }
+        "lessontopic": "family",
+        "questions": [
+        ]
+      },
+      {
+        "lessontopic": "weather",
+        "questions": [
+        ]
+      },
+      {
+        "lessontopic": "pets",
+        "questions": [
+        ]
+      }
+      {
+        "lessontopic": "family",
+        "questions": [
         ]
       }
     ]
