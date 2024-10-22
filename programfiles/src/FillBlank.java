@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+/**
+ * The class UserList maintains a collection of Users using a 
+ * HashMap with UUID as the key and the User as the value;
+ * @author Tony Lin and Ishaan Cheema
+ */
+
 public class FillBlank {
   private Word answer;
   private ArrayList<Word> question;
