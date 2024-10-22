@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//@author De'Juan Carson
+
 public class LanguageLearningSystemUI extends JFrame {
     private JTextField usernameField, firstNameField, lastNameField, addFriendField, signUpUsernameField;
     private JPasswordField passwordField, signUpPasswordField, editPasswordField;
@@ -403,4 +405,4 @@ public class LanguageLearningSystemUI extends JFrame {
             }
         });
     }
-}
+} 
