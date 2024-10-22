@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
 /**
- * The class UserList maintains a collection of Users using a 
- * HashMap with UUID as the key and the User as the value;
+ * The FillBlank class represents a fill-in-the-blank question.
+ * It contains a question and an answer, which is the correct Word.
+ * This class allows checking if a user-provided answer is correct.
  * @author Tony Lin and Ishaan Cheema
- */
+*/
 
 public class FillBlank {
   private Word answer;
