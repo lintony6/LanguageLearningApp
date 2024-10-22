@@ -2,29 +2,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.UUID;
 
-/**
- * LanguageLearningSystemUI is the user interface for the Language Learning System.
- * It provides functionality for user login, sign-up, displaying friends, 
- * selecting languages, and displaying lesson information.
- */
-public class LanguageLearningSystemUI {
-    private LanguageLearningSystemFacade facade; // Facade for the language learning system
-    private JFrame frame; // Main application window
-    private JTextField userNameField; // Field for username input
-    private JPasswordField passwordField; // Field for password input
-    private JTextField firstNameField; // Field for first name input
-    private JTextField lastNameField; // Field for last name input
-    private JTextField signUpUserNameField; // Field for sign-up username input
-    private JPasswordField signUpPasswordField; // Field for sign-up password input
-    private JTextArea friendListArea; // Area to display user's friends
-    private JComboBox<Language> languageListBox; // Dropdown to select languages
-    private JTextArea lessonArea; // Area to display lesson information
+//@author De'Juan Carson
 
-    /**
-     * Constructs the LanguageLearningSystemUI and initializes the facade and UI components.
-     */
+public class LanguageLearningSystemUI extends JFrame {
+    private JTextField usernameField, firstNameField, lastNameField, addFriendField, signUpUsernameField;
+    private JPasswordField passwordField, signUpPasswordField, editPasswordField;
+    private JTextArea friendListArea, languagesArea, lessonArea;
+    private JComboBox<String> languageDropdown, difficultyDropdown;
+    private JButton loginButton, signUpButton, logoutButton, editProfileButton, viewLanguagesButton, startGameButton,
+            addFriendButton, removeFriendButton, saveChangesButton, startLanguageButton, chooseTopicButton,
+            startLessonButton, endLessonButton, backButton, signUpMenuButton, submitEditButton, lessonTopicsButton,
+            friendListButton, gameBackButton, friendListBackButton, lessonBackButton; // Declare lessonBackButton
+
+    private String firstName = ""; // User's first name
+    private String lastName = ""; // User's last name
+    private String userName = ""; // User's username
+    private String password = ""; // User's password
+
     public LanguageLearningSystemUI() {
         // Initialize the facade using the singleton pattern
         facade = LanguageLearningSystemFacade.getInstance();
@@ -212,4 +207,4 @@ public class LanguageLearningSystemUI {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new LanguageLearningSystemUI());
     }
-}
+} 
