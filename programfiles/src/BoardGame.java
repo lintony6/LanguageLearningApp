@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.swing.*;
+import javax.swing.*;
 
 import LanguageLearningApp.programfiles.src.Board;
 
@@ -50,28 +50,28 @@ public class BoardGame {
      * prints the board and user location on the board
      * asks for user input to begin game 
      */
-    public void startGame(){
+    public void startGame() {
         Scanner scanner = new Scanner(System.in);
         boardgame.updateBoard(player);
+
         while (true) {
             System.out.println("Press 1 to start a lesson or 0 to quit");
             int input = scanner.nextInt();
-            if (input == 0){
+
+            if (input == 0) {
                 endGame();
                 break;
-            } else if (input == 1){
-                boolean completeLesson = startLesson();
-                if (completeLesson){
-                    System.out.println("Press 1 to move forward");
+            } else if (input == 1) {
+                boolean lessonCompleted = startLesson();
+                if (lessonCompleted) {
+                    System.out.println("Press 1 to move forward by steps");
                     int steps = scanner.nextInt();
-                    nextSpace(steps);
-                } else {
-                    System.out.println("You did not complete the lesson. Keep trying !! ");
-                } 
-            }else {
-                    System.out.println("Invalid input please press 1 or 0 !");
+                    nextSpace(steps); // Move the player after completing the lesson
                 }
+            } else {
+                System.out.println("Invalid input, please press 1 or 0!");
             }
+        }
     }
 
     /**
@@ -111,10 +111,7 @@ public class BoardGame {
             return false;
         }
     }
-}
-    public static void endGame(){
-        return null;
-    }
+
    /**
     * checks if the user completes the lesson 
     * moves the player forward if the lesson is completed 
@@ -128,6 +125,7 @@ public class BoardGame {
             boardgame.updateBoard(player);
         }else{
             System.out.println("Please complete the lesson successfully in order to move forward!");
+            boardgame.updateBoard(player);
         }
     }
     public static void saveBoard(){
