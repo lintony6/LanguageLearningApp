@@ -1,6 +1,6 @@
-/*
- * This class controls player movement on the board 
- * @author Michael Carson
+/**
+ * This class controls player movement on the board
+ * @author Michael Carson 
  */
 public class Player {
     private int row;
