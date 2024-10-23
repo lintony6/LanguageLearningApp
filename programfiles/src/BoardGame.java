@@ -41,7 +41,7 @@ public class BoardGame {
      * prints the board and user location on the board 
      */
     public void startGame() {
-        boardgame.updateBoard(player);
+        initializeBoard();
     }
     /**
      * moves the player symbol forward

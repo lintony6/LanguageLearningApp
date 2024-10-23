@@ -10,6 +10,7 @@ public class Board extends JPanel{
     private int rows;
     private int columns;
     private String[][] grid;
+    private Color [][] colors;
     private static final int CELL_SIZE = 30; // pixel size 
 
     // creates a board of the size 15 x 15 
