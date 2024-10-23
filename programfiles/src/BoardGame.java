@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.swing.*;
 
 import LanguageLearningApp.programfiles.src.Board;
 
@@ -24,6 +25,13 @@ public class BoardGame {
         this.lessons = new ArrayList<>();
         this.currentLesson = 0;
         this.progress = new Progress();
+
+        JFrame frame = new JFrame("");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(boardgame);
+        frame.pack();
+        frame.setLocationRelativeTo(null); // sets frame to middle of screen 
+        frame.setVisible(true);
     }
     public static BoardGame getInstance(){
         if (instance == null){
@@ -31,6 +39,9 @@ public class BoardGame {
             }
             return instance;
     }
+
+
+
     public static void loadGame(int languageProgress){
         return 0;
         
@@ -42,17 +53,27 @@ public class BoardGame {
     public void startGame(){
         Scanner scanner = new Scanner(System.in);
         boardgame.updateBoard(player);
-        boardgame.printBoard();
         while (true) {
             System.out.println("Press 1 to start a lesson or 0 to quit");
             int input = scanner.nextInt();
             if (input == 0){
                 endGame();
-            }
-            if (input == 1){
+                break;
+            } else if (input == 1){
                 boolean completeLesson = startLesson();
+                if (completeLesson){
+                    System.out.println("Press 1 to move forward");
+                    int steps = scanner.nextInt();
+                    nextSpace(steps);
+                } else {
+                    System.out.println("You did not complete the lesson. Keep trying !! ");
+                } 
+            }else {
+                    System.out.println("Invalid input please press 1 or 0 !");
+                }
             }
     }
+
     /**
      * checks if there is a lesson left 
      * gets a lesson if there is one to get 
