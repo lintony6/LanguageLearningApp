@@ -2,10 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.UUID;
 
 //@author De'Juan Carson
 
 public class LanguageLearningSystemUI extends JFrame {
+    private LanguageLearningSystemFacade facade; // Facade for the language learning system
     private JTextField usernameField, firstNameField, lastNameField, addFriendField, signUpUsernameField;
     private JPasswordField passwordField, signUpPasswordField, editPasswordField;
     private JTextArea friendListArea, languagesArea, lessonArea;
@@ -25,6 +27,9 @@ public class LanguageLearningSystemUI extends JFrame {
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new CardLayout());
+         // Initialize the facade using the singleton pattern
+         facade = LanguageLearningSystemFacade.getInstance();
+         initializeUI();
 
         // Login Screen
         JPanel loginPanel = new JPanel(new GridLayout(3, 2));
@@ -405,4 +410,104 @@ public class LanguageLearningSystemUI extends JFrame {
             }
         });
     }
-} 
+
+    private void initializeUI() {
+    }
+
+     
+    
+
+     //* Handles the login action for the user. It retrieves the username and password
+     //* from the input fields and attempts to log the user in through the facade.
+     //* Displays success or failure message.
+ 
+
+     private void handleLogin() {
+    String userName = usernameField.getText();
+    String password = new String(passwordField.getPassword());
+
+    // Perform login using the facade
+    try {
+        User user = facade.login(userName, password);
+        loadUserFriends();  // Load user's friend list after successful login
+        loadUserLanguages();  // Load available languages for the user
+        loadLesson();  // Load current lesson data
+        JOptionPane.showMessageDialog(null, "Login Successful!");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Login Failed! Please try again.");
+    }      
+}
+
+
+/**
+ * Handles the sign-up action for a new user. It retrieves the user's information
+ * from the input fields and attempts to create a new user through the facade.
+ * Displays success or failure message.
+ */
+
+     private void handleSignUp() {
+    String firstName = firstNameField.getText();
+    String lastName = lastNameField.getText();
+    String userName = signUpUsernameField.getText();
+    String password = new String(signUpPasswordField.getPassword());
+
+    // Use try-catch block to handle potential errors
+    try {
+        // Attempt to sign up the new user
+        User newUser = facade.signUp(firstName, lastName, userName, password, UUID.randomUUID());
+        
+        // Notify user of success and load their related data
+        JOptionPane.showMessageDialog(null, "Sign-Up Successful!");
+        loadUserFriends();  // Load the user's friend list
+        loadUserLanguages();  // Load the available languages for the user
+        loadLesson();  // Load the current lesson
+    } catch (Exception e) {
+        // Notify user of failure in case of an error
+        JOptionPane.showMessageDialog(null, "Sign-Up Failed! Please try again.");
+    }
+}
+
+
+    /**
+     * Loads the user's friends from the facade and displays them in the friend list area.
+     */
+    private void loadUserFriends() {
+        // Clear existing friends
+        friendListArea.setText("");
+
+        // Load friend list from facade
+        for (User friend : facade.getFriendList()) {
+            friendListArea.append(friend.getUserName());
+        }
+    }
+
+    /**
+     * Loads the languages that the user has started from the facade
+     * and displays them in the language selection dropdown.
+     */
+    private void loadUserLanguages() {
+        // Clear existing languages
+       // languageListBox.removeAllItems();
+
+        // Load languages from facade
+        //for (Language language : facade.getLanguages()) {
+        //    languageListBox.addItem(language); // Add the language object directly
+        //}
+    }
+
+    /**
+     * Loads and displays lesson information in the lesson area.
+     * In a real implementation, you'd pull lesson details from the facade.
+     */
+    private void loadLesson() {
+      //  lessonArea.setText("Lesson information goes here...");
+        // In a real implementation, you'd pull lesson details from the facade
+    }
+
+    /**
+     * Main method to launch the Language Learning System UI.
+     * 
+     * @param args command line arguments
+     */
+}
+
