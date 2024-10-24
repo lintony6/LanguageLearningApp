@@ -3,6 +3,7 @@ import java.util.UUID;
 public class Driver {
   private static LanguageLearningSystemFacade facade;
   private static Scanner keyboard;
+  
   public static void startDemo() {
     facade = LanguageLearningSystemFacade.getInstance();
     keyboard = new Scanner(System.in);
@@ -18,6 +19,10 @@ public class Driver {
     keyboard.nextLine();
     facade.login(userName, password);
     System.out.println("Welcome " + facade.getUser().getFirstName());
+    System.out.println("Friends:");
+    for(User user : facade.getUser().getFriendList()) {
+      System.out.println(user.getUserName());
+    }
     } catch(Exception e) {
       System.out.println("Incorrect username/password");
     }
