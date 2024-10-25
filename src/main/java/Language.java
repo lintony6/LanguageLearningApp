@@ -32,6 +32,10 @@ public class Language {
     this.difficulty = difficulty;
   }
   
+  public LanguageDifficulty getDifficulty() {
+    return this.difficulty;
+  }
+
   /** Returns the 3 difficulty options in nice formatted view
    * @return String of all 3 difficulty options
    */
@@ -67,8 +71,12 @@ public class Language {
     for(Lesson lesson : lessons) {
       if(lesson.getTopic().equals(topic)) {
         lesson.completeLesson();
-        progress.updateProgress(lesson);
+        //progress.updateProgress(lesson);
       }
     }
+  }
+
+  public int getLanguageProgress() {
+    return progress.getLanguageProgress();
   }
 }
