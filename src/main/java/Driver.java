@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.ArrayList;
+
+
 public class Driver {
   private static LanguageLearningSystemFacade facade;
   private static Scanner keyboard;
@@ -19,7 +21,7 @@ public class Driver {
     String password = keyboard.next();
     keyboard.nextLine();
     facade.login(userName, password);
-    System.out.println("Welcome " + facade.getUser().getFirstName());
+    System.out.println("Welcome back: " + facade.getUser().getFirstName());
     System.out.println("Friends:");
     for(User user : facade.getUser().getFriendList()) {
       System.out.println(user.getUserName());
@@ -41,48 +43,47 @@ public class Driver {
       String password = keyboard.nextLine();
       System.out.println("Enter your email");
       String email = keyboard.nextLine();
-      int error = checkSignUp(userName, password, email);
-      switch(error) {
-      case 0:facade.signUp(firstName, lastName, userName, password, email, UUID.randomUUID());
-             System.out.println("Welcome " + facade.getUser().getFirstName());
-             break;
-      case 1: System.out.println("This username is taken, please choose a new one"); action(); break;
-      case 2: System.out.println("Please enter a password at least 8 characters"); action(); break;
-      case 3: System.out.println("This email is already registered, please choose a new one"); action(); break;
-      }
-
+      checkSignUp(firstName, lastName, userName, password, email);
     } catch (Exception e) {
       System.out.println(e);
     }
   }
-  private static int checkSignUp(String userName, String password, String email)  {
+  private static void checkSignUp(String firstName, String lastName,
+  String userName, String password, String email)  {
     try {
-      if(password.length() < 8)
-        return 2;
+      if(password.length() < 8) {
+        System.out.println("Please enter a password at least 8 characters");
+        return;
+      }
       ArrayList<User> allUsers = facade.getAllUsers();
       for(User user : allUsers) {
-        if(user.getUserName().equals(userName))
-          return 1;
-        else if (user.getEmail().equals(email))
-          return 3;
+        if(user.getUserName().equals(userName)) {
+          System.out.println("This username is taken, please choose a new one");
+          return;
+        }
+        else if (user.getEmail().equals(email)) {
+          System.out.println("This email is already registered, please choose a new one");
+          return;
+        }
       }
-      return 0;
+      facade.signUp(firstName, lastName, userName, password, email, UUID.randomUUID());
+      System.out.println("Welcome new user: " + facade.getUser().getFirstName());
     } catch (Exception e) {
       System.out.println(e);
-      return 0;
     }
   }
   public static void logout() {
     facade.logout();
+    System.out.println("Logged Out");
   }
 
-  public static void action() {
+  public static void menuOptions() {
     try {
       System.out.println("Enter 1 to login\nEnter 2 to signup"
       + "\nEnter 9 to logout");
-      int action = keyboard.nextInt();
+      int menuOptions = keyboard.nextInt();
       keyboard.nextLine();
-      switch(action) {
+      switch(menuOptions) {
       case 1: login(); break;
       case 2: signUp(); break;
       case 9: logout(); System.exit(0); break;
@@ -93,9 +94,28 @@ public class Driver {
     }
   }
 
+  public static void playSound(String text){
+    Narrator.playSound(text);
+  }
+
+  public static void scenario1() {
+    String firstName = "Tim";
+    String lastName = "Tomacka";
+    String userName = "ttomacka";
+    String password = "timtomacka";
+    String email = "timtomacka@email.com";
+    checkSignUp(firstName, lastName, userName, password, email);
+    userName = "ttom";
+    checkSignUp(firstName, lastName, userName, password, email);
+    facade.logout();
+    facade.login(userName,password);
+    System.out.println("Welcome back: " + facade.getUser().getFirstName());
+  }
+
   public static void main(String[] args) {
-    Narrator.playSound("Welcome");
     startDemo();
-    action();
+    playSound("Hola mi nombre es tony");
+    scenario1();
+    facade.logout();
  }
 }
