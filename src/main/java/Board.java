@@ -26,7 +26,9 @@ public class Board extends JPanel{
         initilizeBoard();
         setPreferredSize(new Dimension(columns * CELL_SIZE, rows * CELL_SIZE));
     }
-    //initializes the board with the default values 
+    /**
+     * creates the board with Grey and Blue checkerboard format
+     */
     private void initilizeBoard(){
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < columns; j++){
