@@ -26,7 +26,9 @@ public class Board extends JPanel{
         initilizeBoard();
         setPreferredSize(new Dimension(columns * CELL_SIZE, rows * CELL_SIZE));
     }
-    //initializes the board with the default values 
+    /**
+     * initializes the board with the default values 
+     */
     private void initilizeBoard(){
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < columns; j++){
@@ -41,7 +43,9 @@ public class Board extends JPanel{
             }
         }
     
-    //draws the board 
+    /**
+     * paints all cells on the board 
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -67,8 +71,10 @@ public class Board extends JPanel{
             }
         }
     }
-
-
+    /**
+     * updates the players position on the board 
+     * @param player
+     */
     public void updateBoard(Player player) {
         initializeBoard(); // Reset the board
         grid[player.getRow(columns)][player.getCol(columns)] = player.getSymbol();
