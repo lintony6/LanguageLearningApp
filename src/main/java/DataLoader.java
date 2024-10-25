@@ -3,6 +3,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import java.io.FileReader;
 import java.util.UUID;
+import java.util.ArrayList;
 
 /**
  * The DataLoader class is responsible for loading in all user data
@@ -19,10 +20,10 @@ public class DataLoader extends DataConstants{
      * list into a UserList and returns the full UserList
      * @return UserList containing all information from JSON file
      */
-  public static UserList loadUsers(String filePath) {
+  public static UserList loadUsers() {
     try {
       UserList userList = UserList.getInstance();
-      FileReader reader = new FileReader(filePath);
+      FileReader reader = new FileReader(FILE_PATH);
       JSONArray usersJSON = (JSONArray)new JSONParser().parse(reader);
       for (int i = 0; i < usersJSON.size(); ++i) {
         JSONObject userJSON = (JSONObject)usersJSON.get(i);
@@ -47,12 +48,12 @@ public class DataLoader extends DataConstants{
         longNum = (Long) userSETTINGS.get(USER_FONT_SIZE);
         updated = longNum.intValue();
         user.changeSetting(3, updated);
+
       }
       for(int i = 0; i < usersJSON.size(); ++i) {
         JSONObject userJSON = (JSONObject)usersJSON.get(i);
         JSONArray userFRIENDS = (JSONArray)userJSON.get(USER_FRIENDS);
-        if(userFRIENDS == null)
-          break;
+        if(userFRIENDS != null) {
         UUID userID = UUID.fromString((String)userJSON.get(USER_ID));
         for(Object friend : userFRIENDS) {
           JSONObject friendJSON = (JSONObject) friend;
@@ -60,6 +61,7 @@ public class DataLoader extends DataConstants{
           userList.getUser(userID).addFriend(userList.getUser(friendID));
         }
       }
+    }
       return userList;
     } catch (Exception e) {
         System.out.println(e);
@@ -67,7 +69,29 @@ public class DataLoader extends DataConstants{
       }
     }
 
-
+  public static LanguageList loadLanguages() {
+    try {
+      LanguageList languageList = LanguageList.getInstance();
+      FileReader reader = new FileReader(FILE_PATH);
+      JSONArray usersJSON = (JSONArray)new JSONParser().parse(reader);
+      for (int i = 0; i < usersJSON.size(); ++i) {
+        JSONObject userJSON = (JSONObject)usersJSON.get(i);
+      JSONArray languagesJSON = (JSONArray) userJSON.get(USER_LANGUAGES);
+      if(languagesJSON != null) {
+        for(Object language : languagesJSON) {
+          JSONObject languageJSON = (JSONObject) language;
+          LanguageDifficulty difficulty = LanguageDifficulty.fromString((String)languageJSON.get(LANGUAGE_DIFFICULTY));
+          ForeignLanguage foreignLanguage = ForeignLanguage.fromString((String)languageJSON.get(FOREIGN_LANGUAGE));
+          languageList.addLanguage(UUID.fromString((String)userJSON.get(USER_ID)), foreignLanguage, difficulty);
+        }
+      }
+    }
+    return languageList;
+    } catch (Exception e) {
+      System.out.println(e);
+      return null;
+    }
+  }
 }
 
     
