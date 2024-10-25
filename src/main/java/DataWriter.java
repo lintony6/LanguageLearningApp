@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class DataWriter extends DataConstants{
   public static void saveUsers() {
     UserList users = UserList.getInstance();
+    LanguageList languages = LanguageList.getInstance();
     ArrayList<User> userList = users.getAllUsers();
     JSONArray usersJSON = new JSONArray();
     for(User user : userList) {
@@ -34,7 +35,17 @@ public class DataWriter extends DataConstants{
       userSettings.put(USER_TEXT_TO_SPEECH, Integer.valueOf(user.getSettings().getTextToSpeech()));
       userSettings.put(USER_FONT_SIZE, Integer.valueOf(user.getSettings().getFontSize()));
       userJSON.put(USER_SETTINGS, userSettings);
-      usersJSON.add(userJSON);
+      // JSONArray languagesJSON = new JSONArray();
+      // ArrayList<Language> userLanguages = languages.getAllLanguages(user.getUserID());
+      // for(Language language : userLanguages) {
+      //   JSONObject languageJSON = new JSONObject();
+      //   languageJSON.put(FOREIGN_LANGUAGE, language.getForeignLanguage()); 
+      //   languageJSON.put(LANGUAGE_DIFFICULTY, language.getDifficulty());
+      //   languageJSON.put(LESSONS_COMPLETED, language.getLanguageProgress());
+      //   languagesJSON.add(languageJSON);
+      // }
+       //userJSON.put(USER_LANGUAGES, languagesJSON);
+       usersJSON.add(userJSON);
     }    
     try {
       FileWriter writer = new FileWriter(FILE_PATH);
