@@ -6,5 +6,16 @@ public enum ForeignLanguage {
 SPANISH,
 GERMAN,
 FRENCH,
-CHINESE
+CHINESE;
+
+public static ForeignLanguage fromString(String text) {
+    if(text.equalsIgnoreCase("SPANISH"))
+      return SPANISH;
+    else if(text.equalsIgnoreCase("GERMAN"))
+      return GERMAN;
+      else if(text.equalsIgnoreCase("FRENCH"))
+      return FRENCH;
+    else 
+      return CHINESE;
+}
 }
