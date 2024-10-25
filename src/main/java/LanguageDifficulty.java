@@ -20,4 +20,13 @@ public enum LanguageDifficulty {
      * looking to master complex concepts and vocabulary.
      */
     HARD;
+
+    public static LanguageDifficulty fromString(String text) {
+      if(text.equalsIgnoreCase("EASY"))
+        return EASY;
+      else if(text.equalsIgnoreCase("MEDIUM"))
+        return MEDIUM;
+      else 
+        return HARD;
+}
 }
