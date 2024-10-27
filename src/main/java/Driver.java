@@ -157,6 +157,23 @@ public class Driver {
     System.out.println("Welcome back: " + facade.getUser().getFirstName());
   }
 
+  /**
+   * Scenario 2
+   */
+
+  public static void scenario2() {
+    facade.logout();
+  }
+
+  /**
+   * Scenario 3
+   */
+  public static void scenario3() {
+    facade.login("ttomacka","Tammyisgreat");
+    facade.getUser().
+  }
+
+
   public static void main(String[] args) {
     startDemo();
     playSound("Hola mi nombre es tony");
