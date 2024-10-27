@@ -12,6 +12,14 @@ public class MultipleChoice {
   private ArrayList<Word>[] answers;
   private int correct;
 
+    /**
+     * Creates a {@code MultipleChoice} question.
+     * 
+     * @param question the question words
+     * @param answers the answer choices
+     * @param correct index of the correct answer
+     */
+
   public MultipleChoice(ArrayList<Word> question,
                         ArrayList<Word>[] answers, int correct) {
     this.question = question;
@@ -19,17 +27,33 @@ public class MultipleChoice {
     this.correct = correct;
   }
 
+  /*
+  * @return the question content 
+  */
+
   public ArrayList<Word> getContent() {
     return this.question;
   }
+
+  /*
+  * @return the answer choices 
+  */
 
   public ArrayList<Word>[] getAnswers() {
     return this.answers;
   }
 
+  /*
+  * Checks if the user-selected answer is correct.
+  */
+
   public boolean isCorrect(int userAnswer) {
     return this.correct == userAnswer;
   }
+
+  /*
+  * @return the correct answer choice 
+  */
 
   public ArrayList<Word> getCorrect() {
     return answers[correct];

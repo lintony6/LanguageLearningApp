@@ -13,10 +13,21 @@ public class UserList {
   private static UserList userList;
   private int size;
 
+   /**
+   * Private constructor to prevent direct instantiation.
+   */
+
   private UserList() {
     users = new HashMap<>();
     size = 0;
   }
+
+    /**
+     * Gets the single instance of {@code UserList}. 
+     * Creates it if it doesn’t exist.
+     * 
+     * @return the singleton instance of {@code UserList}
+     */
 
   public static synchronized UserList getInstance() {
     if (userList == null) {
@@ -24,6 +35,11 @@ public class UserList {
     }
     return userList;
   }
+
+    /*
+     * Adds a new user. 
+     * Adds all of the information as well.
+    */
 
   public User addUser(String firstName, String lastName,
                       String userName, String password, String email,
@@ -34,9 +50,17 @@ public class UserList {
     return toAdd;
   }
 
+  /*
+  * Gets a user by {@code UUID}. 
+  */
+
   public User getUser(UUID userID) {
     return users.get(userID);
   }
+
+  /*
+  * Edits a user’s info by field index. 
+  */
 
   public User editUser(UUID userID, int change, String updated) {
     switch(change) {
@@ -49,11 +73,19 @@ public class UserList {
     return users.get(userID);
   }
 
+  /*
+  * Removes a user by {@code UUID}. 
+  */
+
   public boolean removeUser(UUID userID) {
     users.remove(userID);
     --size;
     return true;
   }
+
+  /*
+  * Authenticates a user by username and password. 
+  */
 
   public User login(String userName, String password) {
     for (User user : users.values()) {
@@ -64,6 +96,10 @@ public class UserList {
     return null;
   }
 
+  /*
+  * Finds a user’s {@code UUID} by username. 
+  */
+
   public UUID getUserID(String userName) {
     for (User user : users.values()) {
       if (user.getUserName().equals(userName)) {
@@ -73,13 +109,25 @@ public class UserList {
     return null;
   }
 
+  /*
+  * Saves the user list. 
+  */
+
   public void saveUsers() {
     DataWriter.saveUsers();
   }
 
+  /*
+  * Gets the number of users. 
+  */
+
   public Integer getSize() {
     return this.size;
   }
+
+  /*
+  * Returns a list of all users. 
+  */
 
   public ArrayList<User> getAllUsers() {
     return new ArrayList<>(users.values());
