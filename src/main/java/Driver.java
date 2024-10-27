@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 /**
  * This driver is testing 3 scenarios for the LanguageLearningApp
  * Scenario 1: Tim Tomacka tries to sign up but fails due to choosing
@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * @author Tony Lin
  */
 public class Driver {
+  private static DictionaryManager dictionaryManager;
   private static LanguageLearningSystemFacade facade;
   private static Scanner keyboard;
   
@@ -20,6 +21,7 @@ public class Driver {
    * Initializes the facade and scanner
    */
   public static void startDemo() {
+    dictionaryManager = new DictionaryManager(new HashMap<String, HashMap<String, Category>>());
     facade = LanguageLearningSystemFacade.getInstance();
     keyboard = new Scanner(System.in);
   }
@@ -170,14 +172,12 @@ public class Driver {
    */
   public static void scenario3() {
     facade.login("ttomacka","Tammyisgreat");
-    facade.getUser().
   }
 
 
   public static void main(String[] args) {
     startDemo();
-    playSound("Hola mi nombre es tony");
     scenario1();
-    facade.logout();
+  
  }
 }
