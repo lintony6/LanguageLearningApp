@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class Language {
   private ArrayList<Lesson> lessons;
   private LanguageDifficulty difficulty;
-  private Progress progress;
   private ForeignLanguage foreignLanguage;
 
   /**
@@ -21,7 +20,6 @@ public class Language {
   public Language(ForeignLanguage language, LanguageDifficulty difficulty) {
     this.lessons = new ArrayList<Lesson>();
     this.difficulty = difficulty;
-    this.progress = new Progress();
     this.foreignLanguage = language;
   }
   
@@ -32,16 +30,30 @@ public class Language {
     this.difficulty = difficulty;
   }
   
+  /**
+   * Returns the current selected difficulty of the language
+   * @return difficulty of the language
+   */
   public LanguageDifficulty getDifficulty() {
     return this.difficulty;
   }
 
-  /** Returns the 3 difficulty options in nice formatted view
-   * @return String of all 3 difficulty options
+  /**
+   * Sets the languages lessons to the ArrayList<Lesson> that is
+   * passed in (Used to load users previously started language)
+   * @param lessons ArrayList of lessons to be set as this 
+   * languages lessons
    */
-  public String getDifficultyOptions() {
-    return LanguageDifficulty.EASY + "\n" + LanguageDifficulty.MEDIUM
-    + "\n" + LanguageDifficulty.HARD;
+  public void setLessons(ArrayList<Lesson> lessons) {
+    this.lessons = lessons;
+  }
+
+  /**
+   * Returns a collection of all lessons the user has not completed
+   * @return ArrayList<Lesson> containing the users lessons
+   */
+  public ArrayList<Lesson> getAllLessons() {
+    return this.lessons;
   }
 
   /** Returns what language this language class currently is
@@ -62,6 +74,7 @@ public class Language {
       if(lesson.getTopic().equals(topic))
         return lesson;
     }
+    return null;
   }
   
   /** Completes the lesson and updates the languages progress
@@ -71,12 +84,7 @@ public class Language {
     for(Lesson lesson : lessons) {
       if(lesson.getTopic().equals(topic)) {
         lesson.completeLesson();
-        //progress.updateProgress(lesson);
       }
     }
-  }
-
-  public int getLanguageProgress() {
-    return progress.getLanguageProgress();
   }
 }
