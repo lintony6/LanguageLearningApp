@@ -1,0 +1,325 @@
+{
+  "dictionary": {
+    "easy": {
+      "school": {
+        "meaning": "A group of students meeting for instruction.",
+        "translations": {
+          "spanish": "clase",
+          "english": "class"
+        }
+      },
+      "school": {
+        "meaning": "A set of written or printed pages, bound together.",
+        "translations": {
+          "spanish": "libro",
+          "english": "book"
+        }
+      },
+      "school": {
+        "meaning": "A piece of furniture with a flat surface for writing or reading.",
+        "translations": {
+          "spanish": "mesa",
+          "english": "desk"
+        }
+      },
+      "family": {
+        "meaning": "A woman in relation to her child or children.",
+        "translations": {
+          "spanish": "madre",
+          "english": "mother"
+        }
+      },
+      "family": {
+        "meaning": "A man in relation to his child or children.",
+        "translations": {
+          "spanish": "padre",
+          "english": "father"
+        }
+      },
+      "family": {
+        "meaning": "A man or boy in relation to other sons and daughters of his parents.",
+        "translations": {
+          "spanish": "hermano",
+          "english": "brother"
+        }
+      },
+      "weather": {
+        "meaning": "The star around which the earth orbits.",
+        "translations": {
+          "spanish": "sol",
+          "english": "sun"
+        }
+      },
+      "weather": {
+        "meaning": "Water that falls from clouds in droplets.",
+        "translations": {
+          "spanish": "lluvia",
+          "english": "rain"
+        }
+      },
+      "weather": {
+        "meaning": "A visible mass of condensed water vapor floating in the atmosphere.",
+        "translations": {
+          "spanish": "nube",
+          "english": "cloud"
+        }
+      },
+      "pets": {
+        "meaning": "A small domesticated carnivorous mammal.",
+        "translations": {
+          "spanish": "gato",
+          "english": "cat"
+        }
+      },
+      "pets": {
+        "meaning": "A domesticated carnivorous mammal.",
+        "translations": {
+          "spanish": "perro",
+          "english": "dog"
+        }
+      },
+      "pets": {
+        "meaning": "A warm-blooded egg-laying vertebrate animal.",
+        "translations": {
+          "spanish": "pájaro",
+          "english": "bird"
+        }
+      },
+      "food": {
+        "meaning": "The round fruit of a tree of the rose family.",
+        "translations": {
+          "spanish": "manzana",
+          "english": "apple"
+        }
+      },
+      "food": {
+        "meaning": "Food made of flour, water, and yeast mixed together.",
+        "translations": {
+          "spanish": "pan",
+          "english": "bread"
+        }
+      },
+      "food": {
+        "meaning": "A white liquid produced by the mammary glands of mammals.",
+        "translations": {
+          "spanish": "leche",
+          "english": "milk"
+        }
+      }
+    },
+    "medium": {
+      "school": {
+        "meaning": "Schoolwork that a student is required to do at home.",
+        "translations": {
+          "spanish": "tarea",
+          "english": "homework"
+        }
+      },
+      "school": {
+        "meaning": "A building or room containing collections of books.",
+        "translations": {
+          "spanish": "biblioteca",
+          "english": "library"
+        }
+      },
+      "school": {
+        "meaning": "A bag with shoulder straps.",
+        "translations": {
+          "spanish": "mochila",
+          "english": "backpack"
+        }
+      },
+      "family": {
+        "meaning": "A child of one's uncle or aunt.",
+        "translations": {
+          "spanish": "primo",
+          "english": "cousin"
+        }
+      },
+      "family": {
+        "meaning": "The father of one's father or mother.",
+        "translations": {
+          "spanish": "abuelo",
+          "english": "grandfather"
+        }
+      },
+      "family": {
+        "meaning": "A son of one's brother or sister.",
+        "translations": {
+          "spanish": "sobrino",
+          "english": "nephew"
+        }
+      },
+      "weather": {
+        "meaning": "A storm with thunder and lightning.",
+        "translations": {
+          "spanish": "tormenta",
+          "english": "thunderstorm"
+        }
+      },
+      "weather": {
+        "meaning": "A thick cloud of tiny water droplets suspended in the atmosphere.",
+        "translations": {
+          "spanish": "bruma",
+          "english": "fog"
+        }
+      },
+      "weather": {
+        "meaning": "The state of being humid.",
+        "translations": {
+          "spanish": "humedad",
+          "english": "humidity"
+        }
+      },
+      "pets": {
+        "meaning": "A small rodent kept as a pet.",
+        "translations": {
+          "spanish": "hámster",
+          "english": "hamster"
+        }
+      },
+      "pets": {
+        "meaning": "A tank for keeping live fish.",
+        "translations": {
+          "spanish": "pecera",
+          "english": "aquarium"
+        }
+      },
+      "pets": {
+        "meaning": "Legally take another's child and bring it up as one's own.",
+        "translations": {
+          "spanish": "adoptar",
+          "english": "adopt"
+        }
+      },
+      "food": {
+        "meaning": "A plant or part of a plant used as food.",
+        "translations": {
+          "spanish": "verdura",
+          "english": "vegetable"
+        }
+      },
+      "food": {
+        "meaning": "A set of instructions for preparing a particular dish.",
+        "translations": {
+          "spanish": "receta",
+          "english": "recipe"
+        }
+      },
+      "food": {
+        "meaning": "A device on which food is cooked by exposure to direct heat.",
+        "translations": {
+          "spanish": "grill",
+          "english": "grill"
+        }
+      }
+    },
+    "hard": {
+      "school": {
+        "meaning": "The subjects comprising a course of study.",
+        "translations": {
+          "spanish": "currículo",
+          "english": "curriculum"
+        }
+      },
+      "school": {
+        "meaning": "A long essay on a particular subject.",
+        "translations": {
+          "spanish": "disertación",
+          "english": "dissertation"
+        }
+      },
+      "school": {
+        "meaning": "Relating to education and scholarship.",
+        "translations": {
+          "spanish": "académico",
+          "english": "academic"
+        }
+      },
+      "family": {
+        "meaning": "A line of descent traced continuously from an ancestor.",
+        "translations": {
+          "spanish": "genealogía",
+          "english": "genealogy"
+        }
+      },
+      "family": {
+        "meaning": "The process of passing on of titles, property.",
+        "translations": {
+          "spanish": "herencia",
+          "english": "inheritance"
+        }
+      },
+      "family": {
+        "meaning": "The position of protecting someone.",
+        "translations": {
+          "spanish": "tutela",
+          "english": "guardianship"
+        }
+      },
+      "weather": {
+        "meaning": "Rain, snow, sleet, or hail that falls to the ground.",
+        "translations": {
+          "spanish": "precipitación",
+          "english": "precipitation"
+        }
+      },
+      "weather": {
+        "meaning": "The amount of moisture in the atmosphere.",
+        "translations": {
+          "spanish": "humedad",
+          "english": "moisture"
+        }
+      },
+      "weather": {
+        "meaning": "A climate that is hot and humid.",
+        "translations": {
+          "spanish": "tropical",
+          "english": "tropical"
+        }
+      },
+      "pets": {
+        "meaning": "The scientific study of animal behavior.",
+        "translations": {
+          "spanish": "etología",
+          "english": "ethology"
+        }
+      },
+      "pets": {
+        "meaning": "A small water-dwelling amphibian commonly kept as a pet.",
+        "translations": {
+          "spanish": "salamandra",
+          "english": "salamander"
+        }
+      },
+      "pets": {
+        "meaning": "A female cat.",
+        "translations": {
+          "spanish": "gata",
+          "english": "queen"
+        }
+      },
+      "food": {
+        "meaning": "A sweet crystalline substance obtained from various plants.",
+        "translations": {
+          "spanish": "azúcar",
+          "english": "sugar"
+        }
+      },
+      "food": {
+        "meaning": "The process of cultivating soil and growing crops.",
+        "translations": {
+          "spanish": "agricultura",
+          "english": "agriculture"
+        }
+      },
+      "food": {
+        "meaning": "An edible mushroom grown on farms.",
+        "translations": {
+          "spanish": "champiñón",
+          "english": "mushroom"
+        }
+      }
+    }
+  }
+}
