@@ -191,4 +191,61 @@ public class User {
       }
     }
   }
+
+  /**
+   * Sets the collection of this user's incomplete questions for a 
+   * specific lesson 
+   * @param topic of the lesson
+   * @param questions ArrayList<Question> of the incomplete questions
+   */
+  public void setIncomplete(LessonTopic topic, ArrayList<Question> questions) {
+    this.progress.setIncomplete(topic, questions);
+  }
+
+  /**
+   * Returns the collection of this user's incomplete questions for
+   * a specific lesson
+   * @param topic of the lesson
+   * @return ArrayList<Question> of the incomplete question of that
+   * lesson
+   */
+  public ArrayList<Question> getIncomplete(LessonTopic topic) {
+    return this.progress.getIncomplete(topic);
+  }
+
+  /**
+   * Returns this user's overall progress through a langauge
+   * @return int representing total number of completed questions
+   * in a language
+   */
+  public int getLanguageProgress() {
+    return this.progress.getLanguageProgress();
+  }
+
+  /**
+   * Returns this user's progress through a specific lesson
+   * @param topic of the lesson
+   * @return int representing complete questions in that lesson
+   */
+  public int getLessonProgress(LessonTopic topic) {
+    return this.progress.getLessonProgress(topic);
+  }
+
+  /**
+   * Adds a question that the user struggles with to the collection
+   * of trouble questions for this user
+   * @param question to be added
+   */
+  public void addTrouble(Question question) {
+    this.progress.addTrouble(question);
+  }
+
+  /**
+   * Removes a trouble question out of the user's collection of
+   * trouble questions
+   * @param question to be removed
+   */
+  public void removeTrouble(Question question) {
+    this.progress.removeTrouble(question);
+  }
 }
