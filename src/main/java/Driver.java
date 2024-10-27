@@ -151,10 +151,13 @@ public class Driver {
     String userName = "ttomacka";
     String password = "timtomacka";
     String email = "timtomacka@email.com";
+    System.out.println("Tim tries to sign in with username \"ttomacka\"");
     checkSignUp(firstName, lastName, userName, password, email);
+    System.out.println("Tim tries with new username \"ttom\"");
     userName = "ttom";
     checkSignUp(firstName, lastName, userName, password, email);
     facade.logout();
+    System.out.println("Tim logs out");
     facade.login(userName,password);
     System.out.println("Welcome back: " + facade.getUser().getFirstName());
   }
