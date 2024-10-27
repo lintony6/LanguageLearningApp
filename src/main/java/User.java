@@ -16,6 +16,7 @@ public class User {
   private String email;
   private ArrayList<User> friendList;
   private Settings settings;
+  private Progress progress;
 
 /**
  * Parameterized constructor of user that generates random userID,
@@ -36,6 +37,9 @@ public class User {
     this.email = email;
     this.friendList = new ArrayList<User>();
     this.settings = new Settings();
+    this.progress = new Progress();
+    this.progress.setIncorrect(new ArrayList<Question>());
+    this.progress.setLessons(new ArrayList<Lesson>());
   }
   
   /** Returns this user's userid
@@ -150,10 +154,18 @@ public class User {
       return false;
   }
 
+  /**
+   * Sets the user's email to new one passed in
+   * @param email new email for user
+   */
   public void setEmail(String email) {
     this.email = email;
   }
 
+  /**
+   * Returns the user's email
+   * @return the user's email
+   */
   public String getEmail() {
     return this.email;
   }
