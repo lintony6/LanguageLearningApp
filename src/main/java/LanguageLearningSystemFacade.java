@@ -28,7 +28,7 @@ public class LanguageLearningSystemFacade {
     userList = UserList.getInstance();
     languageList = LanguageList.getInstance();
     userList = DataLoader.loadUsers();
-    //boardGame = BoardGame.getInstance();
+    boardGame = BoardGame.getInstance();
   }
 
   
@@ -71,11 +71,18 @@ public class LanguageLearningSystemFacade {
     }
 
   }
-
+/**
+ * Returns the current logged in user in the facade
+ * @return User that is logged in
+ */
   public User getUser() {
     return this.user;
   }
   
+  /**
+   * Returns ArrayList containing all users loaded from json
+   * @return ArrayList<User> containing all users in system
+   */
   public ArrayList<User> getAllUsers() {
     return userList.getAllUsers();
   }
@@ -183,7 +190,7 @@ public ArrayList<User> getFriendList() {
    * @return BoardGame that has been started
    */
   public BoardGame startGame() {
-    BoardGame.startGame();
+    boardGame.startGame();
     return boardGame;
   }
 
