@@ -1,96 +1,17 @@
 [
-  {
-    "uuid": "54cd719c-6bdf-4877-9b33-b247ea8dce8e",
-    "first-name": "John",
-    "last-name": "Doe",
-    "username": "john_doe123",
-    "password": "extremelysecure",
-    "email": "johndoe123@gmail.com",
-    "friends": [
-      {
-        "uuid": "add4e359-5591-4cb8-a2f8-4196ece7ccc9",
-        "username": "friend_username_1"
-      }
-    ],
-    "user-settings": {
-      "notifications": 1,
-      "light-mode": 1,
-      "text-to-speech": 0,
-      "font-size": 10
-    },
-    "languages": [
-      {
-        "foreignlanguage": "spanish",
-        "lessonsCompleted": 22,
-        "progress": [
-          {
-            "lessontopic": "school",
-            "incomplete": [
-              "flashcard",
-              "matching",
-              "story"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "uuid": "add4e359-5591-4cb8-a2f8-4196ece7ccc9",
-    "first-name": "Mary",
-    "last-name": "Adam",
-    "username": "maryadam2000",
-    "password": "marymarymary",
-    "email": "maryadam2000@gmail.com",
-    "friends": [
-      {
+    {
+        "password": "Tammyisgreat",
         "uuid": "54cd719c-6bdf-4877-9b33-b247ea8dce8e",
-        "username": "john_doe123"
-      }
-    ],
-    "user-settings": {
-      "notifications": 0,
-      "light-mode": 0,
-      "text-to-speech": 1,
-      "font-size": 20
-    },
-    "languages": [
-      {
-        "foreignlanguage": "Spanish",
-        "lessonsCompleted": 15,
-        "progress": [
-          {
-            "lessontopic": "school",
-            "incomplete": [
-              "flashcard",
-              "matching",
-              "story",
-              "multiplechoice",
-              "fillblank"
-            ]
-          },
-          {
-            "lessontopic": "family",
-            "incomplete": [
-              "flashcard",
-              "matching",
-              "story",
-              "multiplechoice",
-              "fillblank"
-            ]
-          },
-          {
-            "lessontopic": "school",
-            "incomplete": [
-              "flashcard",
-              "matching",
-              "story",
-              "multiplechoice",
-              "fillblank"
-            ]
-          }
-        ]
-      }
-    ]
-  }
+        "user-settings": {
+            "text-to-speech": 0,
+            "light-mode": 1,
+            "font-size": 10,
+            "notifications": 1
+        },
+        "first-name": "Tammy",
+        "email": "tammy@gmail.com",
+        "friends": [],
+        "last-name": "Tomacka",
+        "username": "ttomacka"
+    }
 ]

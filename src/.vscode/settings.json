@@ -1,0 +1,7 @@
+{
+  "java.debug.settings.onBuildFailureProceed": true,
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "/Users/t0nyfat/Library/CloudStorage/OneDrive-UniversityofSouthCarolina/24-25/CSCE247/LanguageLearningApp/programfiles/lib/json-simple-1.1.1.jar"
+  ]
+}
