@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Word {
   private String foreign;
   private String english;
-  // private WordType type;
+  private WordType type;
   private ArrayList<Word> similar;
 
   public Word(String foreign, String english) {
@@ -21,7 +21,6 @@ public class Word {
     }
     this.foreign = foreign;
     this.english = english;
-    // this.type = type;
     this.similar = new ArrayList<>();
   }
 

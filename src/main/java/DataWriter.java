@@ -37,7 +37,7 @@ public class DataWriter extends DataConstants{
        usersJSON.add(userJSON);
     }    
     try {
-      FileWriter writer = new FileWriter(FILE_PATH);
+      FileWriter writer = new FileWriter(USER_JSON);
       writer.write(usersJSON.toJSONString());
       writer.flush();
     } catch (Exception e) {
@@ -62,7 +62,7 @@ public class DataWriter extends DataConstants{
     userJSON.put(USER_LANGUAGES, languagesJSON);
   }
     try {
-      FileWriter writer = new FileWriter(FILE_PATH);
+      FileWriter writer = new FileWriter(USER_JSON);
       writer.write(languagesJSON.toJSONString());
       writer.flush();
     } catch (Exception e) {

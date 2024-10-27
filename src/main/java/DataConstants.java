@@ -1,6 +1,7 @@
 
 public class DataConstants {
-  protected static final String FILE_PATH = "CSCE247/LanguageLearningApp/json/user.json";
+  protected static final String USER_JSON = "CSCE247/LanguageLearningApp/json/user.json";
+  protected static final String DICTIONARY_JSON = "CSCE247/LanguageLearningApp/json/dictionary.json";
   protected static final String USER_ID = "uuid";
   protected static final String USER_FIRST_NAME = "first-name";
   protected static final String USER_LAST_NAME = "last-name";
@@ -8,7 +9,11 @@ public class DataConstants {
   protected static final String USER_EMAIL = "email";
   protected static final String USER_PASSWORD = "password";
   protected static final String USER_LANGUAGES = "languages";
-  protected static final String LANGUAGE_DIFFICULTY = "difficulty";
+  protected static final String DICTIONARY = "dictionary";
+  protected static final String MEANING = "meaning";
+  protected static final String WORDSBYTOPIC = "wordsbytopic";
+  protected static final String ENGLISH = "english";
+  protected static final String DIFFICULTY = "difficulty";
   protected static final String EASY = "EASY";
   protected static final String MEDIUM = "MEDIUM";
   protected static final String HARD = "HARD";
@@ -20,7 +25,7 @@ public class DataConstants {
   protected static final String USER_FONT_SIZE = "font-size";
   protected static final String USER_FRIENDS = "friends";
   protected static final String LESSONS_COMPLETED = "lessons-completed";
-  protected static final String SPANISH = "SPANISH";
+  protected static final String SPANISH = "spanish";
   protected static final String LESSONS = "lessons";
   protected static final String QUESTIONS = "questions";
   protected static final String QUESTIONTYPE = "questiontype";
@@ -31,6 +36,8 @@ public class DataConstants {
   protected static final String STORY = "story";
   protected static final String MULTIPLECHOICE = "multiplechoice";
   protected static final String FILLBLANK = "fillblank";
+  protected static final String TOPIC = "topic";
+  protected static final String WORDS = "words";
   protected static final String SCHOOL = "school";
   protected static final String FAMILY = "family";
   protected static final String WEATHER = "weather";

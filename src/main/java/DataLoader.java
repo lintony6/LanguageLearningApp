@@ -23,7 +23,7 @@ public class DataLoader extends DataConstants{
   public static UserList loadUsers() {
     try {
       UserList userList = UserList.getInstance();
-      FileReader reader = new FileReader(FILE_PATH);
+      FileReader reader = new FileReader(USER_JSON);
       JSONArray usersJSON = (JSONArray)new JSONParser().parse(reader);
       for (int i = 0; i < usersJSON.size(); ++i) {
         JSONObject userJSON = (JSONObject)usersJSON.get(i);
@@ -72,7 +72,7 @@ public class DataLoader extends DataConstants{
   public static LanguageList loadLanguages() {
     try {
       LanguageList languageList = LanguageList.getInstance();
-      FileReader reader = new FileReader(FILE_PATH);
+      FileReader reader = new FileReader(USER_JSON);
       JSONArray usersJSON = (JSONArray)new JSONParser().parse(reader);
       for (int i = 0; i < usersJSON.size(); ++i) {
         JSONObject userJSON = (JSONObject)usersJSON.get(i);
@@ -80,7 +80,7 @@ public class DataLoader extends DataConstants{
       if(languagesJSON != null) {
         for(Object language : languagesJSON) {
           JSONObject languageJSON = (JSONObject) language;
-          LanguageDifficulty difficulty = LanguageDifficulty.fromString((String)languageJSON.get(LANGUAGE_DIFFICULTY));
+          LanguageDifficulty difficulty = LanguageDifficulty.fromString((String)languageJSON.get(DIFFICULTY));
           ForeignLanguage foreignLanguage = ForeignLanguage.fromString((String)languageJSON.get(FOREIGN_LANGUAGE));
           languageList.addLanguage(UUID.fromString((String)userJSON.get(USER_ID)), foreignLanguage, difficulty);
         }
@@ -92,8 +92,40 @@ public class DataLoader extends DataConstants{
       return null;
     }
   }
-}
 
+  public static DictionaryManager loadDictionary() {
+    try {
+      DictionaryManager dictionaryManager = new DictionaryManager();
+      FileReader reader = new FileReader(DICTIONARY_JSON);
+      JSONArray jsonArray = (JSONArray)new JSONParser().parse(reader);
+      for (Object obj : jsonArray) {
+        JSONObject jsonObject = (JSONObject) obj;
+        JSONArray difficultyArray = (JSONArray) jsonObject.get(DIFFICULTY);
+        for(Object difficultyObj : difficultyArray) {
+          JSONObject difficultyLevel = (JSONObject)difficultyObj;
+          LanguageDifficulty difficulty = LanguageDifficulty.fromString((String)difficultyLevel.get(DIFFICULTY));
+          JSONArray wordsByTopicArray= (JSONArray) difficultyLevel.get(WORDSBYTOPIC);
+            for(Object topicObj : wordsByTopicArray) {
+              JSONObject topicEntry = (JSONObject) topicObj;
+              LessonTopic topic = LessonTopic.fromString((String)topicEntry.get(TOPIC));
+              JSONArray wordsArray = (JSONArray) topicEntry.get(WORDS);
+              for(Object wordObj : wordsArray) {
+                JSONObject wordEntry = (JSONObject) wordObj;
+                String foreign = (String) wordEntry.get(SPANISH);
+                String english = (String) wordEntry.get(ENGLISH);
+                String meaning = (String) wordEntry.get(MEANING);
+                dictionaryManager.addWord(difficulty, topic, foreign, english, meaning);
+              }
+            }
+        }
+    }
+    return dictionaryManager;
+   } catch (Exception e) {
+      System.out.println(e);
+      return null;
+    }
+  }
+  }
     
     
     

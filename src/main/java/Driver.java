@@ -21,7 +21,7 @@ public class Driver {
    * Initializes the facade and scanner
    */
   public static void startDemo() {
-    dictionaryManager = new DictionaryManager(new HashMap<String, HashMap<String, Category>>());
+    dictionaryManager = new DictionaryManager();
     facade = LanguageLearningSystemFacade.getInstance();
     keyboard = new Scanner(System.in);
   }
@@ -159,6 +159,7 @@ public class Driver {
     facade.logout();
     System.out.println("Tim logs out");
     facade.login(userName,password);
+    System.out.println("Tim logs back in");
     System.out.println("Welcome back: " + facade.getUser().getFirstName());
   }
 
@@ -180,7 +181,10 @@ public class Driver {
 
   public static void main(String[] args) {
     startDemo();
-    scenario1();
-  
+    dictionaryManager = DataLoader.loadDictionary();
+    ArrayList<Word> words = dictionaryManager.getWordsByTopic(LanguageDifficulty.EASY, LessonTopic.WEATHER);
+    for(Word word : words) {
+      System.out.println(word);
+    }
  }
 }
