@@ -26,12 +26,12 @@ public class Lesson {
   }
 
   public void startLesson() {
-    System.out.println("Starting lesson on topic: " + topic.getName());
+    System.out.println("Starting lesson on topic: " + topic);
   }
 
   public void completeLesson() {
     this.isCompleted = true;
-    System.out.println("Lesson on topic '" + topic.getName() + "' completed.");
+    System.out.println("Lesson on topic '" + topic + "' completed.");
   }
 
   public void addQuestion(Question question) {
