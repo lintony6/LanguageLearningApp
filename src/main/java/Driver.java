@@ -2,16 +2,32 @@ import java.util.Scanner;
 import java.util.UUID;
 import java.util.ArrayList;
 
-
+/**
+ * This driver is testing 3 scenarios for the LanguageLearningApp
+ * Scenario 1: Tim Tomacka tries to sign up but fails due to choosing
+ * a username already taken. He chooses a new username and signs up
+ * Scenario 2: Tim begins learning and gets 3/5 questions correct. He
+ * then checks his progress.
+ * Scenario 3: Tammy logs into her account to view her progress and
+ * her problematic phrases. Shes prints a study sheet and logs out.
+ * @author Tony Lin
+ */
 public class Driver {
   private static LanguageLearningSystemFacade facade;
   private static Scanner keyboard;
   
+  /**
+   * Initializes the facade and scanner
+   */
   public static void startDemo() {
     facade = LanguageLearningSystemFacade.getInstance();
     keyboard = new Scanner(System.in);
   }
 
+  /**
+   * Allows the user to login from the terminal by entering username
+   * and password
+   */
   public static void login() {
     try {
     System.out.println("Enter your username");
@@ -31,6 +47,10 @@ public class Driver {
     }
   }
 
+  /**
+   * Allows the user to sign up from the terminal by entering 
+   * first name, last name, username, password, and email.
+   */
   public static void signUp() {
     try {
       System.out.println("Enter your first name");
@@ -48,6 +68,16 @@ public class Driver {
       System.out.println(e);
     }
   }
+
+  /**
+   * Checks arguments to ensure when the user signs up 
+   * all values they entered are available/valid.
+   * @param firstName First name of user
+   * @param lastName Last name of user
+   * @param userName Username of user
+   * @param password Password of user
+   * @param email Email of user
+   */
   private static void checkSignUp(String firstName, String lastName,
   String userName, String password, String email)  {
     try {
@@ -72,11 +102,18 @@ public class Driver {
       System.out.println(e);
     }
   }
+  /**
+   * Saves all data to json files
+   */
   public static void logout() {
     facade.logout();
     System.out.println("Logged Out");
   }
 
+  /**
+   * Presents options for user to use the program through terminal
+   *  such as login, signup, or logout.
+   */
   public static void menuOptions() {
     try {
       System.out.println("Enter 1 to login\nEnter 2 to signup"
@@ -94,10 +131,18 @@ public class Driver {
     }
   }
 
+  /**
+   * Will play the string passed in as argument as a text-to-speech
+   * feature
+   * @param text to be played out loud
+   */
   public static void playSound(String text){
     Narrator.playSound(text);
   }
 
+  /**
+   * Scenario 1
+   */
   public static void scenario1() {
     String firstName = "Tim";
     String lastName = "Tomacka";
