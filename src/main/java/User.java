@@ -38,8 +38,8 @@ public class User {
     this.friendList = new ArrayList<User>();
     this.settings = new Settings();
     this.progress = new Progress();
-    this.progress.setIncorrect(new ArrayList<Question>());
-    this.progress.setLessons(new ArrayList<Lesson>());
+    for(LessonTopic topic : LessonTopic.values())
+    this.progress.setIncomplete(topic, new ArrayList<Question>());
   }
   
   /** Returns this user's userid
