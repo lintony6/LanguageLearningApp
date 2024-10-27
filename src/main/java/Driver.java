@@ -181,10 +181,6 @@ public class Driver {
 
   public static void main(String[] args) {
     startDemo();
-    dictionaryManager = DataLoader.loadDictionary();
-    ArrayList<Word> words = dictionaryManager.getWordsByTopic(LanguageDifficulty.EASY, LessonTopic.WEATHER);
-    for(Word word : words) {
-      System.out.println(word);
-    }
+    scenario1();
  }
 }

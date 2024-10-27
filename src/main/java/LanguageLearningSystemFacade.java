@@ -28,7 +28,7 @@ public class LanguageLearningSystemFacade {
     userList = UserList.getInstance();
     languageList = LanguageList.getInstance();
     userList = DataLoader.loadUsers();
-    boardGame = BoardGame.getInstance();
+    //boardGame = BoardGame.getInstance();
   }
 
   

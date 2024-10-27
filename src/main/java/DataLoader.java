@@ -93,6 +93,11 @@ public class DataLoader extends DataConstants{
     }
   }
 
+  /**
+   * Reads in all words from dictionary.json and returns a dictionary
+   * manager fully populated with all the words
+   * @return dictionary manager with all words from dictionary.json
+   */
   public static DictionaryManager loadDictionary() {
     try {
       DictionaryManager dictionaryManager = new DictionaryManager();
@@ -126,21 +131,3 @@ public class DataLoader extends DataConstants{
     }
   }
   }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-
-    
-
-    
-    
-
-    

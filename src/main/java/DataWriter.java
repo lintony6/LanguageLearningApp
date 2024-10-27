@@ -46,27 +46,6 @@ public class DataWriter extends DataConstants{
   }
 
   public static void saveLanguages() {
-    UserList userList = UserList.getInstance();
-    ArrayList<User> users = userList.getAllUsers();
-    JSONArray languagesJSON = new JSONArray();
-    LanguageList languages = LanguageList.getInstance();
-    for(User user : users) {
-    ArrayList<Language> userLanguages = languages.getAllLanguages(user.getUserID());
-    for(Language language : userLanguages) {
-      JSONObject languageJSON = new JSONObject();
-      languageJSON.put(FOREIGN_LANGUAGE, language.getForeignLanguage()); 
-      languageJSON.put(LANGUAGE_DIFFICULTY, language.getDifficulty());
-      languageJSON.put(LESSONS_COMPLETED, language.getLanguageProgress());
-      languagesJSON.add(languageJSON);
-    }
-    userJSON.put(USER_LANGUAGES, languagesJSON);
-  }
-    try {
-      FileWriter writer = new FileWriter(USER_JSON);
-      writer.write(languagesJSON.toJSONString());
-      writer.flush();
-    } catch (Exception e) {
-      System.out.println(e);
-      }
+
   }
 }
