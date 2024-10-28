@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class FillBlank implements Question {
   private Word answer;
-  private ArrayList<Word> question;
+  private String prompt;
 
     /**
      * Creates a {@code FillBlank} question.
@@ -18,8 +18,8 @@ public class FillBlank implements Question {
      * @param answer the correct answer
      */
 
-  public FillBlank(ArrayList<Word> question, Word answer) {
-    this.question = question;
+  public FillBlank(String prompt, Word answer) {
+    this.prompt = prompt;
     this.answer = answer;
   }
 
@@ -38,7 +38,10 @@ public class FillBlank implements Question {
   */
   
   public ArrayList<Word> getContent() {
-    return this.question;
+    ArrayList<Word> words = new ArrayList();
+    Word word = new Word("", this.prompt);
+    words.add(word);
+    return words;
   }
 
     /**

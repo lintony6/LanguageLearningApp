@@ -40,6 +40,14 @@ public class Lesson {
 
   }
 
+  public boolean checkMultipleChoice(int choice) {
+    ArrayList<Word> answers = this.multipleChoice.getAnswers();
+    if(this.multipleChoice.getAnswer().get(0).equals(answers.get(choice)))
+      return true;
+    else 
+    return false;
+  }
+
   public String multipleChoiceAnswers() {
     StringBuilder toReturn = new StringBuilder();
     ArrayList<Word> answers = this.multipleChoice.getAnswers();
@@ -64,6 +72,8 @@ public class Lesson {
     ArrayList<Word> allWords = new ArrayList<Word>();
     ArrayList<Word> topicWords = manager.getWordsByTopic(this.difficulty, this.topic);
     for(LessonTopic testtopic : LessonTopic.values()) {
+      if(testtopic.equals(this.topic))
+        continue;
       allWords.addAll(manager.getWordsByTopic(this.difficulty, testtopic));
     }
     Word answerWord = topicWords.get(random.nextInt(3));
@@ -91,26 +101,22 @@ public class Lesson {
   }
 
   public String matchPrompt() {
-    int i = 1;
     StringBuilder prompt = new StringBuilder();
     ArrayList<Word> words = this.matching.getContent();
     for(Word word : words) {
       prompt.append(word.getForeign());
       prompt.append("\n");
-      ++i;
     }
     Collections.shuffle(words);
     for(Word word : words) {
       prompt.append(word.getEnglish());
       prompt.append("\n");
-      ++i;
     }
     return prompt.toString();
   }
 
   public int checkMatching(String prompt, ArrayList<Integer> answers) {
     String[] promptsplit = prompt.split("\n");
-    HashMap<String, String> pairs = new HashMap<String,String>();
     int correct = 0;
     for(int i = 0; i < 5; i = i + 2) {
       boolean isCorrect = this.matching.isCorrect(promptsplit[answers.get(i)],promptsplit[answers.get(i+1)]);

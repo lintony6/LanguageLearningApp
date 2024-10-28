@@ -143,7 +143,11 @@ public class Driver {
     Narrator.playSound(text);
   }
 
-  public static void playMatching(String prompt) {
+  public static void playMatching() {
+    Narrator.playSound("Matching Game");
+    System.out.println("\nMatching Game");
+    String prompt = facade.getLesson().matchPrompt();
+    System.out.println(prompt);
     ArrayList<Integer> userChoices = new ArrayList<>();
     for(int i = 0; i < 3; ++i) {
       System.out.println("Pick a Spanish word");
@@ -155,6 +159,35 @@ public class Driver {
     }
     System.out.println("Your score on Matching is:");
    System.out.println(facade.getLesson().checkMatching(prompt, userChoices));
+  }
+
+  public static void playFlashcards() {
+    Narrator.playSound("Flash Cards");
+    System.out.println("\nCard 1");
+    Narrator.playSound(facade.getLesson().getFlashcards().get(0).getCurrentWord().getForeign());
+    System.out.println(facade.getLesson().getFlashcards().get(0).getCurrentWord().getForeign());
+    Narrator.playSound(facade.getLesson().getFlashcards().get(0).getCurrentWord().getEnglish());
+    System.out.println(facade.getLesson().getFlashcards().get(0).getCurrentWord().getEnglish());
+    System.out.println("\nCard 2");
+    Narrator.playSound(facade.getLesson().getFlashcards().get(1).getCurrentWord().getForeign());
+    System.out.println(facade.getLesson().getFlashcards().get(1).getCurrentWord().getForeign());
+    Narrator.playSound(facade.getLesson().getFlashcards().get(1).getCurrentWord().getEnglish());
+    System.out.println(facade.getLesson().getFlashcards().get(1).getCurrentWord().getEnglish());
+    System.out.println("\nCard 3");
+    Narrator.playSound(facade.getLesson().getFlashcards().get(2).getCurrentWord().getForeign());
+    System.out.println(facade.getLesson().getFlashcards().get(2).getCurrentWord().getForeign());
+    Narrator.playSound(facade.getLesson().getFlashcards().get(2).getCurrentWord().getEnglish());
+    System.out.println(facade.getLesson().getFlashcards().get(2).getCurrentWord().getEnglish());
+  }
+
+  public static void playMultipleChoice() {
+    Narrator.playSound("Multiple Choice Question");
+    System.out.println("Multiple Choice Question:");
+    System.out.println(facade.getLesson().multipleChoicePrompt());
+    System.out.println("Answer Choices");
+    System.out.println(facade.getLesson().multipleChoiceAnswers());
+    int choice = keyboard.nextInt() - 1;
+    System.out.println(facade.getLesson().checkMultipleChoice(choice));
   }
 
   /**
@@ -181,27 +214,17 @@ public class Driver {
     facade.startLanguage(ForeignLanguage.SPANISH, LanguageDifficulty.EASY);
     facade.startLesson(LessonTopic.FAMILY);
     System.out.println("Jim flips through the flashcards");
-    System.out.println("Card 1");
-    System.out.println(facade.getLesson().getFlashcards().get(0).flipCard());
-    System.out.println(facade.getLesson().getFlashcards().get(0).flipCard());
-    System.out.println("Card 2");
-    System.out.println(facade.getLesson().getFlashcards().get(1).flipCard());
-    System.out.println(facade.getLesson().getFlashcards().get(1).flipCard());
-    System.out.println("Card 3");
-    System.out.println(facade.getLesson().getFlashcards().get(2).flipCard());
-    System.out.println(facade.getLesson().getFlashcards().get(2).flipCard());
+    playFlashcards();
     System.out.println("Jim now attempts the questions");
-    System.out.println("Multiple Choice Question:");
-    System.out.println(facade.getLesson().multipleChoicePrompt());
-    System.out.println("Answer Choices");
-    System.out.println(facade.getLesson().multipleChoiceAnswers());
+    playMultipleChoice();
+    playMatching();
+    
   }
 
   /**
    * Scenario 3
    */
   public static void scenario3() {
-    facade.login("ttomacka","Tammyisgreat");
   }
 
 
