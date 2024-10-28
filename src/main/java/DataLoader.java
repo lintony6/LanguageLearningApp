@@ -4,6 +4,7 @@ import org.json.simple.parser.JSONParser;
 import java.io.FileReader;
 import java.util.UUID;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The DataLoader class is responsible for loading in all user data
@@ -48,7 +49,32 @@ public class DataLoader extends DataConstants{
         longNum = (Long) userSETTINGS.get(USER_FONT_SIZE);
         updated = longNum.intValue();
         user.changeSetting(3, updated);
-
+        JSONArray languages = (JSONArray) userJSON.get(LANGUAGES);
+        if(!(languages == null)) {
+        HashMap<LessonTopic, ArrayList<Object>> incompleteObjects = new HashMap<LessonTopic,ArrayList<Object>>();
+        for(LessonTopic topic : LessonTopic.values()) {
+          incompleteObjects.put(topic, new ArrayList<Object>());
+        }
+        for(Object langObj : languages) {
+          JSONObject language = (JSONObject) langObj;  
+          ForeignLanguage foreignLanguage = ForeignLanguage.fromString((String)language.get(FOREIGN_LANGUAGE));
+          Long longValue = (Long)language.get(MODULE);
+          int module = longValue.intValue();
+          longValue = (Long)language.get(LANGUAGE_PROGRESS);
+          int languageProgress = longValue.intValue();
+          JSONArray incompleteArray = (JSONArray)language.get(INCOMPLETE);
+          for(Object questionObj : incompleteArray) {
+            JSONObject question = (JSONObject) questionObj;
+            JSONArray questionTypes = (JSONArray) question.get(QUESTIONTYPE);
+            LessonTopic topic = LessonTopic.fromString((String)question.get(TOPIC));
+            incompleteObjects.get(topic).add(getQuestionType(questionObj));
+          }
+          for(LessonTopic topic : LessonTopic.values()) {
+            incompleteObjects.put(topic, new ArrayList<Object>());
+            user.setIncomplete(topic, incompleteObjects.get(topic));
+          }
+        }
+      }
       }
       for(int i = 0; i < usersJSON.size(); ++i) {
         JSONObject userJSON = (JSONObject)usersJSON.get(i);
@@ -69,29 +95,26 @@ public class DataLoader extends DataConstants{
       }
     }
 
-  public static LanguageList loadLanguages() {
-    try {
-      LanguageList languageList = LanguageList.getInstance();
-      FileReader reader = new FileReader(USER_JSON);
-      JSONArray usersJSON = (JSONArray)new JSONParser().parse(reader);
-      for (int i = 0; i < usersJSON.size(); ++i) {
-        JSONObject userJSON = (JSONObject)usersJSON.get(i);
-      JSONArray languagesJSON = (JSONArray) userJSON.get(USER_LANGUAGES);
-      if(languagesJSON != null) {
-        for(Object language : languagesJSON) {
-          JSONObject languageJSON = (JSONObject) language;
-          LanguageDifficulty difficulty = LanguageDifficulty.fromString((String)languageJSON.get(DIFFICULTY));
-          ForeignLanguage foreignLanguage = ForeignLanguage.fromString((String)languageJSON.get(FOREIGN_LANGUAGE));
-          languageList.addLanguage(UUID.fromString((String)userJSON.get(USER_ID)), foreignLanguage, difficulty);
-        }
-      }
-    }
-    return languageList;
-    } catch (Exception e) {
-      System.out.println(e);
-      return null;
-    }
+ /**
+   * Returns a casted object of one of the lesson objects depending on 
+   * what is passed in to differentiate the different lesson objects
+   * @param object to be differentiated
+   * @return casted version of the object 
+   */
+  public static Object getQuestionType(Object object) {
+    if (object instanceof MultipleChoice) 
+      return (MultipleChoice) object;
+    else if (object instanceof FillBlank) 
+      return (FillBlank) object;
+    else if (object instanceof Matching) 
+      return (Matching) object;
+    else if (object instanceof Flashcard) 
+      return (Flashcard) object;
+    else if (object instanceof PictureStory) 
+      return (PictureStory) object;
+    return null;
   }
+
 
   /**
    * Reads in all words from dictionary.json and returns a dictionary

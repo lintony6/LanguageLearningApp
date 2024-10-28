@@ -12,9 +12,11 @@ public class Progress{
   private HashMap<LessonTopic, ArrayList<Object>> incomplete;
   private HashMap<LessonTopic, HashMap<Question,Integer>> trouble;
   private int languageProgress;
+  private int module;
 
 /** 
- * Constructor initalizes the lesson progress tracker;
+ * Default constructor that initializes the HashMaps tracking the 
+ * user's progress and initializes langaugeProgress to 0
  */
   public Progress(){
     this.lessonProgress = new HashMap<>();
@@ -24,7 +26,8 @@ public class Progress{
       this.lessonProgress.put(topic, 0);
       this.trouble.put(topic, new HashMap<>());
     }
-    languageProgress = 0;
+    this.module = 1;
+    this.languageProgress = 0;
    }
 
    /**
@@ -52,6 +55,7 @@ public class Progress{
      * Updates the user's language progress and lesson progress 
      * while also removing the completed question from the incomplete
      * questions collection
+     * Mainly used for FillBlank, MultipleChoice, Matching
      */
   public void updateCorrect(LessonTopic topic, Question question) {
     this.languageProgress++;
@@ -64,6 +68,11 @@ public class Progress{
     }
   }
 
+  /**
+   * updates the user's progress when they complete a problem
+   * Mainly used for story/flashcard
+   * @param topic
+   */
   public void updateComplete(LessonTopic topic) {
     this.languageProgress++;
     this.lessonProgress.put(topic, this.lessonProgress.get(topic) + 1);
@@ -114,11 +123,27 @@ public class Progress{
     this.trouble.get(topic).remove(question);
   }
 
+  /**
+   * Sets the users troubled problems to the argument passed in
+   * @param map HashMap of problems to be set as users trouble problems
+   */
   public void setTrouble(HashMap<LessonTopic, HashMap<Question, Integer>>map) {
     this.trouble = map;
   }
 
+  /**
+   * Returns a HashMap containing all of the user's troubled problems
+   * @return HashMap of user's trouble problems
+   */
   public HashMap<LessonTopic,HashMap<Question,Integer>> getTrouble() {
     return this.trouble;
+  }
+
+  public void setModule(int num) {
+    this.module = num;
+  }
+
+  public int getModule() {
+    return this.module;
   }
 }

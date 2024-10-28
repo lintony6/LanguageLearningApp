@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 /**
  * This driver is testing 3 scenarios for the LanguageLearningApp
- * Scenario 1: Tim Tomacka tries to sign up but fails due to choosing
- * a username already taken. He chooses a new username and signs up
- * Scenario 2: Tim begins learning and gets 3/5 questions correct. He
- * then checks his progress.
- * Scenario 3: Tammy logs into her account to view her progress and
- * her problematic phrases. Shes prints a study sheet and logs out.
+ * Scenario 1: Jim Smith signs up as a new user
+ * Scenario 2: Jim Smith completes the first module with 4/5 success
+ * Scenario 3: Jim Smith fails a module with  3/5 success
+ * Scenario 4: Jim Smith logs out and logs back in to retry 
+ * the second module
  * @author Tony Lin
  */
 public class Driver {
@@ -18,7 +17,7 @@ public class Driver {
   private static Scanner keyboard;
   
   /**
-   * Initializes the facade and scanner
+   * Initializes the facade, scanner, and dictionary manager
    */
   public static void startDemo() {
     dictionaryManager = DictionaryManager.getInstance();
@@ -143,6 +142,12 @@ public class Driver {
     Narrator.playSound(text);
   }
 
+  /**
+   * Loads the matching game and prints all words to the terminal.
+   * Then allows the user to choose a spanish word and english word 
+   * to pair together. Only marked correct if the user pairs all 3
+   * vocab pairs successfully
+   */
   public static void playMatching() {
     Narrator.playSound("Matching Game");
     System.out.println("\nMatching Game");
@@ -166,6 +171,13 @@ public class Driver {
 
   }
 
+  /**
+   * Loads a FillBlank based on the users choice and prints 
+   * the prompt and takes the users input. Then it checks
+   * the users input and updates their progress if they 
+   * were correct
+   * @param num Representing which FillBlank to load
+   */
   public static void playFillBlank(int num) {
     System.out.println(facade.getLesson().getFillBlank(num).getContent().get(0).getEnglish());
     String input = keyboard.nextLine();
@@ -179,6 +191,10 @@ public class Driver {
     }
   }
 
+  /**
+   * Loads the 3 flashcards per lesson and uses the Narrator to 
+   * say the words out loud
+   */
   public static void playFlashcards() {
     Narrator.playSound("Flash Cards");
     System.out.println("\nCard 1");
@@ -199,6 +215,12 @@ public class Driver {
     facade.getUser().complete(facade.getLesson().getTopic());
   }
 
+  /**
+   * Loads a multiple choice question based on users choice and
+   * prints the prompt and answer choices. Then it takes users choice
+   * checks if the user is correct and updates the user information
+   * @param num Representing which MultipleChoice question to load
+   */
   public static void playMultipleChoice(int num) {
     Narrator.playSound("Multiple Choice Question");
     System.out.println("Multiple Choice Question:");
@@ -250,14 +272,15 @@ public class Driver {
     System.out.println("Jim now attempts the Fill in the Blank");
     playFillBlank(2);
     playFillBlank(1);
+    Narrator.playSound("You scored eighty percent, You can advance to the next module");
+    System.out.println("You scored 80%, You can advance to the next module");
+    facade.getUser().setModule(2);
   }
 
   /**
    * Scenario 3
    */
   public static void scenario3() {
-    Narrator.playSound("You scored eighty percent, You can advance to the next module");
-    System.out.println("You scored 80%, You can advance to the next module");
     facade.startLesson(LessonTopic.SCHOOL);
     System.out.println("Jim flips through the flashcards");
     playFlashcards();
@@ -271,14 +294,27 @@ public class Driver {
     playFillBlank(1);
     Narrator.playSound("You scored sixty percent, Time to try again");
     System.out.println("You scored a 60%");
-    facade.logout();
   }
 
+  /**
+   * Scenario 4
+   */
+  public static void scenario4() {
+    System.out.println("Jim logs out");
+    facade.logout();
+    facade.login("JimSmith01", "SmithRocks");
+    System.out.println("Jim logs back in");
+    facade.startLanguage(ForeignLanguage.SPANISH, LanguageDifficulty.EASY);
+    facade.startLesson(LessonTopic.SCHOOL);
+    System.out.println("Jim continues on 2nd Module");
+    playFlashcards();
+    }
 
   public static void main(String[] args) {
     startDemo();
     scenario1();
     scenario2();
     scenario3();
+    scenario4();
  }
 }

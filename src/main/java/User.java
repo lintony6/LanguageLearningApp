@@ -247,6 +247,13 @@ public class User {
     return this.progress.getTrouble();
   }
 
+  public int getModule() {
+    return this.progress.getModule();
+  }
+
+  public void setModule(int num) {
+    this.progress.setModule(num);
+}
 }
 
 

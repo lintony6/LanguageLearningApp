@@ -18,6 +18,7 @@ public class DataConstants {
   protected static final String MEDIUM = "MEDIUM";
   protected static final String HARD = "HARD";
   protected static final String MODULE = "module";
+  protected static final String LANGUAGES = "languages";
   protected static final String FOREIGN_LANGUAGE = "foreign-language";
   protected static final String USER_SETTINGS = "user-settings";
   protected static final String TROUBLE = "trouble";
