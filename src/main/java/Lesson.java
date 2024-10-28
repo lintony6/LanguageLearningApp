@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class Lesson {
   private LessonTopic topic;
-  private MultipleChoice multipleChoice;
+  private ArrayList<MultipleChoice> multipleChoice;
   private Matching matching;
   private FillBlank fillBlank;
   private ArrayList<Flashcard> flashcards;
@@ -25,6 +25,7 @@ public class Lesson {
     this.difficulty = difficulty;
     this.topic = topic;
     this.flashcards = new ArrayList<Flashcard>();
+    this.multipleChoice = new ArrayList<MultipleChoice>();
     createFlashCard();
     createMatching();
     createMultipleChoice();
@@ -40,31 +41,41 @@ public class Lesson {
 
   }
 
-  public boolean checkMultipleChoice(int choice) {
-    ArrayList<Word> answers = this.multipleChoice.getAnswers();
-    if(this.multipleChoice.getAnswer().get(0).equals(answers.get(choice)))
-      return true;
-    else 
+  public boolean checkMultipleChoice(MultipleChoice question, int answer) {
+    if(this.multipleChoice.contains(question))
+    for(MultipleChoice choice : this.multipleChoice)
+      if(choice.equals(question)){
+        ArrayList<Word> correctanswer = choice.getAnswer();
+        return question.getAnswers().get(answer).equals(correctanswer.get(0));
+      }
     return false;
   }
 
-  public String multipleChoiceAnswers() {
+  public String multipleChoiceAnswers(MultipleChoice question) {
     StringBuilder toReturn = new StringBuilder();
-    ArrayList<Word> answers = this.multipleChoice.getAnswers();
-    for(int i = 0; i < 4; ++i){
-      toReturn.append(answers.get(i).getForeign());
-      toReturn.append("\n");
+    for(MultipleChoice choice : this.multipleChoice)
+      if(choice.equals(question)){
+        ArrayList<Word> answers = question.getAnswers();
+        for(int i = 0; i < 4; ++i){
+          toReturn.append(answers.get(i).getForeign());
+          toReturn.append("\n");
+        }
+        return toReturn.toString();
     }
-    return toReturn.toString();
+    return null;
   }
 
-  public String multipleChoicePrompt() {
+  public String multipleChoicePrompt(MultipleChoice question) {
     StringBuilder prompt = new StringBuilder();
-    for(Word word : multipleChoice.getContent()) {
-      prompt.append(word.getEnglish());
-      prompt.append(" ");
+    for(MultipleChoice choice : this.multipleChoice)
+      if(choice.equals(question)){
+        for(Word word : choice.getContent()) {
+        prompt.append(word.getEnglish());
+        prompt.append(" ");
     }
     return prompt.toString();
+      }
+    return null;
   }
 
   private void createMultipleChoice() {
@@ -76,28 +87,30 @@ public class Lesson {
         continue;
       allWords.addAll(manager.getWordsByTopic(this.difficulty, testtopic));
     }
-    Word answerWord = topicWords.get(random.nextInt(3));
-    String multipleChoiceQuestion = manager.getMeaning(difficulty, topic, answerWord.getForeign());
-    String[] multipleChoiceSplit = multipleChoiceQuestion.split(" ");
-    ArrayList<Word> multipleChoicePrompt = new ArrayList<Word>();
-    for(String word : multipleChoiceSplit)
-      multipleChoicePrompt.add(new Word("", word));
-    ArrayList<Word> answers = new ArrayList<Word>();
-    int correct = random.nextInt(4);
-    for(int i = 0; i < correct; ++i) {
+    for(int i = 0; i < 3; ++i) {
+      Word answerWord = topicWords.get(i);
+      String multipleChoiceQuestion = manager.getMeaning(difficulty, topic, answerWord.getForeign());
+      String[] multipleChoiceSplit = multipleChoiceQuestion.split(" ");
+      ArrayList<Word> multipleChoicePrompt = new ArrayList<Word>();
+      for(String word : multipleChoiceSplit)
+        multipleChoicePrompt.add(new Word("", word));
+        ArrayList<Word> answers = new ArrayList<Word>();
+        int correct = random.nextInt(4);
+      for(int j = 0; j < correct; ++j) {
+        Word word = allWords.get(random.nextInt(allWords.size()));
+        answers.add(word);
+    }
+      answers.add(answerWord);
+      for(int j = 0; j < 3 - correct; ++j) {
       Word word = allWords.get(random.nextInt(allWords.size()));
       answers.add(word);
     }
-    answers.add(answerWord);
-    for(int i = 0; i < 3 - correct; ++i) {
-      Word word = allWords.get(random.nextInt(allWords.size()));
-      answers.add(word);
-    }
-    this.multipleChoice = new MultipleChoice(multipleChoicePrompt, answers, correct);
+      this.multipleChoice.add(new MultipleChoice(multipleChoicePrompt, answers, correct));
+  }
   }
 
   private void createFillBlank() {
-
+  
   }
 
   public String matchPrompt() {
@@ -152,8 +165,8 @@ public class Lesson {
     return this.topic;
   }
 
-  public MultipleChoice getMultipleChoice() {
-    return this.multipleChoice;
+  public MultipleChoice getMultipleChoice(int num) {
+    return this.multipleChoice.get(num);
   }
 
   public ArrayList<Flashcard> getFlashcards() {
@@ -171,4 +184,13 @@ public class Lesson {
   public boolean isCompleted() {
     return this.isCompleted;
   }
+
+  public void setFillBlank(String prompt, Word answer) {
+    this.fillBlank = new FillBlank(prompt, answer);
+  }
+
+  public FillBlank getFillBlank() {
+    return this.fillBlank;
+  }
+
 }
