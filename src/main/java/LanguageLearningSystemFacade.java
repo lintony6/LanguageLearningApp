@@ -185,6 +185,8 @@ public ArrayList<User> getFriendList() {
                                 LanguageDifficulty difficulty) {
     languageList.addLanguage(this.user.getUserID(),language,difficulty);
     this.currentLanguage = languageList.getLanguage(this.user.getUserID(), language);
+    for(LessonTopic topic : LessonTopic.values())
+      this.user.setIncomplete(topic, this.currentLanguage.getLesson(topic).getQuestions());
     return languageList.getLanguage(this.user.getUserID(), language);
   }
 
