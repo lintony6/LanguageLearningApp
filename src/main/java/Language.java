@@ -21,6 +21,9 @@ public class Language {
     this.lessons = new ArrayList<Lesson>();
     this.difficulty = difficulty;
     this.foreignLanguage = language;
+    for(LessonTopic topic : LessonTopic.values()) {
+      this.lessons.add(new Lesson(this.difficulty, topic));
+    }
   }
   
   /** Sets this languages difficulty

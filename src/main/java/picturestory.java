@@ -2,7 +2,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PictureStory {
+public class PictureStory{
     private HashMap<Integer, ArrayList<Word>> pages;
     private ArrayList<BufferedImage> images;
 

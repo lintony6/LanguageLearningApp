@@ -1,22 +1,42 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Matching {
-private ArrayList<Word> wordPairs;
+public class Matching implements Question{
+private ArrayList<Word> words;
 
-public Matching(ArrayList<Word>){
-    return 0;
+
+public Matching(ArrayList<Word> words){
+    this.words = words;
 }
-public addWordPair(Word word1, Word word2){
-    return wordPairs;
+public void addWordPair(Word word1){
+    words.add(word1);
 }
-public static void removeWordPair(Word word1, Word word2){
-    return 0;
+public boolean isCorrect(String foreign, String english){
+    for(Word word : words) {
+      if(word.getForeign().equalsIgnoreCase(foreign) && word.getEnglish().equalsIgnoreCase(english))
+        return true;   
+} 
+    return false;
 }
-public HashMap<Word,Word>getContent(){
-    return 0;
+public ArrayList<Word> getContent() {
+  return this.words;
 }
-public boolean isCorrect(Word word1, Word word2){
-    return true; 
+
+
+public void setPrompt(ArrayList<Word> prompt) {
+  this.words = prompt;
+}
+
+
+public ArrayList<Word> getAnswer() {
+  return this.words;
+}
+
+public void setAnswer(Word answer) {
+
+}
+
+public boolean isCorrect(ArrayList<Word> answer) {
+    return answer == this.words;
 }
 }

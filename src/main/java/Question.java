@@ -13,7 +13,7 @@ Checks if the provided answer index matches the correct answer.
 @param userAnswer an integer representing the user's answer choice
 @return true if the answer is correct; false otherwise
     */
-boolean isCorrect(int userAnswer);
+boolean isCorrect(ArrayList<Word> answer);
 
     /** 
 Sets the content of the question with a prompt of words.
@@ -25,7 +25,7 @@ void setPrompt(ArrayList<Word> prompt);
 Returns the correct answer for the question.
 @return the correct Word answer
     */
-Word getAnswer();
+ArrayList<Word> getAnswer();
 
     /**
 Sets the correct answer for the question.

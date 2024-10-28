@@ -1,10 +1,13 @@
+import java.util.ArrayList;
+
 /**
  * This class implements the flashcard lesson type
  * @author Michael Carson 
  */
 public class Flashcard {
-    private Word front;
-    private Word back;
+    private Word word;
+    private String front;
+    private String back;
     private boolean isFlipped;
 
     /**
@@ -12,9 +15,9 @@ public class Flashcard {
      * @param front
      * @param back
      */
-    public Flashcard(Word front, Word back) {
-        this.front = front;
-        this.back = back;
+    public Flashcard(Word word) {
+        front = word.getForeign();
+        back = word.getEnglish();
         this.isFlipped = false;
     }
     /**
@@ -22,31 +25,25 @@ public class Flashcard {
      * @param word
      * @return
      */
-    public boolean setFront(Word word) {
-        this.front = word;
-        return true;
-    }
-    /**
-     * sets the back of the flashcard 
-     * @param word
-     * @return
-     */
-    public boolean setBack(Word word) {
-        this.back = word;
-        return true;
-    }
+
     /**
      * flips the card 
      */
-    public void flipCard() {
-        isFlipped = !isFlipped;
+    public String flipCard() {
+        this.isFlipped = !this.isFlipped;
+        return this.isFlipped ? this.back : this.front;
     }
     /**
      * returns the current word based on weather or not the card is flipped
      * @return
      */
     public Word getCurrentWord() {
-        return isFlipped ? back : front;
+        return this.word;
+    }
+    public ArrayList<Word> getContent() {
+      ArrayList<Word> words = new ArrayList<>();
+      words.add(this.word);
+      return words;
     }
 }
 

@@ -1,17 +1,1 @@
-[
-    {
-        "password": "Tammyisgreat",
-        "uuid": "54cd719c-6bdf-4877-9b33-b247ea8dce8e",
-        "user-settings": {
-            "text-to-speech": 0,
-            "light-mode": 1,
-            "font-size": 10,
-            "notifications": 1
-        },
-        "first-name": "Tammy",
-        "email": "tammy@gmail.com",
-        "friends": [],
-        "last-name": "Tomacka",
-        "username": "ttomacka"
-    }
-]
+[{"password":"SmithRocks","uuid":"bae137d2-f659-44b2-b98a-5f52e14f4ce0","user-settings":{"text-to-speech":0,"light-mode":1,"font-size":10,"notifications":0},"first-name":"Jim","email":"JimSmith2000@email.com","friends":[],"last-name":"Smith","username":"JimSmith01"}]

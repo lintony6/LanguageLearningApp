@@ -6,8 +6,15 @@ import java.util.ArrayList;
  */
 public class DictionaryManager {
     private HashMap<LanguageDifficulty, HashMap<LessonTopic, HashMap<Word, String>>> data;
+    private static DictionaryManager manager;
+    
+    public static DictionaryManager getInstance() {
+        if(manager == null)
+          manager = new DictionaryManager();
+        return manager;
+      }
 
-    public DictionaryManager() {
+    private DictionaryManager() {
         this.data = new HashMap<>();
     }
 
