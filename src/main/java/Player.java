@@ -40,15 +40,24 @@ public class Player {
         }
     }
 
-    // Getters for row and col
+    /**
+     * getter for row 
+     * @return
+     */
     public int getRow() {
         return row;
     }
-
+    /**
+     * getter for column 
+     * @return
+     */
     public int getCol() {
         return col;
     }
-
+    /**
+     * getter for symbol 
+     * @return
+     */
     public String getSymbol() {
         return symbol;
     }
