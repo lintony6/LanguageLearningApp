@@ -21,7 +21,8 @@ public class Driver {
    * Initializes the facade and scanner
    */
   public static void startDemo() {
-    dictionaryManager = new DictionaryManager();
+    dictionaryManager = DictionaryManager.getInstance();
+    dictionaryManager = DataLoader.loadDictionary();
     facade = LanguageLearningSystemFacade.getInstance();
     keyboard = new Scanner(System.in);
   }
@@ -142,33 +143,58 @@ public class Driver {
     Narrator.playSound(text);
   }
 
+  public static void playMatching(String prompt) {
+    ArrayList<Integer> userChoices = new ArrayList<>();
+    for(int i = 0; i < 3; ++i) {
+      System.out.println("Pick a Spanish word");
+      userChoices.add(keyboard.nextInt()-1);
+      keyboard.nextLine();
+      System.out.println("Pick a English word");
+      userChoices.add(keyboard.nextInt()-1);
+      keyboard.nextLine();
+    }
+    System.out.println("Your score on Matching is:");
+   System.out.println(facade.getLesson().checkMatching(prompt, userChoices));
+  }
+
   /**
    * Scenario 1
    */
   public static void scenario1() {
-    String firstName = "Tim";
-    String lastName = "Tomacka";
-    String userName = "ttomacka";
-    String password = "timtomacka";
-    String email = "timtomacka@email.com";
-    System.out.println("Tim tries to sign in with username \"ttomacka\"");
+    String firstName = "Jim";
+    String lastName = "Smith";
+    String userName = "JimSmith01";
+    String password = "SmithRocks";
+    String email = "JimSmith2000@email.com";
     checkSignUp(firstName, lastName, userName, password, email);
-    System.out.println("Tim tries with new username \"ttom\"");
-    userName = "ttom";
-    checkSignUp(firstName, lastName, userName, password, email);
-    facade.logout();
-    System.out.println("Tim logs out");
     facade.login(userName,password);
-    System.out.println("Tim logs back in");
-    System.out.println("Welcome back: " + facade.getUser().getFirstName());
+    System.out.println("Jim logs out");
+    facade.logout();
+    System.out.println("Jim logs back in");
+    facade.login(userName, password);
   }
 
   /**
    * Scenario 2
    */
-
   public static void scenario2() {
-    facade.logout();
+    facade.startLanguage(ForeignLanguage.SPANISH, LanguageDifficulty.EASY);
+    facade.startLesson(LessonTopic.FAMILY);
+    System.out.println("Jim flips through the flashcards");
+    System.out.println("Card 1");
+    System.out.println(facade.getLesson().getFlashcards().get(0).flipCard());
+    System.out.println(facade.getLesson().getFlashcards().get(0).flipCard());
+    System.out.println("Card 2");
+    System.out.println(facade.getLesson().getFlashcards().get(1).flipCard());
+    System.out.println(facade.getLesson().getFlashcards().get(1).flipCard());
+    System.out.println("Card 3");
+    System.out.println(facade.getLesson().getFlashcards().get(2).flipCard());
+    System.out.println(facade.getLesson().getFlashcards().get(2).flipCard());
+    System.out.println("Jim now attempts the questions");
+    System.out.println("Multiple Choice Question:");
+    System.out.println(facade.getLesson().multipleChoicePrompt());
+    System.out.println("Answer Choices");
+    System.out.println(facade.getLesson().multipleChoiceAnswers());
   }
 
   /**
@@ -182,5 +208,6 @@ public class Driver {
   public static void main(String[] args) {
     startDemo();
     scenario1();
+    scenario2();
  }
 }

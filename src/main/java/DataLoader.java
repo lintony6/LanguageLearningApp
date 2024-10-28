@@ -100,7 +100,7 @@ public class DataLoader extends DataConstants{
    */
   public static DictionaryManager loadDictionary() {
     try {
-      DictionaryManager dictionaryManager = new DictionaryManager();
+      DictionaryManager dictionaryManager = DictionaryManager.getInstance();
       FileReader reader = new FileReader(DICTIONARY_JSON);
       JSONArray jsonArray = (JSONArray)new JSONParser().parse(reader);
       for (Object obj : jsonArray) {

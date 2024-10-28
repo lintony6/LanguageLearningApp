@@ -16,9 +16,6 @@ public class Word {
   private ArrayList<Word> similar;
 
   public Word(String foreign, String english) {
-    if (foreign == null || english == null) {
-      throw new IllegalArgumentException("Foreign and English words cannot be null.");
-    }
     this.foreign = foreign;
     this.english = english;
     this.similar = new ArrayList<>();

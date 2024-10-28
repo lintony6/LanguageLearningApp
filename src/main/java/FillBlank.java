@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Tony Lin and Ishaan Cheema
 */
 
-public class FillBlank {
+public class FillBlank implements Question {
   private Word answer;
   private ArrayList<Word> question;
 
@@ -27,8 +27,10 @@ public class FillBlank {
   * @return the correct answer 
   */
 
-  public Word getAnswer() {
-    return this.answer;
+  public ArrayList<Word> getAnswer() {
+    ArrayList<Word> word = new ArrayList<>();
+    word.add(this.answer);
+    return word;
   }
 
   /*
@@ -91,4 +93,15 @@ public class FillBlank {
   public void setAnswer(Word newAnswer) {
     this.answer = newAnswer;
   }
+
+    public boolean isCorrect(ArrayList<Word> answer) {
+     return answer.get(0)==this.answer;
+    }
+
+
+    public void setPrompt(ArrayList<Word> prompt) {
+     this.question = prompt;
+    }
+
+
 }

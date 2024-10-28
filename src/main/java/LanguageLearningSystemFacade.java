@@ -205,16 +205,23 @@ public ArrayList<User> getFriendList() {
     return languageList.getLanguage(this.user.getUserID(),language).getLesson(topic);
 }
 
-  
+  public Lesson getLesson() {
+    return this.currentLesson; 
+  }
+
+  public void setLesson(Lesson lesson) {
+    this.currentLesson = lesson;
+  }
+
   /** Begins a lesson for the user and returns that lesson
    * @param language of the lesson the user wants to start
    * @param topic of the lesson the user wants to start
    * @return Lesson for the user to complete
    */
-  public Lesson startLesson(ForeignLanguage language, LessonTopic topic) {
-    this.currentLesson = languageList.getLanguage(this.user.getUserID(),language).getLesson(topic);
-    languageList.getLanguage(this.user.getUserID(),language).getLesson(topic).startLesson();
-    return languageList.getLanguage(this.user.getUserID(),language).getLesson(topic);
+  public Lesson startLesson(LessonTopic topic) {
+    this.currentLesson = languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic);
+    languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic).startLesson();
+    return languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic);
   }
 
   
