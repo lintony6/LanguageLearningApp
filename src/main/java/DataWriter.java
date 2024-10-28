@@ -4,13 +4,21 @@ import org.json.simple.parser.JSONParser;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.UUID;
-
 import javax.swing.plaf.multi.MultiPanelUI;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * The DataWriter is responsible for writing all stored data into 
+ * the respective json files.
+ */
 public class DataWriter extends DataConstants{
+  /**
+   * Saves all users to user.json as well as all relevant
+   * user information including: personal information, language
+   * progress, friend list, and personal settings
+   * @param userList
+   */
   public static void saveUsers(ArrayList<User> userList) {
     try {
     LanguageLearningSystemFacade facade = LanguageLearningSystemFacade.getInstance();
@@ -109,6 +117,12 @@ public class DataWriter extends DataConstants{
     }
   }
 
+  /**
+   * Returns a casted object of one of the lesson objects depending on 
+   * what is passed in to differentiate the different lesson objects
+   * @param object to be differentiated
+   * @return casted version of the object 
+   */
   public static Object getQuestionType(Object object) {
     if (object instanceof MultipleChoice) 
       return (MultipleChoice) object;
@@ -120,12 +134,9 @@ public class DataWriter extends DataConstants{
       return (Flashcard) object;
     else if (object instanceof PictureStory) 
       return (PictureStory) object;
-
-   
     return null;
   }
 
   public static void saveLanguages() {
-
   }
 }

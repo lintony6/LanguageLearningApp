@@ -8,14 +8,19 @@ import java.util.HashMap;
  *  and a picture story.
  * @author Tony Lin and Ishaan Cheema
  */
-
 public class Lesson {
   private LessonTopic topic;
   private ArrayList<Object> questions;
-  private PictureStory story;
   private LanguageDifficulty difficulty;
   private static DictionaryManager manager;
 
+  /**
+   * Parameterized Constructor for Lesson that creates a 
+   * ArrayList<Object> that has a story,matching, 3 flashcards,
+   * 3 MultipleChoice, and 3 FillBlank questions
+   * @param difficulty Difficulty of the questions
+   * @param topic Topic of the questions
+   */
   public Lesson(LanguageDifficulty difficulty, LessonTopic topic) {
     manager = DictionaryManager.getInstance();
     this.difficulty = difficulty;
@@ -28,6 +33,10 @@ public class Lesson {
     //this.story = new PictureStory();
   }
 
+  /**
+   * Creates 3 flashcards of the 3 vocab words per lesson topic 
+   * and adds them to this.questions
+   */
   private void createFlashCard() {
     ArrayList<Word> words = manager.getWordsByTopic(this.difficulty, this.topic);
     for(Word word : words) {
@@ -37,6 +46,13 @@ public class Lesson {
 
   }
 
+  /**
+   * Returns true or false to if the user selected the correct option
+   * from the MultipleChoice
+   * @param multipleChoice The MultipleChoice the user answered
+   * @param answer The users selected answer
+   * @return Boolean true or false
+   */
   public boolean checkMultipleChoice(MultipleChoice multipleChoice, int answer) {
     if(this.questions.contains(multipleChoice))
     for(Object question : this.questions)
@@ -48,6 +64,12 @@ public class Lesson {
     return false;
   }
 
+  /**
+   * Returns formatted string containing the 4 answer choices for
+   * the MultipleChoice question
+   * @param multipleChoice The MultipleChoice to be formatted
+   * @return String formatted with the answer choices
+   */
   public String multipleChoiceAnswers(MultipleChoice multipleChoice) {
     StringBuilder toReturn = new StringBuilder();
     for(Object question : this.questions)
@@ -63,6 +85,11 @@ public class Lesson {
     return null;
   }
 
+  /**
+   * Returns formatted string of the MultipleChoice prompt 
+   * @param multipleChoice The MultipleChoice to be formatted
+   * @return String formatted and containing prompt of MultipleChoice
+   */
   public String multipleChoicePrompt(MultipleChoice multipleChoice) {
     StringBuilder prompt = new StringBuilder();
     for(Object object : this.questions)
@@ -77,6 +104,9 @@ public class Lesson {
     return null;
   }
 
+  /**
+   * Creates 3 multiple choice questions to add to this.questions
+   */
   private void createMultipleChoice() {
     Random random = new Random();
     ArrayList<Word> allWords = new ArrayList<Word>();
@@ -108,6 +138,9 @@ public class Lesson {
   }
   }
 
+  /**
+   * Creates 3 FillBlank questions depending on what this.topic is
+   */
   private void createFillBlank() {
     switch(this.topic) {
       case SCHOOL:
@@ -138,6 +171,11 @@ public class Lesson {
     }
   }
 
+  /**
+   * Takes the Matching object in this.questions and formats 
+   * all word pairs separated by \n into one stingle string
+   * @return String formatted with all words for matching 
+   */
   public String matchPrompt() {
     StringBuilder prompt = new StringBuilder();
     for(Object question : this.questions) {
@@ -158,6 +196,14 @@ public class Lesson {
     return prompt.toString();
   }
 
+  /**
+   * Checks the users answers for the matching problem and returns
+   * an int from 0-3 of how many pairs they correctly identified
+   * @param prompt The String prompt of matching (All 6 words separated by \n)
+   * @param answers ArrayList<Integer> containing all of the users pairings
+   * @return Integer representing how many correct pairs the user
+   * identified
+   */
   public int checkMatching(String prompt, ArrayList<Integer> answers) {
     String[] promptsplit = prompt.split("\n");
     int correct = 0;
@@ -174,28 +220,35 @@ public class Lesson {
     return correct;
   }
 
+  /**
+   * Creates a Matching object that contains all 3 vocab words of 
+   * this lessons topic. There will be 3 pairs of words with one
+   * pair consisting of the foreign word and the english word
+   */
   private void createMatching() {
     ArrayList<Word> matching = manager.getWordsByTopic(this.difficulty, this.topic);
     this.questions.add(new Matching(matching));
   }
-  
-  public void startLesson() {
-    System.out.println("Starting lesson on topic: " + topic);
-  }
 
+  // public void setStory(PictureStory story) {
+  //   this.story = story;
+  // }
 
-  public void addFlashcard(Flashcard flashcard) {
-    this.questions.add(flashcard);
-  }
-
-  public void setStory(PictureStory story) {
-    this.story = story;
-  }
-
+  /**
+   * Returns the lessontopic
+   * @return LessonTopic
+   */
   public LessonTopic getTopic() {
     return this.topic;
   }
 
+  /**
+   * Returns a MultipleChoice object based on which identifier is
+   * provided because there are 3 MultipleChoice questions per 
+   * lesson
+   * @param num identifier for which multiple choice to return
+   * @return MultipleChoice object
+   */
   public MultipleChoice getMultipleChoice(int num) {
     int i = 0;
     for(Object question : this.questions)
@@ -208,6 +261,11 @@ public class Lesson {
     return null;
   }
 
+  /**
+   * Returns an ArrayList<Flashcard> containing 
+   * 3 flashcards for the 3 vocab words for the lesson
+   * @return ArrayList<Flashcard> containing 3 flashcards
+   */
   public ArrayList<Flashcard> getFlashcards() {
     ArrayList<Flashcard> cards = new ArrayList<>();
     for(Object object : this.questions)
@@ -218,6 +276,10 @@ public class Lesson {
     return cards;
   }
 
+  /**
+   * Returns a Matching Object
+   * @return Matching Object
+   */
   public Matching getMatching() {
     for(Object question : this.questions)
       if(question instanceof Matching) 
@@ -225,10 +287,16 @@ public class Lesson {
     return null;
   }
   
-  public PictureStory getStory() {
-    return this.story;
-  }
+  // public PictureStory getStory() {
+  //   return this.story;
+  // }
 
+  /**
+   * Return a FillBlank object based on which one is selected
+   * @param num identifier for which FillBlank out of the lesson is 
+   * returned
+   * @return FillBlank Object
+   */
   public FillBlank getFillBlank(int num) {
     int i = 0;
     for(Object question : this.questions)
@@ -242,6 +310,14 @@ public class Lesson {
     return null;
   }
 
+  /**
+   * Checks the user response to the FillBlank question and return 
+   * true or false 
+   * @param num number identifier of FillBlank since there are 3 per
+   * lesson
+   * @param input The users input as a string
+   * @return Boolean true or false
+   */
   public boolean checkFillBlank(int num, String input) {
     int i = 0;
     for(Object question : this.questions)
@@ -255,6 +331,10 @@ public class Lesson {
     return false;
   }
 
+  /**
+   * Returns all questions/flashcards/story inside one ArrayList<Object>
+   * @return ArrayList<Object> of all things to complete in lesson
+   */
   public ArrayList<Object> getQuestions() {
     return this.questions;
   }

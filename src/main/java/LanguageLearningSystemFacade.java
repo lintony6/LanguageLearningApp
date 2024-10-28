@@ -225,7 +225,6 @@ public ArrayList<User> getFriendList() {
    */
   public Lesson startLesson(LessonTopic topic) {
     this.currentLesson = languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic);
-    languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic).startLesson();
     return languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic);
   }
 
