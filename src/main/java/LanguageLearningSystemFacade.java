@@ -170,6 +170,9 @@ public ArrayList<User> getFriendList() {
     return languageList.getAllLanguages(this.user.getUserID());
   }
 
+  public Language getLanguage() {
+    return this.currentLanguage;
+  }
   
   /** Adds the new language to languageList and sets the
    * currentLanguage to the language. Returns the language for 

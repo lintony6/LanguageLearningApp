@@ -70,10 +70,10 @@ public class DictionaryManager {
      * @return A string containing the meaning of the word, or "Word not found." if
      *         the word is not in the dictionary.
      */
-    public String getTranslation(LanguageDifficulty difficulty, LessonTopic category, String foreign) {
-        for (Word word : data.get(difficulty).get(category).keySet()) {
+    public Word getWord(LanguageDifficulty difficulty, LessonTopic topic, String foreign) {
+        for (Word word : data.get(difficulty).get(topic).keySet()) {
             if (word.getForeign().equalsIgnoreCase(foreign)) {
-                return "The word '" + foreign + "' translates to '" + word.getEnglish() + "' in English.";
+                return word;
             }
         }
         return null;
@@ -90,8 +90,6 @@ public class DictionaryManager {
                 "A set of written or printed pages, bound together.");
 
         // Retrieving translations
-        System.out.println(manager.getTranslation(LanguageDifficulty.EASY, LessonTopic.SCHOOL, "clase")); // Output:
-                                                                                                          // class
         System.out.println(manager.getMeaning(LanguageDifficulty.EASY, LessonTopic.SCHOOL, "libro")); // Output: The
                                                                                                       // word 'libro'
                                                                                                       // translates to

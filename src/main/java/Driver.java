@@ -161,6 +161,35 @@ public class Driver {
    System.out.println(facade.getLesson().checkMatching(prompt, userChoices));
   }
 
+  public static void playFillBlank1() {
+    Narrator.playSound("Fill in the Blank");
+    facade.getLesson().setFillBlank("____ is from cows", dictionaryManager.getWord(facade.getLanguage().getDifficulty(), facade.getLesson().getTopic(), "leche"));
+    System.out.println(facade.getLesson().getFillBlank().getContent().get(0).getEnglish());
+    System.out.println("Enter the vocab word that completes the sentence");
+    String input = keyboard.nextLine();
+    System.out.println(facade.getLesson().getFillBlank().isCorrect(input));
+    Narrator.playSound("Fill in the Blank");
+    facade.getLesson().setFillBlank("____ is a red fruit that grows in trees", dictionaryManager.getWord(facade.getLanguage().getDifficulty(), facade.getLesson().getTopic(), "manzana"));
+    System.out.println(facade.getLesson().getFillBlank().getContent().get(0).getEnglish());
+    System.out.println("Enter the vocab word that completes the sentence");
+    input = keyboard.nextLine();
+    System.out.println(facade.getLesson().getFillBlank().isCorrect(input));
+  }
+
+  public static void playFillBlank2() {
+    Narrator.playSound("Fill in the Blank");
+    facade.getLesson().setFillBlank("____ is where students sit", dictionaryManager.getWord(facade.getLanguage().getDifficulty(), facade.getLesson().getTopic(), "mesa"));
+    System.out.println(facade.getLesson().getFillBlank().getContent().get(0).getEnglish());
+    System.out.println("Enter the vocab word that completes the sentence");
+    String input = keyboard.nextLine();
+    System.out.println(facade.getLesson().getFillBlank().isCorrect(input));
+    Narrator.playSound("Fill in the Blank");
+    facade.getLesson().setFillBlank("____ is what the student will read", dictionaryManager.getWord(facade.getLanguage().getDifficulty(), facade.getLesson().getTopic(), "libro"));
+    System.out.println(facade.getLesson().getFillBlank().getContent().get(0).getEnglish());
+    System.out.println("Enter the vocab word that completes the sentence");
+    input = keyboard.nextLine();
+    System.out.println(facade.getLesson().getFillBlank().isCorrect(input));
+  }
   public static void playFlashcards() {
     Narrator.playSound("Flash Cards");
     System.out.println("\nCard 1");
@@ -180,14 +209,15 @@ public class Driver {
     System.out.println(facade.getLesson().getFlashcards().get(2).getCurrentWord().getEnglish());
   }
 
-  public static void playMultipleChoice() {
+  public static void playMultipleChoice(int num) {
     Narrator.playSound("Multiple Choice Question");
     System.out.println("Multiple Choice Question:");
-    System.out.println(facade.getLesson().multipleChoicePrompt());
+    System.out.println(facade.getLesson().multipleChoicePrompt(facade.getLesson().getMultipleChoice(num)));
     System.out.println("Answer Choices");
-    System.out.println(facade.getLesson().multipleChoiceAnswers());
+    System.out.println(facade.getLesson().multipleChoiceAnswers(facade.getLesson().getMultipleChoice(num)));
+    System.out.println("Enter a number 1-4");
     int choice = keyboard.nextInt() - 1;
-    System.out.println(facade.getLesson().checkMultipleChoice(choice));
+    System.out.println(facade.getLesson().checkMultipleChoice(facade.getLesson().getMultipleChoice(num),choice));
   }
 
   /**
@@ -212,19 +242,36 @@ public class Driver {
    */
   public static void scenario2() {
     facade.startLanguage(ForeignLanguage.SPANISH, LanguageDifficulty.EASY);
-    facade.startLesson(LessonTopic.FAMILY);
+    facade.startLesson(LessonTopic.FOOD);
     System.out.println("Jim flips through the flashcards");
     playFlashcards();
     System.out.println("Jim now attempts the questions");
-    playMultipleChoice();
+    playMultipleChoice(0);
+    playMultipleChoice(1);
+    playMultipleChoice(2);
+    System.out.println("Jim now attempts the Matching");
     playMatching();
-    
+    System.out.println("Jim now attempts the Fill in the Blank");
+    playFillBlank1();
   }
 
   /**
    * Scenario 3
    */
   public static void scenario3() {
+    Narrator.playSound("You scored 80%, You can advance to the next module");
+    System.out.println("You scored 80%, You can advance to the next module");
+    facade.startLesson(LessonTopic.SCHOOL);
+    System.out.println("Jim flips through the flashcards");
+    playFlashcards();
+    System.out.println("Jim now attempts the questions");
+    playMultipleChoice(0);
+    playMultipleChoice(1);
+    playMultipleChoice(2);
+    System.out.println("Jim now attempts the Matching");
+    playMatching();
+    System.out.println("Jim now attempts the Fill in the Blank");
+    playFillBlank2();
   }
 
 
@@ -232,5 +279,6 @@ public class Driver {
     startDemo();
     scenario1();
     scenario2();
+    scenario3();
  }
 }
