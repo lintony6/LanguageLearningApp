@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class FillBlank implements Question {
   private Word answer;
   private String prompt;
+  private int id;
 
     /**
      * Creates a {@code FillBlank} question.
@@ -18,9 +19,10 @@ public class FillBlank implements Question {
      * @param answer the correct answer
      */
 
-  public FillBlank(String prompt, Word answer) {
+  public FillBlank(String prompt, Word answer, int id) {
     this.prompt = prompt;
     this.answer = answer;
+    this.id = id;
   }
 
   /*
@@ -67,27 +69,6 @@ public class FillBlank implements Question {
   }
 
     /**
-     * Adds a word to the question content.
-     * 
-     * @param word the word to add
-     */
-
-  public void addWordToQuestion(Word word) {
-    this.question.add(word);
-  }
-
-    /**
-     * Removes a word from the question content.
-     * 
-     * @param word the word to remove
-     * @return {@code true} if removed, {@code false} if not found
-     */
-
-  public boolean removeWordFromQuestion(Word word) {
-    return this.question.remove(word);
-  }
-
-    /**
      * Sets a new correct answer.
      * 
      * @param newAnswer the new answer
@@ -101,10 +82,13 @@ public class FillBlank implements Question {
      return answer.get(0)==this.answer;
     }
 
-
+    @Override
     public void setPrompt(ArrayList<Word> prompt) {
-     this.question = prompt;
     }
+
+  public int getId() {
+    return this.id; 
+  }
 
 
 }

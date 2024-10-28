@@ -11,6 +11,7 @@ public class MultipleChoice implements Question{
   private ArrayList<Word> question;
   private ArrayList<Word> answers;
   private int correct;
+  private int id;
 
     /**
      * Creates a {@code MultipleChoice} question.
@@ -21,10 +22,11 @@ public class MultipleChoice implements Question{
      */
 
   public MultipleChoice(ArrayList<Word> question,
-                        ArrayList<Word> answers, int correct) {
+                        ArrayList<Word> answers, int correct, int id) {
     this.question = question;
     this.answers = answers;
     this.correct = correct;
+    this.id = id;
   }
 
   /*
@@ -70,5 +72,8 @@ public class MultipleChoice implements Question{
   public void setAnswer(Word answer) {
   }
 
+  public int getId() {
+    return this.id; 
+  }
 
 }

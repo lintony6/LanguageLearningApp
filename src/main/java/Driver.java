@@ -157,39 +157,28 @@ public class Driver {
       userChoices.add(keyboard.nextInt()-1);
       keyboard.nextLine();
     }
-    System.out.println("Your score on Matching is:");
-   System.out.println(facade.getLesson().checkMatching(prompt, userChoices));
+    System.out.println("Your score was :");
+    System.out.println(facade.getLesson().checkMatching(prompt, userChoices));
+    if(facade.getLesson().checkMatching(prompt, userChoices) == 3) 
+      facade.getUser().correct(facade.getLesson().getTopic(), facade.getLesson().getMatching());
+    else 
+      facade.getUser().incorrect(facade.getLesson().getTopic(), facade.getLesson().getMatching());
+
   }
 
-  public static void playFillBlank1() {
-    Narrator.playSound("Fill in the Blank");
-    facade.getLesson().setFillBlank("____ is from cows", dictionaryManager.getWord(facade.getLanguage().getDifficulty(), facade.getLesson().getTopic(), "leche"));
-    System.out.println(facade.getLesson().getFillBlank().getContent().get(0).getEnglish());
-    System.out.println("Enter the vocab word that completes the sentence");
+  public static void playFillBlank(int num) {
+    System.out.println(facade.getLesson().getFillBlank(num).getContent().get(0).getEnglish());
     String input = keyboard.nextLine();
-    System.out.println(facade.getLesson().getFillBlank().isCorrect(input));
-    Narrator.playSound("Fill in the Blank");
-    facade.getLesson().setFillBlank("____ is a red fruit that grows in trees", dictionaryManager.getWord(facade.getLanguage().getDifficulty(), facade.getLesson().getTopic(), "manzana"));
-    System.out.println(facade.getLesson().getFillBlank().getContent().get(0).getEnglish());
-    System.out.println("Enter the vocab word that completes the sentence");
-    input = keyboard.nextLine();
-    System.out.println(facade.getLesson().getFillBlank().isCorrect(input));
+    if(facade.getLesson().checkFillBlank(num, input)) {
+      facade.getUser().correct(facade.getLesson().getTopic(), facade.getLesson().getFillBlank(num));
+      System.out.println("Correct");
+    } else {
+      facade.getUser().incorrect(facade.getLesson().getTopic(), facade.getLesson().getFillBlank(num));
+      System.out.println("Incorrect, the correct answer was");
+      System.out.println(facade.getLesson().getFillBlank(num).getAnswer().get(0).getForeign());
+    }
   }
 
-  public static void playFillBlank2() {
-    Narrator.playSound("Fill in the Blank");
-    facade.getLesson().setFillBlank("____ is where students sit", dictionaryManager.getWord(facade.getLanguage().getDifficulty(), facade.getLesson().getTopic(), "mesa"));
-    System.out.println(facade.getLesson().getFillBlank().getContent().get(0).getEnglish());
-    System.out.println("Enter the vocab word that completes the sentence");
-    String input = keyboard.nextLine();
-    System.out.println(facade.getLesson().getFillBlank().isCorrect(input));
-    Narrator.playSound("Fill in the Blank");
-    facade.getLesson().setFillBlank("____ is what the student will read", dictionaryManager.getWord(facade.getLanguage().getDifficulty(), facade.getLesson().getTopic(), "libro"));
-    System.out.println(facade.getLesson().getFillBlank().getContent().get(0).getEnglish());
-    System.out.println("Enter the vocab word that completes the sentence");
-    input = keyboard.nextLine();
-    System.out.println(facade.getLesson().getFillBlank().isCorrect(input));
-  }
   public static void playFlashcards() {
     Narrator.playSound("Flash Cards");
     System.out.println("\nCard 1");
@@ -207,6 +196,7 @@ public class Driver {
     System.out.println(facade.getLesson().getFlashcards().get(2).getCurrentWord().getForeign());
     Narrator.playSound(facade.getLesson().getFlashcards().get(2).getCurrentWord().getEnglish());
     System.out.println(facade.getLesson().getFlashcards().get(2).getCurrentWord().getEnglish());
+    facade.getUser().complete(facade.getLesson().getTopic());
   }
 
   public static void playMultipleChoice(int num) {
@@ -217,7 +207,14 @@ public class Driver {
     System.out.println(facade.getLesson().multipleChoiceAnswers(facade.getLesson().getMultipleChoice(num)));
     System.out.println("Enter a number 1-4");
     int choice = keyboard.nextInt() - 1;
-    System.out.println(facade.getLesson().checkMultipleChoice(facade.getLesson().getMultipleChoice(num),choice));
+    keyboard.nextLine();
+    if(facade.getLesson().checkMultipleChoice(facade.getLesson().getMultipleChoice(num),choice)) {
+      facade.getUser().correct(facade.getLesson().getTopic(), facade.getLesson().getMultipleChoice(num));
+      System.out.println("Correct");
+    } else {
+    facade.getUser().incorrect(facade.getLesson().getTopic(), facade.getLesson().getMultipleChoice(num));
+    System.out.println("Incorrect");
+    }
   }
 
   /**
@@ -246,32 +243,35 @@ public class Driver {
     System.out.println("Jim flips through the flashcards");
     playFlashcards();
     System.out.println("Jim now attempts the questions");
-    playMultipleChoice(0);
-    playMultipleChoice(1);
     playMultipleChoice(2);
+    playMultipleChoice(1);
     System.out.println("Jim now attempts the Matching");
     playMatching();
     System.out.println("Jim now attempts the Fill in the Blank");
-    playFillBlank1();
+    playFillBlank(2);
+    playFillBlank(1);
   }
 
   /**
    * Scenario 3
    */
   public static void scenario3() {
-    Narrator.playSound("You scored 80%, You can advance to the next module");
+    Narrator.playSound("You scored eighty percent, You can advance to the next module");
     System.out.println("You scored 80%, You can advance to the next module");
     facade.startLesson(LessonTopic.SCHOOL);
     System.out.println("Jim flips through the flashcards");
     playFlashcards();
     System.out.println("Jim now attempts the questions");
-    playMultipleChoice(0);
-    playMultipleChoice(1);
     playMultipleChoice(2);
+    playMultipleChoice(1);
     System.out.println("Jim now attempts the Matching");
     playMatching();
     System.out.println("Jim now attempts the Fill in the Blank");
-    playFillBlank2();
+    playFillBlank(2);
+    playFillBlank(1);
+    Narrator.playSound("You scored sixty percent, Time to try again");
+    System.out.println("You scored a 60%");
+    facade.logout();
   }
 
 
