@@ -13,9 +13,7 @@
                             "matching",
                             "multiplechoice",
                             "multiplechoice",
-                            "multiplechoice",
                             "fillblank",
-                            "multiplechoice",
                             "multiplechoice",
                             "matching"
                         ],
@@ -74,19 +72,17 @@
                             "matching",
                             "multiplechoice",
                             "fillblank",
-                            "fillblank",
-                            "matching",
-                            "fillblank"
+                            "matching"
                         ],
                         "topic": "food"
                     }
                 ],
                 "module": 2,
                 "trouble": [],
-                "language-progress": 7
+                "language-progress": 9
             }
         ],
-        "uuid": "212dd34c-fd41-416c-8999-83b6a29a2789",
+        "uuid": "72c3921b-e5ca-4046-86c2-4eb6c7d24bc2",
         "user-settings": {
             "text-to-speech": 0,
             "light-mode": 1,
