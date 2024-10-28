@@ -18,6 +18,7 @@ public class Flashcard {
     public Flashcard(Word word) {
         front = word.getForeign();
         back = word.getEnglish();
+        this.word = word;
         this.isFlipped = false;
     }
     /**
