@@ -76,12 +76,14 @@ public class Board extends JPanel{
      * @param player
      */
     public void updateBoard(Player player) {
-        initializeBoard(); // Reset the board
+        //initializeBoard(); // Reset the board
         grid[player.getRow(columns)][player.getCol(columns)] = player.getSymbol();
         repaint(); // Repaint the board to reflect changes
     }
 
+
     public boolean setup(){
+        initilizeBoard();
         return true;
     }
 }

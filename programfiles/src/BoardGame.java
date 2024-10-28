@@ -13,6 +13,9 @@ public class BoardGame {
     private Board boardgame;
     private Player player;
     
+    /**
+     * creates board and player symbol 
+     */
     private BoardGame(){
        this.boardgame = new Board();
         this.player = new Player("X"); 
@@ -25,7 +28,10 @@ public class BoardGame {
         frame.setLocationRelativeTo(null); // sets frame to middle of screen 
         frame.setVisible(true);
     }
-    
+    /**
+     * creates an instance of the board game 
+     * @return
+     */
     public static BoardGame getInstance(){
         if (instance == null){
             instance = new BoardGame();
@@ -51,6 +57,7 @@ public class BoardGame {
         player.move(steps, 15, 15);
         boardgame.updateBoard(player);
     }
+    
     public static void saveBoard(){
         return 0;
     }
