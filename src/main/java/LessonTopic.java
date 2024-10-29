@@ -33,4 +33,16 @@ Represents the food topic, covering vocabulary and phrases
 associated with food items, meals, cooking, and dining.
     */
 FOOD;
+public static LessonTopic fromString(String text) {
+    if(text.equalsIgnoreCase("school"))
+      return SCHOOL;
+    else if(text.equalsIgnoreCase("family"))
+      return FAMILY;
+    else if(text.equalsIgnoreCase("weather"))
+      return WEATHER;
+    else if(text.equalsIgnoreCase("PETS"))
+      return PETS;
+    else 
+      return FOOD;
+}
 }

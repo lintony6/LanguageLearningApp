@@ -7,40 +7,88 @@ import java.util.ArrayList;
  * @author Tony Lin and Ishaan Cheema
 */
 
-public class FillBlank {
+public class FillBlank implements Question {
   private Word answer;
-  private ArrayList<Word> question;
+  private String prompt;
+  private int id;
 
-  public FillBlank(ArrayList<Word> question, Word answer) {
-    this.question = question;
+    /**
+     * Creates a {@code FillBlank} question.
+     * 
+     * @param question the question content as a list of words
+     * @param answer the correct answer
+     */
+
+  public FillBlank(String prompt, Word answer, int id) {
+    this.prompt = prompt;
     this.answer = answer;
+    this.id = id;
   }
 
-  public Word getAnswer() {
-    return this.answer;
+  /*
+  * @return the correct answer 
+  */
+
+  public ArrayList<Word> getAnswer() {
+    ArrayList<Word> word = new ArrayList<>();
+    word.add(this.answer);
+    return word;
   }
+
+  /*
+  * @return the question content 
+  */
   
   public ArrayList<Word> getContent() {
-    return this.question;
+    ArrayList<Word> words = new ArrayList();
+    Word word = new Word("", this.prompt);
+    words.add(word);
+    return words;
   }
+
+    /**
+     * Checks if the given {@code Word} is correct.
+     * 
+     * @param userAnswer the user's answer
+     * @return {@code true} if correct, {@code false} otherwise
+     */
   
   public boolean isCorrect(Word userAnswer) {
     return this.answer.equals(userAnswer);
   }
+
+    /**
+     * Checks if the given word (in foreign language) is correct.
+     * 
+     * @param foreignWord the user's answer in foreign language
+     * @return {@code true} if correct, {@code false} otherwise
+     */
   
   public boolean isCorrect(String foreignWord) {
     return this.answer.getForeign().equals(foreignWord);
   }
 
-  public void addWordToQuestion(Word word) {
-    this.question.add(word);
-  }
-
-  public boolean removeWordFromQuestion(Word word) {
-    return this.question.remove(word);
-  }
+    /**
+     * Sets a new correct answer.
+     * 
+     * @param newAnswer the new answer
+     */
 
   public void setAnswer(Word newAnswer) {
     this.answer = newAnswer;
   }
+
+    public boolean isCorrect(ArrayList<Word> answer) {
+     return answer.get(0)==this.answer;
+    }
+
+    @Override
+    public void setPrompt(ArrayList<Word> prompt) {
+    }
+
+  public int getId() {
+    return this.id; 
+  }
+
+
 }

@@ -28,7 +28,7 @@ public class LanguageLearningSystemFacade {
     userList = UserList.getInstance();
     languageList = LanguageList.getInstance();
     userList = DataLoader.loadUsers();
-    boardGame = BoardGame.getInstance();
+    //boardGame = BoardGame.getInstance();
   }
 
   
@@ -170,6 +170,9 @@ public ArrayList<User> getFriendList() {
     return languageList.getAllLanguages(this.user.getUserID());
   }
 
+  public Language getLanguage() {
+    return this.currentLanguage;
+  }
   
   /** Adds the new language to languageList and sets the
    * currentLanguage to the language. Returns the language for 
@@ -182,6 +185,8 @@ public ArrayList<User> getFriendList() {
                                 LanguageDifficulty difficulty) {
     languageList.addLanguage(this.user.getUserID(),language,difficulty);
     this.currentLanguage = languageList.getLanguage(this.user.getUserID(), language);
+    for(LessonTopic topic : LessonTopic.values())
+      this.user.setIncomplete(topic, this.currentLanguage.getLesson(topic).getQuestions());
     return languageList.getLanguage(this.user.getUserID(), language);
   }
 
@@ -205,16 +210,22 @@ public ArrayList<User> getFriendList() {
     return languageList.getLanguage(this.user.getUserID(),language).getLesson(topic);
 }
 
-  
+  public Lesson getLesson() {
+    return this.currentLesson; 
+  }
+
+  public void setLesson(Lesson lesson) {
+    this.currentLesson = lesson;
+  }
+
   /** Begins a lesson for the user and returns that lesson
    * @param language of the lesson the user wants to start
    * @param topic of the lesson the user wants to start
    * @return Lesson for the user to complete
    */
-  public Lesson startLesson(ForeignLanguage language, LessonTopic topic) {
-    this.currentLesson = languageList.getLanguage(this.user.getUserID(),language).getLesson(topic);
-    languageList.getLanguage(this.user.getUserID(),language).getLesson(topic).startLesson();
-    return languageList.getLanguage(this.user.getUserID(),language).getLesson(topic);
+  public Lesson startLesson(LessonTopic topic) {
+    this.currentLesson = languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic);
+    return languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic);
   }
 
   

@@ -9,17 +9,25 @@ import java.util.HashMap;
  */
 public class Progress{
   private HashMap<LessonTopic, Integer> lessonProgress;
-  private HashMap<LessonTopic, ArrayList<Question>> incomplete;
-  private ArrayList<Question> trouble;
+  private HashMap<LessonTopic, ArrayList<Object>> incomplete;
+  private HashMap<LessonTopic, HashMap<Question,Integer>> trouble;
   private int languageProgress;
+  private int module;
 
 /** 
- * Constructor initalizes the lesson progress tracker;
+ * Default constructor that initializes the HashMaps tracking the 
+ * user's progress and initializes langaugeProgress to 0
  */
   public Progress(){
     this.lessonProgress = new HashMap<>();
     this.incomplete = new HashMap<>();
-    languageProgress = 0;
+    this.trouble = new HashMap<>();
+    for(LessonTopic topic : LessonTopic.values()) {
+      this.lessonProgress.put(topic, 0);
+      this.trouble.put(topic, new HashMap<>());
+    }
+    this.module = 1;
+    this.languageProgress = 0;
    }
 
    /**
@@ -28,9 +36,9 @@ public class Progress{
     * @param topic of the lesson
     * @param questions ArrayList<Question> of the incomplete questions
     */
-  public void setIncomplete(LessonTopic topic, ArrayList<Question> questions) {
+  public void setIncomplete(LessonTopic topic, ArrayList<Object> questions) {
     this.incomplete.put(topic, questions);
-    this.lessonProgress.put(topic, 5 - questions.size());
+    this.lessonProgress.put(topic, 9 - questions.size());
   }
 
   /**
@@ -39,7 +47,7 @@ public class Progress{
    * @param topic of the lesson
    * @return ArrayList<Question> of the incompleted questions
    */
-  public ArrayList<Question> getIncomplete(LessonTopic topic){
+  public ArrayList<Object> getIncomplete(LessonTopic topic){
     return this.incomplete.get(topic);
     }
 
@@ -47,15 +55,27 @@ public class Progress{
      * Updates the user's language progress and lesson progress 
      * while also removing the completed question from the incomplete
      * questions collection
+     * Mainly used for FillBlank, MultipleChoice, Matching
      */
   public void updateCorrect(LessonTopic topic, Question question) {
     this.languageProgress++;
     this.lessonProgress.put(topic, this.lessonProgress.get(topic) + 1);
     this.incomplete.get(topic).remove(question);
+    this.trouble.get(topic).remove(question);
     try {
-      this.trouble.remove(question);
+      
     } catch (Exception e) {
     }
+  }
+
+  /**
+   * updates the user's progress when they complete a problem
+   * Mainly used for story/flashcard
+   * @param topic
+   */
+  public void updateComplete(LessonTopic topic) {
+    this.languageProgress++;
+    this.lessonProgress.put(topic, this.lessonProgress.get(topic) + 1);
   }
 
   /**
@@ -63,8 +83,16 @@ public class Progress{
    * @param topic LessonTopic of the incomplete question
    * @param question that is incomplete
    */
-  public void updateIncomplete(LessonTopic topic, Question question) {
-    this.incomplete.get(topic).add(question);
+  public void updateIncomplete(LessonTopic topic, Question toAdd) {
+    for(Question question : this.trouble.get(topic).keySet()) {
+      System.out.println("hi");
+        if(!this.trouble.get(topic).containsKey(question)) {
+          this.trouble.get(topic).put(question, 1);
+        }
+        else
+          this.trouble.get(topic).put(question, this.trouble.get(topic).get(question) + 1);
+    }
+    this.incomplete.get(topic).add(toAdd);
   }
 
   /**
@@ -88,18 +116,34 @@ public class Progress{
   }
 
   /**
-   * Adds a trouble question to the collection
-   * @param question to be added
-   */
-  public void addTrouble(Question question) {
-    this.trouble.add(question);
-  }
-
-  /**
    * Removes the trouble question from the collection
    * @param question to be removed
    */
-  public void removeTrouble(Question question) {
-    this.trouble.remove(question);
+  public void removeTrouble(LessonTopic topic, Question question) {
+    this.trouble.get(topic).remove(question);
+  }
+
+  /**
+   * Sets the users troubled problems to the argument passed in
+   * @param map HashMap of problems to be set as users trouble problems
+   */
+  public void setTrouble(HashMap<LessonTopic, HashMap<Question, Integer>>map) {
+    this.trouble = map;
+  }
+
+  /**
+   * Returns a HashMap containing all of the user's troubled problems
+   * @return HashMap of user's trouble problems
+   */
+  public HashMap<LessonTopic,HashMap<Question,Integer>> getTrouble() {
+    return this.trouble;
+  }
+
+  public void setModule(int num) {
+    this.module = num;
+  }
+
+  public int getModule() {
+    return this.module;
   }
 }

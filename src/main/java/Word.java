@@ -12,16 +12,12 @@ import java.util.ArrayList;
 public class Word {
   private String foreign;
   private String english;
-  // private WordType type;
+  private WordType type;
   private ArrayList<Word> similar;
 
   public Word(String foreign, String english) {
-    if (foreign == null || english == null) {
-      throw new IllegalArgumentException("Foreign and English words cannot be null.");
-    }
     this.foreign = foreign;
     this.english = english;
-    // this.type = type;
     this.similar = new ArrayList<>();
   }
 

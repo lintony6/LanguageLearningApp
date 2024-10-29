@@ -114,7 +114,7 @@ public class UserList {
   */
 
   public void saveUsers() {
-    DataWriter.saveUsers();
+    DataWriter.saveUsers(userList.getAllUsers());
   }
 
   /*
@@ -130,6 +130,9 @@ public class UserList {
   */
 
   public ArrayList<User> getAllUsers() {
-    return new ArrayList<>(users.values());
+    ArrayList<User> toReturn = new ArrayList<>();
+    for(User user : users.values())
+      toReturn.add(user);
+    return toReturn;
   }
 }
