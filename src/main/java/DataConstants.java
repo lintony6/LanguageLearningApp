@@ -1,7 +1,7 @@
 
 public class DataConstants {
-  protected static final String USER_JSON = "CSCE247/LanguageLearningApp/json/user.json";
-  protected static final String DICTIONARY_JSON = "CSCE247/LanguageLearningApp/json/dictionary.json";
+  protected static final String USER_JSON = "/data/user.json";
+  protected static final String DICTIONARY_JSON = "/data/dictionary.json";
   protected static final String USER_ID = "uuid";
   protected static final String USER_FIRST_NAME = "first-name";
   protected static final String USER_LAST_NAME = "last-name";
