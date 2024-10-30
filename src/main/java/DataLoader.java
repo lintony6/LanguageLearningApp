@@ -1,7 +1,11 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +28,9 @@ public class DataLoader extends DataConstants{
   public static UserList loadUsers() {
     try {
       UserList userList = UserList.getInstance();
-      FileReader reader = new FileReader(USER_JSON);
+      InputStream inputStream = DataLoader.class.getResourceAsStream(USER_JSON);
+      InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+      BufferedReader reader = new BufferedReader(inputStreamReader);
       JSONArray usersJSON = (JSONArray)new JSONParser().parse(reader);
       for (int i = 0; i < usersJSON.size(); ++i) {
         JSONObject userJSON = (JSONObject)usersJSON.get(i);
@@ -124,7 +130,9 @@ public class DataLoader extends DataConstants{
   public static DictionaryManager loadDictionary() {
     try {
       DictionaryManager dictionaryManager = DictionaryManager.getInstance();
-      FileReader reader = new FileReader(DICTIONARY_JSON);
+      InputStream inputStream = DataLoader.class.getResourceAsStream(DICTIONARY_JSON);
+      InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+      BufferedReader reader = new BufferedReader(inputStreamReader);
       JSONArray jsonArray = (JSONArray)new JSONParser().parse(reader);
       for (Object obj : jsonArray) {
         JSONObject jsonObject = (JSONObject) obj;

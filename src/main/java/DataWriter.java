@@ -1,8 +1,14 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URL;
 import java.util.UUID;
 import javax.swing.plaf.multi.MultiPanelUI;
 import java.util.ArrayList;
@@ -77,21 +83,24 @@ public class DataWriter extends DataConstants{
          JSONObject incompleteObject = new JSONObject();
          JSONArray questionTypes = new JSONArray();
          for(Object object : user.getIncomplete(topic)) {
+          JSONObject questionObj = new JSONObject();
             if(object instanceof Matching) {
-              questionTypes.add(MATCHING);
+              questionObj.put(QUESTIONTYPE, MATCHING);
             }
             else if(object instanceof FillBlank) {
-              questionTypes.add(FILLBLANK);
+              FillBlank toAdd = (FillBlank)object;
+              questionObj.put(QUESTIONTYPE,FILLBLANK);
+              questionObj.put(QUESTION_ID, toAdd.getId());
             }
             else if(object instanceof MultipleChoice) {
-              questionTypes.add(MULTIPLECHOICE);
-            }
-            else if(object instanceof PictureStory) {
-              questionTypes.add(STORY);
+              MultipleChoice toAdd = (MultipleChoice)object;
+              questionObj.put(QUESTIONTYPE, MULTIPLECHOICE);
+              questionObj.put(QUESTION_ID, toAdd.getId());
             }
             else if(object instanceof Flashcard) {
-              questionTypes.add(FLASHCARD);
+              questionObj.put(QUESTIONTYPE, MATCHING);
             }
+            questionTypes.add(questionObj);
          }
          switch(topic) {
           case SCHOOL: incompleteObject.put(TOPIC, SCHOOL); break;
@@ -108,8 +117,9 @@ public class DataWriter extends DataConstants{
        userJSON.put(USER_LANGUAGES,languagesArray);
       }
         usersJSON.add(userJSON);
-    }    
-      FileWriter writer = new FileWriter(USER_JSON);
+    }   
+      URI url = DataWriter.class.getResource(USER_JSON).toURI();
+      FileWriter writer = new FileWriter(url.getPath());
       writer.write(usersJSON.toJSONString());
       writer.flush();
     } catch (Exception e) {

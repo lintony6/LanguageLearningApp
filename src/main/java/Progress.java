@@ -38,7 +38,7 @@ public class Progress{
     */
   public void setIncomplete(LessonTopic topic, ArrayList<Object> questions) {
     this.incomplete.put(topic, questions);
-    this.lessonProgress.put(topic, 9 - questions.size());
+    this.lessonProgress.put(topic, 8 - questions.size());
   }
 
   /**
@@ -145,5 +145,10 @@ public class Progress{
 
   public int getModule() {
     return this.module;
+  }
+
+  public void completeLesson(LessonTopic topic) {
+    this.lessonProgress.put(topic, 8);
+    this.incomplete.remove(topic);
   }
 }
