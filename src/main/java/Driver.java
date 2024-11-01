@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 /**
  * This driver is testing 3 scenarios for the LanguageLearningApp
- * Scenario 1: Tim Tomacka tries to sign up but fails due to choosing
- * a username already taken. He chooses a new username and signs up
- * Scenario 2: Tim begins learning and gets 3/5 questions correct. He
- * then checks his progress.
- * Scenario 3: Tammy logs into her account to view her progress and
- * her problematic phrases. Shes prints a study sheet and logs out.
+ * Scenario 1: Jim Smith signs up as a new user
+ * Scenario 2: Jim Smith completes the first module with 4/5 success
+ * Scenario 3: Jim Smith fails a module with  3/5 success
+ * Scenario 4: Jim Smith logs out and logs back in to retry 
+ * the second module
  * @author Tony Lin
  */
 public class Driver {
@@ -18,7 +17,7 @@ public class Driver {
   private static Scanner keyboard;
   
   /**
-   * Initializes the facade and scanner
+   * Initializes the facade, scanner, and dictionary manager
    */
   public static void startDemo() {
     dictionaryManager = DictionaryManager.getInstance();
@@ -143,8 +142,14 @@ public class Driver {
     Narrator.playSound(text);
   }
 
-  public static void playMatching() {
-    Narrator.playSound("Matching Game");
+  /**
+   * Loads the matching game and prints all words to the terminal.
+   * Then allows the user to choose a spanish word and english word 
+   * to pair together. Only marked correct if the user pairs all 3
+   * vocab pairs successfully
+   */
+  public static boolean playMatching() {
+   // Narrator.playSound("Matching Game");
     System.out.println("\nMatching Game");
     String prompt = facade.getLesson().matchPrompt();
     System.out.println(prompt);
@@ -157,67 +162,121 @@ public class Driver {
       userChoices.add(keyboard.nextInt()-1);
       keyboard.nextLine();
     }
-    System.out.println("Your score on Matching is:");
-   System.out.println(facade.getLesson().checkMatching(prompt, userChoices));
+    System.out.println("Your score was :");
+    System.out.println(facade.getLesson().checkMatching(prompt, userChoices));
+    if(facade.getLesson().checkMatching(prompt, userChoices) == 3) {
+      facade.getUser().correct(facade.getLesson().getTopic(), facade.getLesson().getMatching());
+      return true;
+    }else {
+      facade.getUser().incorrect(facade.getLesson().getTopic(), facade.getLesson().getMatching());
+      return false;
+    }
   }
 
-  public static void playFillBlank1() {
-    Narrator.playSound("Fill in the Blank");
-    facade.getLesson().setFillBlank("____ is from cows", dictionaryManager.getWord(facade.getLanguage().getDifficulty(), facade.getLesson().getTopic(), "leche"));
-    System.out.println(facade.getLesson().getFillBlank().getContent().get(0).getEnglish());
-    System.out.println("Enter the vocab word that completes the sentence");
+  /**
+   * Loads a FillBlank based on the users choice and prints 
+   * the prompt and takes the users input. Then it checks
+   * the users input and updates their progress if they 
+   * were correct
+   * @param num Representing which FillBlank to load
+   */
+  public static boolean playFillBlank(int num) {
+    // Narrator.playSound("Fill in the Blank");
+    System.out.println(facade.getLesson().getFillBlank(num).getContent().get(0).getEnglish());
     String input = keyboard.nextLine();
-    System.out.println(facade.getLesson().getFillBlank().isCorrect(input));
-    Narrator.playSound("Fill in the Blank");
-    facade.getLesson().setFillBlank("____ is a red fruit that grows in trees", dictionaryManager.getWord(facade.getLanguage().getDifficulty(), facade.getLesson().getTopic(), "manzana"));
-    System.out.println(facade.getLesson().getFillBlank().getContent().get(0).getEnglish());
-    System.out.println("Enter the vocab word that completes the sentence");
-    input = keyboard.nextLine();
-    System.out.println(facade.getLesson().getFillBlank().isCorrect(input));
+    if(facade.getLesson().checkFillBlank(num, input)) {
+      facade.getUser().correct(facade.getLesson().getTopic(), facade.getLesson().getFillBlank(num));
+      System.out.println("Correct");
+      return true;
+    } else {
+      facade.getUser().incorrect(facade.getLesson().getTopic(), facade.getLesson().getFillBlank(num));
+      System.out.println("Incorrect, the correct answer was");
+      System.out.println(facade.getLesson().getFillBlank(num).getAnswer().get(0).getForeign());
+      return false;
+    }
   }
 
-  public static void playFillBlank2() {
-    Narrator.playSound("Fill in the Blank");
-    facade.getLesson().setFillBlank("____ is where students sit", dictionaryManager.getWord(facade.getLanguage().getDifficulty(), facade.getLesson().getTopic(), "mesa"));
-    System.out.println(facade.getLesson().getFillBlank().getContent().get(0).getEnglish());
-    System.out.println("Enter the vocab word that completes the sentence");
-    String input = keyboard.nextLine();
-    System.out.println(facade.getLesson().getFillBlank().isCorrect(input));
-    Narrator.playSound("Fill in the Blank");
-    facade.getLesson().setFillBlank("____ is what the student will read", dictionaryManager.getWord(facade.getLanguage().getDifficulty(), facade.getLesson().getTopic(), "libro"));
-    System.out.println(facade.getLesson().getFillBlank().getContent().get(0).getEnglish());
-    System.out.println("Enter the vocab word that completes the sentence");
-    input = keyboard.nextLine();
-    System.out.println(facade.getLesson().getFillBlank().isCorrect(input));
-  }
+  /**
+   * Loads the 3 flashcards per lesson and uses the Narrator to 
+   * say the words out loud
+   */
   public static void playFlashcards() {
-    Narrator.playSound("Flash Cards");
+   // Narrator.playSound("Flash Cards");
     System.out.println("\nCard 1");
-    Narrator.playSound(facade.getLesson().getFlashcards().get(0).getCurrentWord().getForeign());
+    //Narrator.playSound(facade.getLesson().getFlashcards().get(0).getCurrentWord().getForeign());
     System.out.println(facade.getLesson().getFlashcards().get(0).getCurrentWord().getForeign());
-    Narrator.playSound(facade.getLesson().getFlashcards().get(0).getCurrentWord().getEnglish());
+   // Narrator.playSound(facade.getLesson().getFlashcards().get(0).getCurrentWord().getEnglish());
     System.out.println(facade.getLesson().getFlashcards().get(0).getCurrentWord().getEnglish());
     System.out.println("\nCard 2");
-    Narrator.playSound(facade.getLesson().getFlashcards().get(1).getCurrentWord().getForeign());
+    //Narrator.playSound(facade.getLesson().getFlashcards().get(1).getCurrentWord().getForeign());
     System.out.println(facade.getLesson().getFlashcards().get(1).getCurrentWord().getForeign());
-    Narrator.playSound(facade.getLesson().getFlashcards().get(1).getCurrentWord().getEnglish());
+   // Narrator.playSound(facade.getLesson().getFlashcards().get(1).getCurrentWord().getEnglish());
     System.out.println(facade.getLesson().getFlashcards().get(1).getCurrentWord().getEnglish());
     System.out.println("\nCard 3");
-    Narrator.playSound(facade.getLesson().getFlashcards().get(2).getCurrentWord().getForeign());
+   // Narrator.playSound(facade.getLesson().getFlashcards().get(2).getCurrentWord().getForeign());
     System.out.println(facade.getLesson().getFlashcards().get(2).getCurrentWord().getForeign());
-    Narrator.playSound(facade.getLesson().getFlashcards().get(2).getCurrentWord().getEnglish());
+   // Narrator.playSound(facade.getLesson().getFlashcards().get(2).getCurrentWord().getEnglish());
     System.out.println(facade.getLesson().getFlashcards().get(2).getCurrentWord().getEnglish());
+    facade.getUser().complete(facade.getLesson().getTopic());
   }
 
-  public static void playMultipleChoice(int num) {
-    Narrator.playSound("Multiple Choice Question");
+  /**
+   * Loads a multiple choice question based on users choice and
+   * prints the prompt and answer choices. Then it takes users choice
+   * checks if the user is correct and updates the user information
+   * @param num Representing which MultipleChoice question to load
+   */
+  public static boolean playMultipleChoice(int num) {
+   // Narrator.playSound("Multiple Choice Question");
     System.out.println("Multiple Choice Question:");
     System.out.println(facade.getLesson().multipleChoicePrompt(facade.getLesson().getMultipleChoice(num)));
     System.out.println("Answer Choices");
     System.out.println(facade.getLesson().multipleChoiceAnswers(facade.getLesson().getMultipleChoice(num)));
     System.out.println("Enter a number 1-4");
     int choice = keyboard.nextInt() - 1;
-    System.out.println(facade.getLesson().checkMultipleChoice(facade.getLesson().getMultipleChoice(num),choice));
+    keyboard.nextLine();
+    if(facade.getLesson().checkMultipleChoice(facade.getLesson().getMultipleChoice(num),choice)) {
+      facade.getUser().correct(facade.getLesson().getTopic(), facade.getLesson().getMultipleChoice(num));
+      System.out.println("Correct");
+      return true;
+    } else {
+    facade.getUser().incorrect(facade.getLesson().getTopic(), facade.getLesson().getMultipleChoice(num));
+    System.out.println("Incorrect");
+    return false;
+    }
+  }
+
+  public static void startLanguage(ForeignLanguage language,LanguageDifficulty difficulty) {
+    facade.startLanguage(language, difficulty);
+  }
+
+  public static void startLesson(LessonTopic topic) {
+    int score = 0;
+    facade.startLesson(topic);
+    playFlashcards();
+    ++score;
+    if(playMultipleChoice(2))
+      ++score;
+    if(playMultipleChoice(1))
+    ++score;
+    if(playMultipleChoice(0));
+    ++score;
+    if(playMatching())
+      ++score;
+    if(playFillBlank(2))
+      ++score;
+    if(playFillBlank(1))
+    ++score;
+    if(playFillBlank(0))
+    ++score;
+    Narrator.playSound("You scored " + String.valueOf(score) + "Out of eight");
+    System.out.println("You scored " + score + "/8");
+    if(score >= 7) {
+      facade.getUser().complete(topic);
+    } else {
+      System.out.println("Try this module again");
+      return;
+    }
   }
 
   /**
@@ -241,44 +300,41 @@ public class Driver {
    * Scenario 2
    */
   public static void scenario2() {
-    facade.startLanguage(ForeignLanguage.SPANISH, LanguageDifficulty.EASY);
-    facade.startLesson(LessonTopic.FOOD);
-    System.out.println("Jim flips through the flashcards");
-    playFlashcards();
-    System.out.println("Jim now attempts the questions");
-    playMultipleChoice(0);
-    playMultipleChoice(1);
-    playMultipleChoice(2);
-    System.out.println("Jim now attempts the Matching");
-    playMatching();
-    System.out.println("Jim now attempts the Fill in the Blank");
-    playFillBlank1();
+    startLanguage(ForeignLanguage.SPANISH, LanguageDifficulty.EASY);
+    startLesson(LessonTopic.FOOD);
+    //Narrator.playSound("You scored eighty percent, You can advance to the next module");
+    System.out.println("You scored 80%, You can advance to the next module");
+    facade.getUser().setModule(2);
   }
 
   /**
    * Scenario 3
    */
   public static void scenario3() {
-    Narrator.playSound("You scored 80%, You can advance to the next module");
-    System.out.println("You scored 80%, You can advance to the next module");
     facade.startLesson(LessonTopic.SCHOOL);
-    System.out.println("Jim flips through the flashcards");
-    playFlashcards();
-    System.out.println("Jim now attempts the questions");
-    playMultipleChoice(0);
-    playMultipleChoice(1);
-    playMultipleChoice(2);
-    System.out.println("Jim now attempts the Matching");
-    playMatching();
-    System.out.println("Jim now attempts the Fill in the Blank");
-    playFillBlank2();
+    //Narrator.playSound("You scored sixty percent, Time to try again");
+    System.out.println("You scored a 60%");
   }
 
+  /**
+   * Scenario 4
+   */
+  public static void scenario4() {
+    System.out.println("Jim logs out");
+    facade.logout();
+    facade.login("JimSmith01", "SmithRocks");
+    System.out.println("Jim logs back in");
+    facade.startLanguage(ForeignLanguage.SPANISH, LanguageDifficulty.EASY);
+    facade.startLesson(LessonTopic.SCHOOL);
+    System.out.println("Jim continues on 2nd Module");
+    startLesson(LessonTopic.SCHOOL);
+    }
 
   public static void main(String[] args) {
     startDemo();
     scenario1();
     scenario2();
     scenario3();
+    scenario4();
  }
 }

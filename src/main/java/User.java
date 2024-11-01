@@ -1,5 +1,6 @@
 import java.util.UUID;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The User class represents a user with data members such as
@@ -39,7 +40,7 @@ public class User {
     this.settings = new Settings();
     this.progress = new Progress();
     for(LessonTopic topic : LessonTopic.values())
-    this.progress.setIncomplete(topic, new ArrayList<Question>());
+    this.progress.setIncomplete(topic, new ArrayList<Object>());
   }
   
   /** Returns this user's userid
@@ -198,7 +199,7 @@ public class User {
    * @param topic of the lesson
    * @param questions ArrayList<Question> of the incomplete questions
    */
-  public void setIncomplete(LessonTopic topic, ArrayList<Question> questions) {
+  public void setIncomplete(LessonTopic topic, ArrayList<Object> questions) {
     this.progress.setIncomplete(topic, questions);
   }
 
@@ -209,7 +210,7 @@ public class User {
    * @return ArrayList<Question> of the incomplete question of that
    * lesson
    */
-  public ArrayList<Question> getIncomplete(LessonTopic topic) {
+  public ArrayList<Object> getIncomplete(LessonTopic topic) {
     return this.progress.getIncomplete(topic);
   }
 
@@ -231,21 +232,29 @@ public class User {
     return this.progress.getLessonProgress(topic);
   }
 
-  /**
-   * Adds a question that the user struggles with to the collection
-   * of trouble questions for this user
-   * @param question to be added
-   */
-  public void addTrouble(Question question) {
-    this.progress.addTrouble(question);
+  public void complete(LessonTopic topic) {
+    this.progress.updateComplete(topic);
+  }
+  public void correct(LessonTopic topic, Question question) {
+    this.progress.updateCorrect(topic,question);
+   }
+
+  public void incorrect(LessonTopic topic, Question question) {
+    this.progress.updateIncomplete(topic,question);
+}
+
+  public HashMap<LessonTopic,HashMap<Question,Integer>> getTrouble() {
+    return this.progress.getTrouble();
   }
 
-  /**
-   * Removes a trouble question out of the user's collection of
-   * trouble questions
-   * @param question to be removed
-   */
-  public void removeTrouble(Question question) {
-    this.progress.removeTrouble(question);
+  public int getModule() {
+    return this.progress.getModule();
   }
+
+  public void setModule(int num) {
+    this.progress.setModule(num);
 }
+}
+
+
+

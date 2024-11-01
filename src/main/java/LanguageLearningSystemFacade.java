@@ -185,6 +185,8 @@ public ArrayList<User> getFriendList() {
                                 LanguageDifficulty difficulty) {
     languageList.addLanguage(this.user.getUserID(),language,difficulty);
     this.currentLanguage = languageList.getLanguage(this.user.getUserID(), language);
+    for(LessonTopic topic : LessonTopic.values())
+      this.user.setIncomplete(topic, this.currentLanguage.getLesson(topic).getQuestions());
     return languageList.getLanguage(this.user.getUserID(), language);
   }
 
@@ -223,7 +225,6 @@ public ArrayList<User> getFriendList() {
    */
   public Lesson startLesson(LessonTopic topic) {
     this.currentLesson = languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic);
-    languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic).startLesson();
     return languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic);
   }
 
