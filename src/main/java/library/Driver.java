@@ -15,7 +15,6 @@ import java.util.HashMap;
  * @author Tony Lin
  */
 public class Driver {
-  private static DictionaryManager dictionaryManager;
   private static LanguageLearningSystemFacade facade;
   private static Scanner keyboard;
   
@@ -23,8 +22,6 @@ public class Driver {
    * Initializes the facade, scanner, and dictionary manager
    */
   public static void startDemo() {
-    dictionaryManager = DictionaryManager.getInstance();
-    dictionaryManager = DataLoader.loadDictionary();
     facade = LanguageLearningSystemFacade.getInstance();
     keyboard = new Scanner(System.in);
   }
@@ -220,7 +217,10 @@ public class Driver {
     System.out.println(facade.getLesson().getFlashcards().get(2).getCurrentWord().getForeign());
     Narrator.playSound(facade.getLesson().getFlashcards().get(2).getCurrentWord().getEnglish());
     System.out.println(facade.getLesson().getFlashcards().get(2).getCurrentWord().getEnglish());
-    facade.getUser().complete(facade.getLesson().getTopic());
+    for(Flashcard card : facade.getLesson().getFlashcards()) {
+      facade.getUser().correct(facade.getLesson().getTopic(),card);
+    }
+
   }
 
   /**
@@ -273,7 +273,7 @@ public class Driver {
     if(playFillBlank(0))
     ++score;
     Narrator.playSound("You scored " + String.valueOf(score) + "Out of eight");
-    System.out.println("You scored " + score + "/8");
+    System.out.println("You scored " + score + "/8" + " (" + (score/8)*100 + "%)");
     if(score >= 7) {
       facade.getUser().complete(topic);
     } else {
@@ -335,9 +335,15 @@ public class Driver {
 
   public static void main(String[] args) {
     startDemo();
-    scenario1();
-    scenario2();
-    scenario3();
-    scenario4();
- }
+    facade.login("JimSmith01", "SmithRocks");
+    for(LessonTopic topic : LessonTopic.values()){
+      System.out.println(topic);
+      for(Object obj : facade.getUser().getIncomplete(topic))
+        System.out.println(obj);
+    }
+    // scenario1();
+    // scenario2();
+    // scenario3();
+    // scenario4();
+}
 }

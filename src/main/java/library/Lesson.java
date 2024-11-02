@@ -45,7 +45,6 @@ public class Lesson {
       Flashcard card = new Flashcard(word);
       this.questions.add(card);
     }
-
   }
 
   /**
@@ -228,6 +227,7 @@ public class Lesson {
    * pair consisting of the foreign word and the english word
    */
   private void createMatching() {
+    
     ArrayList<Word> matching = manager.getWordsByTopic(this.difficulty, this.topic);
     this.questions.add(new Matching(matching));
   }

@@ -1,6 +1,9 @@
 package library;
 
 import java.util.UUID;
+
+import javax.naming.ldap.LdapName;
+
 import java.util.ArrayList;
 
 
@@ -189,7 +192,13 @@ public ArrayList<User> getFriendList() {
     this.currentLanguage = languageList.getLanguage(this.user.getUserID(), language);
     for(LessonTopic topic : LessonTopic.values())
       this.user.setIncomplete(topic, this.currentLanguage.getLesson(topic).getQuestions());
+    user.setDifficulty(difficulty);
     return languageList.getLanguage(this.user.getUserID(), language);
+  }
+
+  public void setLanguage(ForeignLanguage language,
+                              LanguageDifficulty difficulty) {
+    this.currentLanguage = new Language(language, difficulty);
   }
 
   
@@ -226,8 +235,8 @@ public ArrayList<User> getFriendList() {
    * @return Lesson for the user to complete
    */
   public Lesson startLesson(LessonTopic topic) {
-    this.currentLesson = languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic);
-    return languageList.getLanguage(this.user.getUserID(),this.currentLanguage.getForeignLanguage()).getLesson(topic);
+    this.currentLesson = this.currentLanguage.getLesson(topic);
+    return this.currentLesson;
   }
 
   

@@ -33,33 +33,19 @@ public class DataWriter extends DataConstants{
     JSONArray usersJSON = new JSONArray();
     for(User user : userList) {
       JSONObject userJSON = new JSONObject();
-      userJSON.put(USER_ID, user.getUserID().toString());
-      userJSON.put(USER_FIRST_NAME, user.getFirstName());
-      userJSON.put(USER_LAST_NAME, user.getLastName());
-      userJSON.put(USER_USERNAME, user.getUserName());
-      userJSON.put(USER_PASSWORD, user.getPassword());
-      userJSON.put(USER_EMAIL, user.getEmail());
-      JSONArray friendsJSON = new JSONArray();
-      ArrayList<User> friendList = user.getFriendList();
-      for(User friend : friendList) {
-        JSONObject friendJSON = new JSONObject();
-        friendJSON.put(USER_ID, friend.getUserID().toString());
-        friendJSON.put(USER_USERNAME, friend.getUserName());
-        friendsJSON.add(friendJSON);
-      }
-      userJSON.put(USER_FRIENDS, friendsJSON);
-      JSONObject userSettings = new JSONObject();
-      userSettings.put(USER_NOTIFICATIONS, Integer.valueOf(user.getSettings().getNotifications()));
-      userSettings.put(USER_LIGHT_MODE, Integer.valueOf(user.getSettings().getLightMode()));
-      userSettings.put(USER_TEXT_TO_SPEECH, Integer.valueOf(user.getSettings().getTextToSpeech()));
-      userSettings.put(USER_FONT_SIZE, Integer.valueOf(user.getSettings().getFontSize()));
-      userJSON.put(USER_SETTINGS, userSettings);
+      savePersonalData(user, userJSON);
+      saveFriends(user, userJSON);
       if(facade.getLanguage()!= null) {
       JSONArray languagesArray = new JSONArray();
       JSONObject spanishObject = new JSONObject();
       spanishObject.put(FOREIGN_LANGUAGE, String.valueOf(facade.getLanguage().getForeignLanguage()));
       spanishObject.put(LANGUAGE_PROGRESS, facade.getUser().getLanguageProgress());
-      spanishObject.put(MODULE, 2);
+      switch(user.getDifficulty()){
+        case EASY: spanishObject.put(DIFFICULTY, EASY); break;
+        case MEDIUM: spanishObject.put(DIFFICULTY, MEDIUM); break;
+        case HARD: spanishObject.put(DIFFICULTY, HARD); break;
+      }
+      spanishObject.put(MODULE, user.getModule());
       JSONArray troubleArray = new JSONArray();
       for(LessonTopic topic : LessonTopic.values()) {
         HashMap<Question,Integer> map = user.getTrouble().get(topic);
@@ -82,6 +68,7 @@ public class DataWriter extends DataConstants{
       spanishObject.put(TROUBLE,troubleArray);
        JSONArray incompleteArray = new JSONArray();
        for(LessonTopic topic : LessonTopic.values()) {
+        if(!(user.getIncomplete(topic) == null)) {
          JSONObject incompleteObject = new JSONObject();
          JSONArray questionTypes = new JSONArray();
          for(Object object : user.getIncomplete(topic)) {
@@ -100,7 +87,7 @@ public class DataWriter extends DataConstants{
               questionObj.put(QUESTION_ID, toAdd.getId());
             }
             else if(object instanceof Flashcard) {
-              questionObj.put(QUESTIONTYPE, MATCHING);
+              questionObj.put(QUESTIONTYPE, FLASHCARD);
             }
             questionTypes.add(questionObj);
          }
@@ -111,9 +98,12 @@ public class DataWriter extends DataConstants{
           case FOOD: incompleteObject.put(TOPIC, FOOD); break;
           case PETS: incompleteObject.put(TOPIC, PETS); break;
          }
+
          incompleteObject.put(QUESTIONTYPE,questionTypes);
          incompleteArray.add(incompleteObject);
+        }
        }
+       spanishObject.put(TROUBLE, troubleArray);
        spanishObject.put(INCOMPLETE, incompleteArray);
        languagesArray.add(spanishObject);
        userJSON.put(USER_LANGUAGES,languagesArray);
@@ -129,13 +119,40 @@ public class DataWriter extends DataConstants{
     }
   }
 
+  private static void saveFriends(User user, JSONObject userJSON) {
+    JSONArray friendsJSON = new JSONArray();
+    ArrayList<User> friendList = user.getFriendList();
+    for(User friend : friendList) {
+      JSONObject friendJSON = new JSONObject();
+      friendJSON.put(USER_ID, friend.getUserID().toString());
+      friendJSON.put(USER_USERNAME, friend.getUserName());
+      friendsJSON.add(friendJSON);
+    }
+    userJSON.put(USER_FRIENDS, friendsJSON);
+  }
+
+  private static void savePersonalData (User user, JSONObject userJSON) {
+    userJSON.put(USER_ID, user.getUserID().toString());
+    userJSON.put(USER_FIRST_NAME, user.getFirstName());
+    userJSON.put(USER_LAST_NAME, user.getLastName());
+    userJSON.put(USER_USERNAME, user.getUserName());
+    userJSON.put(USER_PASSWORD, user.getPassword());
+    userJSON.put(USER_EMAIL, user.getEmail());
+    JSONObject userSettings = new JSONObject();
+    userSettings.put(USER_NOTIFICATIONS, Integer.valueOf(user.getSettings().getNotifications()));
+    userSettings.put(USER_LIGHT_MODE, Integer.valueOf(user.getSettings().getLightMode()));
+    userSettings.put(USER_TEXT_TO_SPEECH, Integer.valueOf(user.getSettings().getTextToSpeech()));
+    userSettings.put(USER_FONT_SIZE, Integer.valueOf(user.getSettings().getFontSize()));
+    userJSON.put(USER_SETTINGS, userSettings);
+  }
+
   /**
    * Returns a casted object of one of the lesson objects depending on 
    * what is passed in to differentiate the different lesson objects
    * @param object to be differentiated
    * @return casted version of the object 
    */
-  public static Object getQuestionType(Object object) {
+  private static Object getQuestionType(Object object) {
     if (object instanceof MultipleChoice) 
       return (MultipleChoice) object;
     else if (object instanceof FillBlank) 

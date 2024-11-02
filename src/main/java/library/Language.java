@@ -82,14 +82,4 @@ public class Language {
     return null;
   }
   
-  /** Completes the lesson and updates the languages progress
-   * @param topic of the lesson that was completed
-   */
-  public void completeLesson(LessonTopic topic) {
-    for(Lesson lesson : lessons) {
-      if(lesson.getTopic().equals(topic)) {
-        lesson.completeLesson();
-      }
-    }
-  }
 }

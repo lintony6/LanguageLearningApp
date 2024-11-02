@@ -15,7 +15,8 @@ public class Progress{
   private HashMap<LessonTopic, HashMap<Question,Integer>> trouble;
   private int languageProgress;
   private int module;
-
+  private LanguageDifficulty difficulty;
+  private ForeignLanguage language;
 /** 
  * Default constructor that initializes the HashMaps tracking the 
  * user's progress and initializes langaugeProgress to 0
@@ -59,7 +60,7 @@ public class Progress{
      * questions collection
      * Mainly used for FillBlank, MultipleChoice, Matching
      */
-  public void updateCorrect(LessonTopic topic, Question question) {
+  public void updateCorrect(LessonTopic topic, Object question) {
     this.languageProgress++;
     this.lessonProgress.put(topic, this.lessonProgress.get(topic) + 1);
     this.incomplete.get(topic).remove(question);
@@ -71,21 +72,11 @@ public class Progress{
   }
 
   /**
-   * updates the user's progress when they complete a problem
-   * Mainly used for story/flashcard
-   * @param topic
-   */
-  public void updateComplete(LessonTopic topic) {
-    this.languageProgress++;
-    this.lessonProgress.put(topic, this.lessonProgress.get(topic) + 1);
-  }
-
-  /**
    * Adds a question to the incomplete questions HashMap
    * @param topic LessonTopic of the incomplete question
    * @param question that is incomplete
    */
-  public void updateIncomplete(LessonTopic topic, Question toAdd) {
+  public void updateIncomplete(LessonTopic topic, Object toAdd) {
     for(Question question : this.trouble.get(topic).keySet()) {
       System.out.println("hi");
         if(!this.trouble.get(topic).containsKey(question)) {
@@ -152,5 +143,23 @@ public class Progress{
   public void completeLesson(LessonTopic topic) {
     this.lessonProgress.put(topic, 8);
     this.incomplete.remove(topic);
+  }
+
+  public void setLanguageProgress(int progress) {
+    this.languageProgress = progress;
+  }
+  public LanguageDifficulty getDifficulty() {
+    return this.difficulty;
+  }
+
+  public void setDifficulty(LanguageDifficulty difficulty) {
+    this.difficulty = difficulty;
+  }
+  public void setLanguage(ForeignLanguage language) {
+    this.language = language;
+  }
+
+  public ForeignLanguage getLanguage() {
+    return this.language; 
   }
 }

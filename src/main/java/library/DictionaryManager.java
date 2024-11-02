@@ -11,14 +11,23 @@ public class DictionaryManager {
     private static DictionaryManager manager;
     
     public static DictionaryManager getInstance() {
-        if(manager == null)
+        if(manager == null){
           manager = new DictionaryManager();
+          manager = DataLoader.loadDictionary(manager);
+        }
         return manager;
       }
 
     private DictionaryManager() {
         this.data = new HashMap<>();
+        for(LanguageDifficulty difficulty : LanguageDifficulty.values()) {
+          data.put(difficulty, new HashMap());
+          for(LessonTopic topic : LessonTopic.values()) {
+            data.get(difficulty).put(topic, new HashMap<>());
+          }
+        }
     }
+
 
     /**
      * Adds a word to the dictionary.
@@ -30,11 +39,7 @@ public class DictionaryManager {
      */
     public void addWord(LanguageDifficulty difficulty, LessonTopic category, String foreign, String english,
             String meaning) {
-        // Create the inner HashMap if it doesn't exist
-        data.putIfAbsent(difficulty, new HashMap<>());
-        data.get(difficulty).putIfAbsent(category, new HashMap<>());
         Word word = new Word(foreign, english);
-        // Add the word and its translation to the appropriate category
         data.get(difficulty).get(category).put(word, meaning);
     }
 
@@ -79,25 +84,5 @@ public class DictionaryManager {
             }
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        // Example usage:
-        DictionaryManager manager = new DictionaryManager();
-
-        // Adding words directly to the dictionary
-        manager.addWord(LanguageDifficulty.EASY, LessonTopic.SCHOOL, "clase", "class",
-                "A group of students meeting for instruction.");
-        manager.addWord(LanguageDifficulty.EASY, LessonTopic.SCHOOL, "libro", "book",
-                "A set of written or printed pages, bound together.");
-
-        // Retrieving translations
-        System.out.println(manager.getMeaning(LanguageDifficulty.EASY, LessonTopic.SCHOOL, "libro")); // Output: The
-                                                                                                      // word 'libro'
-                                                                                                      // translates to
-                                                                                                      // 'book' in
-                                                                                                      // English.
-        System.out.println(manager.getMeaning(LanguageDifficulty.EASY, LessonTopic.SCHOOL, "mesa")); // Output: Word not
-                                                                                                     // found.
     }
 }

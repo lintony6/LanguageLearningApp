@@ -235,13 +235,26 @@ public class User {
   }
 
   public void complete(LessonTopic topic) {
-    this.progress.updateComplete(topic);
+    this.progress.completeLesson(topic);
   }
-  public void correct(LessonTopic topic, Question question) {
+
+  public ArrayList<Object> getAllIncomplete() {
+    ArrayList<Object> toReturn = new ArrayList<>();
+    for(LessonTopic topic : LessonTopic.values()) {
+      toReturn.addAll(this.progress.getIncomplete(topic));
+    }
+    return toReturn;
+  }
+
+  public void setLanguageProgress(int progress) {
+    this.progress.setLanguageProgress(progress);
+  }
+
+  public void correct(LessonTopic topic, Object question) {
     this.progress.updateCorrect(topic,question);
    }
 
-  public void incorrect(LessonTopic topic, Question question) {
+  public void incorrect(LessonTopic topic, Object question) {
     this.progress.updateIncomplete(topic,question);
 }
 
@@ -256,6 +269,21 @@ public class User {
   public void setModule(int num) {
     this.progress.setModule(num);
 }
+
+  public LanguageDifficulty getDifficulty() {
+    return this.progress.getDifficulty();
+  }
+
+  public void setDifficulty(LanguageDifficulty difficulty) {
+    this.progress.setDifficulty(difficulty);
+  }
+  public void setLanguage(ForeignLanguage language) {
+    this.progress.setLanguage(language);
+  }
+
+  public ForeignLanguage getLanguage() {
+    return this.progress.getLanguage();
+  }
 }
 
 

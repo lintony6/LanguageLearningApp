@@ -3,18 +3,19 @@
         "password": "SmithRocks",
         "languages": [
             {
+                "difficulty": "EASY",
                 "foreign-language": "SPANISH",
                 "incomplete": [
                     {
                         "question-type": [
                             {
-                                "question-type": "matching"
+                                "question-type": "flashcard"
                             },
                             {
-                                "question-type": "matching"
+                                "question-type": "flashcard"
                             },
                             {
-                                "question-type": "matching"
+                                "question-type": "flashcard"
                             },
                             {
                                 "question-type": "matching"
@@ -49,13 +50,13 @@
                     {
                         "question-type": [
                             {
-                                "question-type": "matching"
+                                "question-type": "flashcard"
                             },
                             {
-                                "question-type": "matching"
+                                "question-type": "flashcard"
                             },
                             {
-                                "question-type": "matching"
+                                "question-type": "flashcard"
                             },
                             {
                                 "question-type": "matching"
@@ -90,13 +91,13 @@
                     {
                         "question-type": [
                             {
-                                "question-type": "matching"
+                                "question-type": "flashcard"
                             },
                             {
-                                "question-type": "matching"
+                                "question-type": "flashcard"
                             },
                             {
-                                "question-type": "matching"
+                                "question-type": "flashcard"
                             },
                             {
                                 "question-type": "matching"
@@ -131,13 +132,13 @@
                     {
                         "question-type": [
                             {
-                                "question-type": "matching"
+                                "question-type": "flashcard"
                             },
                             {
-                                "question-type": "matching"
+                                "question-type": "flashcard"
                             },
                             {
-                                "question-type": "matching"
+                                "question-type": "flashcard"
                             },
                             {
                                 "question-type": "matching"
@@ -168,28 +169,14 @@
                             }
                         ],
                         "topic": "pets"
-                    },
-                    {
-                        "question-type": [
-                            {
-                                "question-type": "matching"
-                            },
-                            {
-                                "question-type": "matching"
-                            },
-                            {
-                                "question-type": "matching"
-                            }
-                        ],
-                        "topic": "food"
                     }
                 ],
                 "module": 2,
                 "trouble": [],
-                "language-progress": 9
+                "language-progress": 10
             }
         ],
-        "uuid": "a8c2e060-51cd-4e74-bfde-1a985f3fdd37",
+        "uuid": "213a517e-bb36-46e6-b97a-80624da6d652",
         "user-settings": {
             "text-to-speech": 0,
             "light-mode": 1,

@@ -32,69 +32,16 @@ public class DataLoader extends DataConstants{
       UserList userList = UserList.getInstance();
       BufferedReader reader = getReaderFromFile(USER_JSON, USER_JUNIT);
       JSONArray usersJSON = (JSONArray)new JSONParser().parse(reader);
-      for (int i = 0; i < usersJSON.size(); ++i) {
-        JSONObject userJSON = (JSONObject)usersJSON.get(i);
-        JSONObject userSETTINGS = (JSONObject) userJSON.get(USER_SETTINGS);
-        UUID userID = UUID.fromString((String)userJSON.get(USER_ID));
-        String firstName = (String) userJSON.get(USER_FIRST_NAME);
-        String lastName = (String) userJSON.get(USER_LAST_NAME);
-        String userName = (String) userJSON.get(USER_USERNAME);
-        String password = (String) userJSON.get(USER_PASSWORD);
-        String email = (String) userJSON.get(USER_EMAIL);
-        userList.addUser(firstName, lastName, userName, password, email, userID);
-        User user = userList.getUser(userID);
-        Long longNum = (Long) userSETTINGS.get(USER_NOTIFICATIONS);
-        int updated = longNum.intValue();
-        user.changeSetting(0, updated);
-        longNum = (Long) userSETTINGS.get(USER_LIGHT_MODE);
-        updated = longNum.intValue();
-        user.changeSetting(1, updated);
-        longNum = (Long) userSETTINGS.get(USER_TEXT_TO_SPEECH);
-        updated = longNum.intValue();
-        user.changeSetting(2, updated);
-        longNum = (Long) userSETTINGS.get(USER_FONT_SIZE);
-        updated = longNum.intValue();
-        user.changeSetting(3, updated);
+      for(Object userObj : usersJSON) {
+        JSONObject userJSON = (JSONObject) userObj;
+        loadPersonalData(userList, usersJSON);
         JSONArray languages = (JSONArray) userJSON.get(LANGUAGES);
-        if(!(languages == null)) {
-        HashMap<LessonTopic, ArrayList<Object>> incompleteObjects = new HashMap<LessonTopic,ArrayList<Object>>();
-        for(LessonTopic topic : LessonTopic.values()) {
-          incompleteObjects.put(topic, new ArrayList<Object>());
-        }
-        for(Object langObj : languages) {
-          JSONObject language = (JSONObject) langObj;  
-          ForeignLanguage foreignLanguage = ForeignLanguage.fromString((String)language.get(FOREIGN_LANGUAGE));
-          Long longValue = (Long)language.get(MODULE);
-          int module = longValue.intValue();
-          longValue = (Long)language.get(LANGUAGE_PROGRESS);
-          int languageProgress = longValue.intValue();
-          JSONArray incompleteArray = (JSONArray)language.get(INCOMPLETE);
-          for(Object questionObj : incompleteArray) {
-            JSONObject question = (JSONObject) questionObj;
-            JSONArray questionTypes = (JSONArray) question.get(QUESTIONTYPE);
-            LessonTopic topic = LessonTopic.fromString((String)question.get(TOPIC));
-            incompleteObjects.get(topic).add(getQuestionType(questionObj));
-          }
-          for(LessonTopic topic : LessonTopic.values()) {
-            incompleteObjects.put(topic, new ArrayList<Object>());
-            user.setIncomplete(topic, incompleteObjects.get(topic));
-          }
-        }
-      }
-      }
-      for(int i = 0; i < usersJSON.size(); ++i) {
-        JSONObject userJSON = (JSONObject)usersJSON.get(i);
-        JSONArray userFRIENDS = (JSONArray)userJSON.get(USER_FRIENDS);
-        if(userFRIENDS != null) {
-        UUID userID = UUID.fromString((String)userJSON.get(USER_ID));
-        for(Object friend : userFRIENDS) {
-          JSONObject friendJSON = (JSONObject) friend;
-          UUID friendID = UUID.fromString((String)friendJSON.get(USER_ID));
-          userList.getUser(userID).addFriend(userList.getUser(friendID));
-        }
+        for(User user : userList.getAllUsers()) {
+        loadProgress(user,languages);
       }
     }
-    reader.close();
+      loadFriends(usersJSON,userList);
+      reader.close();
       return userList;
     } catch (Exception e) {
         System.out.println(e);
@@ -128,13 +75,12 @@ public class DataLoader extends DataConstants{
    * manager fully populated with all the words
    * @return dictionary manager with all words from dictionary.json
    */
-  public static DictionaryManager loadDictionary() {
+  public static DictionaryManager loadDictionary(DictionaryManager dictionaryManager) {
     try {
-      DictionaryManager dictionaryManager = DictionaryManager.getInstance();
       BufferedReader reader = getReaderFromFile(DICTIONARY_JSON, DICTIONARY_JUNIT);
       JSONArray jsonArray = (JSONArray)new JSONParser().parse(reader);
-      for (Object obj : jsonArray) {
-        JSONObject jsonObject = (JSONObject) obj;
+      for (int i = 0; i < 1; ++i) {
+        JSONObject jsonObject = (JSONObject)jsonArray.get(i);
         JSONArray difficultyArray = (JSONArray) jsonObject.get(DIFFICULTY);
         for(Object difficultyObj : difficultyArray) {
           JSONObject difficultyLevel = (JSONObject)difficultyObj;
@@ -158,7 +104,109 @@ public class DataLoader extends DataConstants{
     return dictionaryManager;
    } catch (Exception e) {
       System.out.println(e);
-      return null;
+      return dictionaryManager;
+    }
+  }
+
+  private static void loadFriends(JSONArray usersJSON, UserList userList) {
+    for(int i = 0; i < usersJSON.size(); ++i) {
+      JSONObject userJSON = (JSONObject)usersJSON.get(i);
+      JSONArray userFRIENDS = (JSONArray)userJSON.get(USER_FRIENDS);
+      if(userFRIENDS != null) {
+      UUID userID = UUID.fromString((String)userJSON.get(USER_ID));
+      for(Object friend : userFRIENDS) {
+        JSONObject friendJSON = (JSONObject) friend;
+        UUID friendID = UUID.fromString((String)friendJSON.get(USER_ID));
+        userList.getUser(userID).addFriend(userList.getUser(friendID));
+      }
+    }
+  }
+  }
+
+  private static void loadPersonalData(UserList userList, JSONArray usersJSON) {
+    for (int i = 0; i < usersJSON.size(); ++i) {
+      JSONObject userJSON = (JSONObject)usersJSON.get(i);
+      JSONObject userSETTINGS = (JSONObject) userJSON.get(USER_SETTINGS);
+      UUID userID = UUID.fromString((String)userJSON.get(USER_ID));
+      String firstName = (String) userJSON.get(USER_FIRST_NAME);
+      String lastName = (String) userJSON.get(USER_LAST_NAME);
+      String userName = (String) userJSON.get(USER_USERNAME);
+      String password = (String) userJSON.get(USER_PASSWORD);
+      String email = (String) userJSON.get(USER_EMAIL);
+      userList.addUser(firstName, lastName, userName, password, email, userID);
+      User user = userList.getUser(userID);
+      Long longNum = (Long) userSETTINGS.get(USER_NOTIFICATIONS);
+      int updated = longNum.intValue();
+      user.changeSetting(0, updated);
+      longNum = (Long) userSETTINGS.get(USER_LIGHT_MODE);
+      updated = longNum.intValue();
+      user.changeSetting(1, updated);
+      longNum = (Long) userSETTINGS.get(USER_TEXT_TO_SPEECH);
+      updated = longNum.intValue();
+      user.changeSetting(2, updated);
+      longNum = (Long) userSETTINGS.get(USER_FONT_SIZE);
+      updated = longNum.intValue();
+      user.changeSetting(3, updated);
+    }
+  }
+
+  private static void loadProgress(User user, JSONArray languages) {
+    if(languages != null) {
+      HashMap<LessonTopic, ArrayList<Object>> incompleteObjects = new HashMap<LessonTopic,ArrayList<Object>>();
+      for(LessonTopic topic : LessonTopic.values()) {
+        incompleteObjects.put(topic, new ArrayList<Object>());
+      }
+      for(Object langObj : languages) {
+        JSONObject language = (JSONObject) langObj;  
+        ForeignLanguage foreignLanguage = ForeignLanguage.fromString((String)language.get(FOREIGN_LANGUAGE));
+        user.setLanguage(foreignLanguage);
+        LanguageDifficulty difficulty = LanguageDifficulty.fromString((String)language.get(DIFFICULTY));
+        user.setDifficulty(difficulty);
+        Long longValue = (Long)language.get(MODULE);
+        user.setModule(longValue.intValue());
+        longValue = (Long)language.get(LANGUAGE_PROGRESS);
+        user.setLanguageProgress(longValue.intValue());
+        JSONArray incompleteArray = (JSONArray)language.get(INCOMPLETE);
+        for(Object incompleteTopicObject : incompleteArray) {
+          JSONObject incompleteTopic = (JSONObject) incompleteTopicObject;
+          JSONArray questionTypes = (JSONArray) incompleteTopic.get(QUESTIONTYPE);
+          LessonTopic topic = LessonTopic.fromString((String)incompleteTopic.get(TOPIC));
+          Lesson tempNewLesson = new Lesson(difficulty,topic);
+          for(Object object : questionTypes) {
+            JSONObject question = (JSONObject) object;
+            String type = String.valueOf(question.get(QUESTIONTYPE));
+            if(question.containsKey(QUESTION_ID))
+              longValue = (long)question.get(QUESTION_ID);
+            switch(type) {
+              case MATCHING:
+                incompleteObjects.get(topic).add(tempNewLesson.getMatching()); break;
+              case FLASHCARD: 
+                for(Flashcard card : tempNewLesson.getFlashcards()) {
+                  incompleteObjects.get(topic).add(card);
+                }
+              case MULTIPLECHOICE:
+                switch(longValue.intValue()) {
+                  case 0:
+                  incompleteObjects.get(topic).add(tempNewLesson.getMultipleChoice(0)); break;
+                  case 1:
+                  incompleteObjects.get(topic).add(tempNewLesson.getMultipleChoice(1)); break;
+                  case 2:
+                  incompleteObjects.get(topic).add(tempNewLesson.getMultipleChoice(2)); break;
+                } break;
+              case FILLBLANK:
+                switch(longValue.intValue()) {
+                case 0:
+                incompleteObjects.get(topic).add(tempNewLesson.getFillBlank(0)); break;
+                case 1:
+                incompleteObjects.get(topic).add(tempNewLesson.getFillBlank(1)); break;
+                case 2:
+                incompleteObjects.get(topic).add(tempNewLesson.getFillBlank(2)); break;
+              } break;
+            }
+          }
+          user.setIncomplete(topic, incompleteObjects.get(topic));
+        }
+      }
     }
   }
 
