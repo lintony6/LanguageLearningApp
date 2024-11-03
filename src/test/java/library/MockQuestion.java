@@ -1,10 +1,9 @@
 package library;
-
-
 import java.util.ArrayList;
 
 
 /**
+ * @author Brian Lee
  * Mock implementation of the Question interface for testing purposes.
  */
 public class MockQuestion implements Question {
