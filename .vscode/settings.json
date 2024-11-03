@@ -7,5 +7,6 @@
     "lib/**/*.jar",
     "programfiles/lib/json-simple-1.1.1.jar",
     "programfiles/lib/**/*.jar"
-  ]
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

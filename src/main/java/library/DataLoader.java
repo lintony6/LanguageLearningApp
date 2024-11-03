@@ -108,7 +108,7 @@ public class DataLoader extends DataConstants{
     }
   }
 
-  private static void loadFriends(JSONArray usersJSON, UserList userList) {
+  static void loadFriends(JSONArray usersJSON, UserList userList) {
     for(int i = 0; i < usersJSON.size(); ++i) {
       JSONObject userJSON = (JSONObject)usersJSON.get(i);
       JSONArray userFRIENDS = (JSONArray)userJSON.get(USER_FRIENDS);
@@ -123,7 +123,7 @@ public class DataLoader extends DataConstants{
   }
   }
 
-  private static void loadPersonalData(UserList userList, JSONArray usersJSON) {
+  static void loadPersonalData(UserList userList, JSONArray usersJSON) {
     for (int i = 0; i < usersJSON.size(); ++i) {
       JSONObject userJSON = (JSONObject)usersJSON.get(i);
       JSONObject userSETTINGS = (JSONObject) userJSON.get(USER_SETTINGS);
@@ -150,7 +150,7 @@ public class DataLoader extends DataConstants{
     }
   }
 
-  private static void loadProgress(User user, JSONArray languages) {
+  static void loadProgress(User user, JSONArray languages) {
     if(languages != null) {
       HashMap<LessonTopic, ArrayList<Object>> incompleteObjects = new HashMap<LessonTopic,ArrayList<Object>>();
       for(LessonTopic topic : LessonTopic.values()) {
@@ -210,7 +210,7 @@ public class DataLoader extends DataConstants{
     }
   }
 
-  private static BufferedReader getReaderFromFile(String fileName, String jsonFileName) {
+  static BufferedReader getReaderFromFile(String fileName, String jsonFileName) {
     try {
       if(isJunitTest()) {
         InputStream inputStream = DataLoader.class.getResourceAsStream(jsonFileName);

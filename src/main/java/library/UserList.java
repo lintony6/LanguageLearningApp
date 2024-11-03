@@ -19,7 +19,7 @@ public class UserList {
    * Private constructor to prevent direct instantiation.
    */
 
-  private UserList() {
+  UserList() {
     users = new HashMap<>();
     size = 0;
   }
