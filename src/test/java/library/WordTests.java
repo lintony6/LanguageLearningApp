@@ -6,6 +6,8 @@ package library;
  import static org.junit.Assert.*;
  import org.junit.Before;
  import org.junit.Test;
+ import javax.swing.*;
+ import java.awt.*;
  import java.util.ArrayList;
  
  public class WordTests {
@@ -14,7 +16,6 @@ package library;
  
      @Before
      public void setUp() {
-         // This will run before each test
          word = new Word("foreignWord", "englishWord");
          similarWord = new Word("similarForeign", "similarEnglish");
      }

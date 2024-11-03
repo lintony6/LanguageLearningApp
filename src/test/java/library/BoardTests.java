@@ -10,14 +10,12 @@ public class BoardTests {
 
     @Before
     public void setUp() {
-        // This will run before each test
         board = new Board(15, 15);
     }
 
     @Test
     public void testBoardInitialization() {
         board.setup();
-        // Add assertions based on what setup is supposed to do
         assertNotNull(board.getGrid());
     }
 

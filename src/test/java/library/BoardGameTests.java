@@ -1,18 +1,20 @@
 package library;
 /**
  * @author Michael Carson 
- * 
+ * some of these methods are placeholders for future tests 
+ * due to the methods not being implemented/not being functional 
  */
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import javax.swing.*;
+import java.awt.*;
 
 public class BoardGameTests {
     private BoardGame boardGame;
 
     @Before
     public void setUp() {
-        // This will run before each test
         boardGame = BoardGame.getInstance();
     }
 
@@ -26,14 +28,12 @@ public class BoardGameTests {
     @Test
     public void testStartGame() {
         boardGame.startGame();
-        // Add assertions based on what startGame is supposed to do
         assertNotNull(boardGame.getInstance());
     }
 
     @Test
     public void testNextSpace() {
         boardGame.nextSpace(5);
-        // Add assertions based on what nextSpace is supposed to do
         assertEquals(expectedPlayerPosition, boardGame.getPlayer().getPosition());
     }
 

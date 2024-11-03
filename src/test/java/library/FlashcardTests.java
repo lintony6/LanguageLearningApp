@@ -5,6 +5,8 @@ package library;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class FlashcardTests {
@@ -13,20 +15,19 @@ public class FlashcardTests {
 
     @Before
     public void setUp() {
-        // This will run before each test
         word = new Word("foreignWord", "englishWord");
         flashcard = new Flashcard(word);
     }
 
     @Test
     public void testFlipCard() {
-        // Initially, the flashcard is not flipped
+        // front of flashcard shows
         assertEquals("foreignWord", flashcard.flipCard());
 
-        // After one flip, it should show the back
+        // back of flashcard shows after flip
         assertEquals("englishWord", flashcard.flipCard());
 
-        // After another flip, it should show the front again
+        // front shows again after second flip 
         assertEquals("foreignWord", flashcard.flipCard());
     }
 
