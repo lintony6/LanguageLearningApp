@@ -6,6 +6,8 @@ package library;
  import static org.junit.Assert.*;
  import org.junit.Before;
  import org.junit.Test;
+ import javax.swing.*;
+ import java.awt.*;
  import java.util.ArrayList;
  
  public class MatchingTests {
@@ -15,7 +17,6 @@ package library;
  
      @Before
      public void setUp() {
-         // This will run before each test
          word1 = new Word("foreign1", "english1");
          word2 = new Word("foreign2", "english2");
          ArrayList<Word> words = new ArrayList<>();

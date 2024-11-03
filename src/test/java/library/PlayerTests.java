@@ -3,6 +3,9 @@ package library;
  * @author Michael Carson 
  */
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +14,6 @@ public class PlayerTests {
 
     @Before
     public void setUp() {
-        // This will run before each test
         player = new Player("X");
     }
 
@@ -44,14 +46,14 @@ public class PlayerTests {
 
     @Test
     public void testMoveToLastCell() {
-        player.move(224, 15, 15); // 15x15 grid has 225 cells (0 to 224)
+        player.move(224, 15, 15); 
         assertEquals(14, player.getRow());
         assertEquals(14, player.getCol());
     }
 
     @Test
     public void testMoveBeyondLastCell() {
-        player.move(230, 15, 15); // Attempt to move beyond the last cell
+        player.move(230, 15, 15); 
         assertEquals(14, player.getRow());
         assertEquals(14, player.getCol());
     }

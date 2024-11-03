@@ -118,7 +118,7 @@ public class DataWriter extends DataConstants{
     }
   }
 
-  private static void saveFriends(User user, JSONObject userJSON) {
+  public static void saveFriends(User user, JSONObject userJSON) {
     JSONArray friendsJSON = new JSONArray();
     ArrayList<User> friendList = user.getFriendList();
     for(User friend : friendList) {
@@ -130,7 +130,7 @@ public class DataWriter extends DataConstants{
     userJSON.put(USER_FRIENDS, friendsJSON);
   }
 
-  private static void savePersonalData (User user, JSONObject userJSON) {
+  public static void savePersonalData (User user, JSONObject userJSON) {
     userJSON.put(USER_ID, user.getUserID().toString());
     userJSON.put(USER_FIRST_NAME, user.getFirstName());
     userJSON.put(USER_LAST_NAME, user.getLastName());
@@ -151,7 +151,7 @@ public class DataWriter extends DataConstants{
    * @param object to be differentiated
    * @return casted version of the object 
    */
-  private static Object getQuestionType(Object object) {
+  public static Object getQuestionType(Object object) {
     if (object instanceof MultipleChoice) 
       return (MultipleChoice) object;
     else if (object instanceof FillBlank) 
@@ -165,7 +165,7 @@ public class DataWriter extends DataConstants{
     return null;
   }
 
-  private static String getFileWritingPath(String filePath, String junitFilePath) {
+  public static String getFileWritingPath(String filePath, String junitFilePath) {
     try {
       if(isJunitTest()) {
         URI url = DataWriter.class.getResource(junitFilePath).toURI();

@@ -3,9 +3,11 @@ package library;
  * @author Michael Carson 
  */
 
- import static org.junit.Assert.*;
- import org.junit.Before;
- import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+import javax.swing.*;
+import java.awt.*;
  import java.util.ArrayList;
  
  public class FillBlankTests {
@@ -14,7 +16,6 @@ package library;
  
      @Before
      public void setUp() {
-         // This will run before each test
          answer = new Word("correctAnswer", "correctAnswer");
          fillBlank = new FillBlank("What is the correct answer?", answer, 1);
      }
