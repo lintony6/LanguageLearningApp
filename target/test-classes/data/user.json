@@ -1,1 +1,192 @@
-[{"password":"password123","uuid":"05403638-eba1-4552-8bd5-20850169d2d0","user-settings":{"text-to-speech":0,"light-mode":1,"font-size":12,"notifications":1},"first-name":"John","email":"john.doe@example.com","friends":[{"uuid":"f69cdbbd-c55b-46b6-89bb-a5957259c7d7","username":"janedoe"}],"last-name":"Doe","username":"johndoe"}]
+[
+    {
+        "password": "SmithRocks",
+        "languages": [
+            {
+                "difficulty": "EASY",
+                "foreign-language": "SPANISH",
+                "incomplete": [
+                    {
+                        "question-type": [
+                            {
+                                "question-type": "flashcard"
+                            },
+                            {
+                                "question-type": "flashcard"
+                            },
+                            {
+                                "question-type": "flashcard"
+                            },
+                            {
+                                "question-type": "matching"
+                            },
+                            {
+                                "question-type": "multiplechoice",
+                                "question-id": 0
+                            },
+                            {
+                                "question-type": "multiplechoice",
+                                "question-id": 1
+                            },
+                            {
+                                "question-type": "multiplechoice",
+                                "question-id": 2
+                            },
+                            {
+                                "question-type": "fillblank",
+                                "question-id": 0
+                            },
+                            {
+                                "question-type": "fillblank",
+                                "question-id": 1
+                            },
+                            {
+                                "question-type": "fillblank",
+                                "question-id": 2
+                            }
+                        ],
+                        "topic": "school"
+                    },
+                    {
+                        "question-type": [
+                            {
+                                "question-type": "flashcard"
+                            },
+                            {
+                                "question-type": "flashcard"
+                            },
+                            {
+                                "question-type": "flashcard"
+                            },
+                            {
+                                "question-type": "matching"
+                            },
+                            {
+                                "question-type": "multiplechoice",
+                                "question-id": 0
+                            },
+                            {
+                                "question-type": "multiplechoice",
+                                "question-id": 1
+                            },
+                            {
+                                "question-type": "multiplechoice",
+                                "question-id": 2
+                            },
+                            {
+                                "question-type": "fillblank",
+                                "question-id": 0
+                            },
+                            {
+                                "question-type": "fillblank",
+                                "question-id": 1
+                            },
+                            {
+                                "question-type": "fillblank",
+                                "question-id": 2
+                            }
+                        ],
+                        "topic": "family"
+                    },
+                    {
+                        "question-type": [
+                            {
+                                "question-type": "flashcard"
+                            },
+                            {
+                                "question-type": "flashcard"
+                            },
+                            {
+                                "question-type": "flashcard"
+                            },
+                            {
+                                "question-type": "matching"
+                            },
+                            {
+                                "question-type": "multiplechoice",
+                                "question-id": 0
+                            },
+                            {
+                                "question-type": "multiplechoice",
+                                "question-id": 1
+                            },
+                            {
+                                "question-type": "multiplechoice",
+                                "question-id": 2
+                            },
+                            {
+                                "question-type": "fillblank",
+                                "question-id": 0
+                            },
+                            {
+                                "question-type": "fillblank",
+                                "question-id": 1
+                            },
+                            {
+                                "question-type": "fillblank",
+                                "question-id": 2
+                            }
+                        ],
+                        "topic": "weather"
+                    },
+                    {
+                        "question-type": [
+                            {
+                                "question-type": "flashcard"
+                            },
+                            {
+                                "question-type": "flashcard"
+                            },
+                            {
+                                "question-type": "flashcard"
+                            },
+                            {
+                                "question-type": "matching"
+                            },
+                            {
+                                "question-type": "multiplechoice",
+                                "question-id": 0
+                            },
+                            {
+                                "question-type": "multiplechoice",
+                                "question-id": 1
+                            },
+                            {
+                                "question-type": "multiplechoice",
+                                "question-id": 2
+                            },
+                            {
+                                "question-type": "fillblank",
+                                "question-id": 0
+                            },
+                            {
+                                "question-type": "fillblank",
+                                "question-id": 1
+                            },
+                            {
+                                "question-type": "fillblank",
+                                "question-id": 2
+                            }
+                        ],
+                        "topic": "pets"
+                    }
+                ],
+                "module": 2,
+                "trouble": [],
+                "language-progress": 10
+            }
+        ],
+        "uuid": "213a517e-bb36-46e6-b97a-80624da6d652",
+        "user-settings": {
+            "text-to-speech": 0,
+            "light-mode": 1,
+            "font-size": 10,
+            "notifications": 0
+        },
+        "first-name": "Jim",
+        "email": "JimSmith2000@email.com",
+        "friends": [],
+        "last-name": "Smith",
+        "username": "JimSmith01"
+    }
+]
