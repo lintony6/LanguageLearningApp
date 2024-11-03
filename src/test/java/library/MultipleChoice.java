@@ -31,6 +31,10 @@ public class MultipleChoice implements Question{
     this.id = id;
   }
 
+  public int getCorrectPosition() {
+    return this.correct;
+  }
+
   /*
   * @return the question content 
   */

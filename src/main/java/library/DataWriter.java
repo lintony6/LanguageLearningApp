@@ -29,17 +29,16 @@ public class DataWriter extends DataConstants{
    */
   public static void saveUsers(ArrayList<User> userList) {
     try {
-    LanguageLearningSystemFacade facade = LanguageLearningSystemFacade.getInstance();
     JSONArray usersJSON = new JSONArray();
     for(User user : userList) {
       JSONObject userJSON = new JSONObject();
       savePersonalData(user, userJSON);
       saveFriends(user, userJSON);
-      if(facade.getLanguage()!= null) {
+      if(user.getLanguage()!= null) {
       JSONArray languagesArray = new JSONArray();
       JSONObject spanishObject = new JSONObject();
-      spanishObject.put(FOREIGN_LANGUAGE, String.valueOf(facade.getLanguage().getForeignLanguage()));
-      spanishObject.put(LANGUAGE_PROGRESS, facade.getUser().getLanguageProgress());
+      spanishObject.put(FOREIGN_LANGUAGE, String.valueOf(user.getLanguage()));
+      spanishObject.put(LANGUAGE_PROGRESS, user.getLanguageProgress());
       switch(user.getDifficulty()){
         case EASY: spanishObject.put(DIFFICULTY, EASY); break;
         case MEDIUM: spanishObject.put(DIFFICULTY, MEDIUM); break;

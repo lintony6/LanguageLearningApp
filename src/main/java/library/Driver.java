@@ -336,11 +336,8 @@ public class Driver {
   public static void main(String[] args) {
     startDemo();
     facade.login("JimSmith01", "SmithRocks");
-    for(LessonTopic topic : LessonTopic.values()){
-      System.out.println(topic);
-      for(Object obj : facade.getUser().getIncomplete(topic))
-        System.out.println(obj);
-    }
+    facade.startLanguage(ForeignLanguage.SPANISH, LanguageDifficulty.EASY);
+    facade.startLesson(LessonTopic.FOOD);
     // scenario1();
     // scenario2();
     // scenario3();
