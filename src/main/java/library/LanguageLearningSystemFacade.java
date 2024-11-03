@@ -47,6 +47,9 @@ public class LanguageLearningSystemFacade {
     return facade;
   }
 
+  public static void resetInstance() {
+    facade = null;
+  }
   
   /** Logs in to the users preexisting accout and sets this user
    * to user that was just logged into
@@ -247,7 +250,7 @@ public ArrayList<User> getFriendList() {
    */
   public boolean endLesson(ForeignLanguage language, Lesson lesson) {
     try {
-      //languageList.getLanguage(this.user.getUserID(), language).completeLesson(lesson.getTopic());
+      this.currentLesson = null;
       return true;
     } catch (Exception e) {
       return false;
