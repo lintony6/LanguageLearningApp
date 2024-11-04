@@ -13,7 +13,7 @@ import java.util.HashMap;
 class ProgressTest {
 
     private Progress progress;
-    private final LessonTopic topic = LessonTopic.SCHOOL; // Change this to an appropriate topic
+    private final LessonTopic topic = LessonTopic.SCHOOL; 
 
     @BeforeEach
     void setUp() {
@@ -51,7 +51,7 @@ class ProgressTest {
 
     @Test
     void testUpdateIncomplete() {
-        Object question = new QuestionMock("A set of written or printed pages, bound together."); // Updated question
+        Object question = new QuestionMock("A set of written or printed pages, bound together.");
         
         // Initialize the incomplete list for the topic before updating
         ArrayList<Object> initialIncompleteQuestions = new ArrayList<>();
@@ -97,7 +97,7 @@ class ProgressTest {
     @Test
     void testRemoveTrouble() {
         HashMap<Question, Integer> troubleMap = new HashMap<>();
-        Question troubleQuestion = new QuestionMock("What is escuela in english?"); // Updated question
+        Question troubleQuestion = new QuestionMock("What is escuela in english?"); 
         troubleMap.put(troubleQuestion, 1);
         progress.setTrouble(new HashMap<>() {{ put(topic, troubleMap); }});
 
@@ -114,7 +114,7 @@ class ProgressTest {
 
     @Test
     void testSetAndGetDifficulty() {
-        LanguageDifficulty difficulty = LanguageDifficulty.EASY; // Assuming a LanguageDifficulty enum exists
+        LanguageDifficulty difficulty = LanguageDifficulty.EASY; 
         progress.setDifficulty(difficulty);
         assertEquals(difficulty, progress.getDifficulty());
     }
