@@ -1,6 +1,7 @@
 package library;
 /**
  * @Author Brian Lee
+ * 
  */
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +23,8 @@ class ProgressTest {
     @Test
     void testSetIncomplete() {
         ArrayList<Object> questions = new ArrayList<>();
-        questions.add(new QuestionMock("Cuál es la capital de España?"));
-        questions.add(new QuestionMock("¿Cuánto es 2 + 2?"));
+        questions.add(new QuestionMock("What is 'clase' in English?")); 
+        questions.add(new QuestionMock("What is 'libro' in English?")); 
 
         progress.setIncomplete(topic, questions);
 
@@ -34,7 +35,7 @@ class ProgressTest {
     @Test
     void testUpdateCorrect() {
         ArrayList<Object> questions = new ArrayList<>();
-        Object question = new QuestionMock("What is the capital of France?");
+        Object question = new QuestionMock("A piece of furniture with a flat surface for writing or reading."); 
         questions.add(question);
         progress.setIncomplete(topic, questions);
     
@@ -50,7 +51,7 @@ class ProgressTest {
 
     @Test
     void testUpdateIncomplete() {
-        Object question = new QuestionMock("What is the capital of France?");
+        Object question = new QuestionMock("A set of written or printed pages, bound together."); // Updated question
         
         // Initialize the incomplete list for the topic before updating
         ArrayList<Object> initialIncompleteQuestions = new ArrayList<>();
@@ -62,31 +63,29 @@ class ProgressTest {
         // Verify that the question has been added to the incomplete list
         assertTrue(progress.getIncomplete(topic).contains(question));
     }
-    
 
     @Test
-void testGetLanguageProgress() {
-    // Set up the initial state by initializing the incomplete questions
-    ArrayList<Object> initialIncompleteQuestions = new ArrayList<>();
-    Object question = new QuestionMock("What is the capital of France?");
-    initialIncompleteQuestions.add(question);
-    progress.setIncomplete(topic, initialIncompleteQuestions); // Ensure the topic is set up
+    void testGetLanguageProgress() {
+        // Set up the initial state by initializing the incomplete questions
+        ArrayList<Object> initialIncompleteQuestions = new ArrayList<>();
+        Object question = new QuestionMock("What is 'mesa' in English?"); 
+        initialIncompleteQuestions.add(question);
+        progress.setIncomplete(topic, initialIncompleteQuestions); // Ensure the topic is set up
 
-    // Confirm the initial language progress is 0
-    assertEquals(0, progress.getLanguageProgress());
+        // Confirm the initial language progress is 0
+        assertEquals(0, progress.getLanguageProgress());
 
-    // Now mark the question as correct
-    progress.updateCorrect(topic, question);
+        // Now mark the question as correct
+        progress.updateCorrect(topic, question);
 
-    // Assert the language progress has increased
-    assertEquals(1, progress.getLanguageProgress());
-}
-
+        // Assert the language progress has increased
+        assertEquals(1, progress.getLanguageProgress());
+    }
 
     @Test
     void testCompleteLesson() {
         ArrayList<Object> questions = new ArrayList<>();
-        questions.add(new QuestionMock("What is the capital of France?"));
+        questions.add(new QuestionMock("What is 'lapiz' in English?")); 
         progress.setIncomplete(topic, questions);
 
         progress.completeLesson(topic);
@@ -98,7 +97,7 @@ void testGetLanguageProgress() {
     @Test
     void testRemoveTrouble() {
         HashMap<Question, Integer> troubleMap = new HashMap<>();
-        Question troubleQuestion = new QuestionMock("What is 2 + 2?");
+        Question troubleQuestion = new QuestionMock("What is escuela in english?"); // Updated question
         troubleMap.put(troubleQuestion, 1);
         progress.setTrouble(new HashMap<>() {{ put(topic, troubleMap); }});
 
