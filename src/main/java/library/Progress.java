@@ -143,6 +143,7 @@ public class Progress{
   public void completeLesson(LessonTopic topic) {
     this.lessonProgress.put(topic, 8);
     this.incomplete.remove(topic);
+    ++this.module;
   }
 
   public void setLanguageProgress(int progress) {

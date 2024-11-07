@@ -1,8 +1,8 @@
 package library;
 
 public class DataConstants {
-  protected static final String USER_JUNIT = "/data/user.json";
-  protected static final String DICTIONARY_JUNIT = "/data/dictionary.json";
+  protected static final String USER_JUNIT = "data/user.json";
+  protected static final String DICTIONARY_JUNIT = "data/dictionary.json";
   protected static final String USER_JSON = "src/main/java/data/user.json";
   protected static final String DICTIONARY_JSON = "src/main/java/data/dictionary.json";
   protected static final String USER_ID = "uuid";

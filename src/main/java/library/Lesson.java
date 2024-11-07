@@ -339,4 +339,8 @@ public class Lesson {
   public ArrayList<Object> getQuestions() {
     return this.questions;
   }
+
+  public void setQuestions(ArrayList<Object> questions) {
+    this.questions = questions;
+  }
 }

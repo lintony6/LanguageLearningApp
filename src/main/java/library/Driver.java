@@ -254,6 +254,10 @@ public class Driver {
   }
 
   public static void startLesson(LessonTopic topic) {
+    if(facade.getUser().getLessonProgress(topic) == 8) {
+      System.out.println("You have already completed this module");
+      return;
+    }
     int score = 0;
     facade.startLesson(topic);
     playFlashcards();
@@ -336,8 +340,10 @@ public class Driver {
   public static void main(String[] args) {
     startDemo();
     facade.login("JimSmith01", "SmithRocks");
-    facade.startLanguage(ForeignLanguage.SPANISH, LanguageDifficulty.EASY);
-    facade.startLesson(LessonTopic.FOOD);
+    facade.selectLanguage(ForeignLanguage.SPANISH);
+    facade.startLesson(LessonTopic.PETS);
+    playMultipleChoice(0); 
+    logout();
     // scenario1();
     // scenario2();
     // scenario3();
