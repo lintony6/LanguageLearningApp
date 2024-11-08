@@ -61,13 +61,16 @@ public class Progress{
      * Mainly used for FillBlank, MultipleChoice, Matching
      */
   public void updateCorrect(LessonTopic topic, Object question) {
-    this.languageProgress++;
-    this.lessonProgress.put(topic, this.lessonProgress.get(topic) + 1);
-    this.incomplete.get(topic).remove(question);
-    this.trouble.get(topic).remove(question);
+      if(this.lessonProgress.get(topic) < 8) {
     try {
-      
+      if(this.incomplete.get(topic).contains(question)) {
+        this.languageProgress++;
+        this.lessonProgress.put(topic, this.lessonProgress.get(topic) + 1);
+        this.incomplete.get(topic).remove(question);
+        this.trouble.get(topic).remove(question);
+      }
     } catch (Exception e) {
+    }
     }
   }
 

@@ -340,9 +340,9 @@ public class Driver {
   public static void main(String[] args) {
     startDemo();
     facade.login("JimSmith01", "SmithRocks");
-    facade.selectLanguage(ForeignLanguage.SPANISH);
-    facade.startLesson(LessonTopic.PETS);
-    playMultipleChoice(0); 
+    facade.continueLanguage(ForeignLanguage.SPANISH);
+    facade.startLesson(LessonTopic.FOOD);
+    playFlashcards();
     logout();
     // scenario1();
     // scenario2();

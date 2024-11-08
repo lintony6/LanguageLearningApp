@@ -199,7 +199,7 @@ public ArrayList<User> getFriendList() {
     return languageList.getLanguage(this.user.getUserID(), language);
   }
 
-  public Language selectLanguage(ForeignLanguage language) {
+  public Language continueLanguage(ForeignLanguage language) {
     this.currentLanguage = languageList.addLanguage(this.user.getUserID(), language, this.user.getDifficulty());
     ArrayList<Lesson> lessons = new ArrayList<Lesson>();
     for(LessonTopic topic : LessonTopic.values()) {
@@ -207,15 +207,10 @@ public ArrayList<User> getFriendList() {
       toAdd.setQuestions(this.user.getIncomplete(topic));
       lessons.add(toAdd);
     }
-     this.currentLanguage.setLessons(lessons);
      user.setLanguage(language);
      return this.currentLanguage;
   }
 
-  public void setLanguage(ForeignLanguage language,
-                              LanguageDifficulty difficulty) {
-    this.currentLanguage = new Language(language, difficulty);
-  }
 
   
   /** Begins the board game
