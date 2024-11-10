@@ -1,6 +1,7 @@
 package library;
 
 import java.util.HashMap;
+import java.util.function.BooleanSupplier;
 import java.util.ArrayList;
 /**
  * A class to manage a language learning dictionary of words and their
@@ -18,7 +19,7 @@ public class DictionaryManager {
         return manager;
       }
 
-    private DictionaryManager() {
+    DictionaryManager() {
         this.data = new HashMap<>();
         for(LanguageDifficulty difficulty : LanguageDifficulty.values()) {
           data.put(difficulty, new HashMap());
@@ -84,5 +85,10 @@ public class DictionaryManager {
             }
         }
         return null;
+    }
+
+    public BooleanSupplier hasWord(String string) {
+      // TODO Auto-generated method stub
+      throw new UnsupportedOperationException("Unimplemented method 'hasWord'");
     }
 }

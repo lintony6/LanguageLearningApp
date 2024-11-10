@@ -3,6 +3,8 @@ package library;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -108,7 +110,7 @@ public class DataLoader extends DataConstants{
     }
   }
 
-  public static void loadFriends(JSONArray usersJSON, UserList userList) {
+  private static void loadFriends(JSONArray usersJSON, UserList userList) {
     for(int i = 0; i < usersJSON.size(); ++i) {
       JSONObject userJSON = (JSONObject)usersJSON.get(i);
       JSONArray userFRIENDS = (JSONArray)userJSON.get(USER_FRIENDS);
@@ -123,7 +125,7 @@ public class DataLoader extends DataConstants{
   }
   }
 
-  public static void loadPersonalData(UserList userList, JSONArray usersJSON) {
+  private static void loadPersonalData(UserList userList, JSONArray usersJSON) {
     for (int i = 0; i < usersJSON.size(); ++i) {
       JSONObject userJSON = (JSONObject)usersJSON.get(i);
       JSONObject userSETTINGS = (JSONObject) userJSON.get(USER_SETTINGS);
@@ -150,7 +152,7 @@ public class DataLoader extends DataConstants{
     }
   }
 
-  public static void loadProgress(User user, JSONArray languages) {
+  private static void loadProgress(User user, JSONArray languages) {
     if(languages != null) {
       HashMap<LessonTopic, ArrayList<Object>> incompleteObjects = new HashMap<LessonTopic,ArrayList<Object>>();
       for(LessonTopic topic : LessonTopic.values()) {
@@ -166,15 +168,23 @@ public class DataLoader extends DataConstants{
         user.setModule(longValue.intValue());
         longValue = (Long)language.get(LANGUAGE_PROGRESS);
         user.setLanguageProgress(longValue.intValue());
+        int languageProgress = 50;
+        int module = 1;
         JSONArray incompleteArray = (JSONArray)language.get(INCOMPLETE);
         for(Object incompleteTopicObject : incompleteArray) {
           JSONObject incompleteTopic = (JSONObject) incompleteTopicObject;
-          JSONArray questionTypes = (JSONArray) incompleteTopic.get(QUESTIONTYPE);
           LessonTopic topic = LessonTopic.fromString((String)incompleteTopic.get(TOPIC));
+          if(!incompleteTopic.containsKey(QUESTIONTYPE)) {
+            user.complete(topic);
+            module++;
+            continue;
+          }
+          JSONArray questionTypes = (JSONArray) incompleteTopic.get(QUESTIONTYPE);
           Lesson tempNewLesson = new Lesson(difficulty,topic);
           for(Object object : questionTypes) {
             JSONObject question = (JSONObject) object;
             String type = String.valueOf(question.get(QUESTIONTYPE));
+            --languageProgress;
             if(question.containsKey(QUESTION_ID))
               longValue = (long)question.get(QUESTION_ID);
             switch(type) {
@@ -204,17 +214,21 @@ public class DataLoader extends DataConstants{
               } break;
             }
           }
+          user.setModule(module);
+          user.setLanguageProgress(languageProgress);
           user.setIncomplete(topic, incompleteObjects.get(topic));
         }
       }
     }
   }
 
-  public static BufferedReader getReaderFromFile(String fileName, String jsonFileName) {
+  private static BufferedReader getReaderFromFile(String fileName, String jsonFileName) {
     try {
       if(isJunitTest()) {
+        final Logger logger = LoggerFactory.getLogger(DataLoader.class);
         InputStream inputStream = DataLoader.class.getResourceAsStream(jsonFileName);
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        logger.info("test");
         return new BufferedReader(inputStreamReader);
       } else {
         FileReader reader = new FileReader(fileName);

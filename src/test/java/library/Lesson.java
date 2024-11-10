@@ -227,7 +227,6 @@ public class Lesson {
    * pair consisting of the foreign word and the english word
    */
   private void createMatching() {
-    
     ArrayList<Word> matching = manager.getWordsByTopic(this.difficulty, this.topic);
     this.questions.add(new Matching(matching));
   }
@@ -339,5 +338,9 @@ public class Lesson {
    */
   public ArrayList<Object> getQuestions() {
     return this.questions;
+  }
+
+  public void setQuestions(ArrayList<Object> questions) {
+    this.questions = questions;
   }
 }
