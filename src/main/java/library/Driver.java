@@ -162,8 +162,7 @@ public class Driver {
       userChoices.add(keyboard.nextInt()-1);
       keyboard.nextLine();
     }
-    System.out.println("Your score was :");
-    System.out.println(facade.getLesson().checkMatching(prompt, userChoices));
+    System.out.println("Your score was: "+ facade.getLesson().checkMatching(prompt, userChoices) + "/3");
     if(facade.getLesson().checkMatching(prompt, userChoices) == 3) {
       facade.getUser().correct(facade.getLesson().getTopic(), facade.getLesson().getMatching());
       return true;
@@ -342,7 +341,7 @@ public class Driver {
     facade.login("JimSmith01", "SmithRocks");
     facade.continueLanguage(ForeignLanguage.SPANISH);
     facade.startLesson(LessonTopic.FOOD);
-    playFlashcards();
+    playMatching();
     logout();
     // scenario1();
     // scenario2();

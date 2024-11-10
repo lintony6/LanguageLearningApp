@@ -105,7 +105,6 @@ public class DataWriter extends DataConstants{
           case PETS: topicObject.put(TOPIC, PETS); break;
          }
          if((user.getIncomplete(topic) == null)) {
-          System.out.println(topic);
           incompleteArray.add(topicObject);
           continue;
          }
