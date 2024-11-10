@@ -84,21 +84,5 @@ public class Board extends JPanel{
         initilizeBoard();
         return true;
     }
-
-    // Getter methods
-    public int getRows() {
-        return rows;
-    }
-
-    public int getColumns() {
-        return columns;
-    }
-
-    public String[][] getGrid() {
-        return grid;
-    }
-
-    public Color getColorAt(int row, int col) {
-        return colors[row][col];
-    }
 }
+   

@@ -246,6 +246,10 @@ public class User {
     return toReturn;
   }
 
+  public void setLessonProgress(LessonTopic topic, int progress) {
+    
+  }
+
   public void setLanguageProgress(int progress) {
     this.progress.setLanguageProgress(progress);
   }

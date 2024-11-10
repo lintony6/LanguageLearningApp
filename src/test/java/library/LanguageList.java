@@ -1,58 +1,82 @@
 package library;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.UUID;
 
-class LanguageListTest {
-    private LanguageList languageList;
-    private UUID userID;
-    private ForeignLanguage language1;
-    private ForeignLanguage language2;
-    private LanguageDifficulty difficulty;
+/**
+ * The LanguageList class manages a list of languages associated with
+ * each user using a HashMap.
+ * @author Tony Lin
+ */
+public class LanguageList {
+  private static LanguageList languageList;
+  private HashMap<UUID, ArrayList<Language>> userLanguages;
 
-    @BeforeEach
-    void setUp() {
-        languageList = LanguageList.getInstance(); // Singleton instance
-        userID = UUID.randomUUID();
-        language1 = ForeignLanguage.SPANISH; // Assuming ForeignLanguage is an enum or constant
-        language2 = ForeignLanguage.FRENCH;
-        difficulty = LanguageDifficulty.INTERMEDIATE; // Assuming LanguageDifficulty is an enum or constant
+  /**
+   * Private constructor that initializes the HashMap userLanguages
+   */
+  private LanguageList() {
+    userLanguages = new HashMap<UUID,ArrayList<Language>>();
+  }
+  
+  /** Checks if there exists an instance of LanguageList. If one exists
+   * returns that LanguageList. If one does not exist will create new
+   * LanguageList to return
+   * @return LanguageList
+   */
+  public static LanguageList getInstance() {
+    if(languageList == null)
+      languageList = new LanguageList();
+    return languageList;
+  }
+
+  /** Checks if the user has other languages in the HashMap. If this
+   * is the user's first language, will add them to the HashMap with
+   * a new ArrayList to hold their languages. If the user has a
+   * previous language, it just adds the language onto their existing
+   * ArrayList
+   * @param userID Of the user to add the language
+   * @param language To be added to the user
+   * @return Language back to the user for them to complete
+   */
+  public Language addLanguage(UUID userID, ForeignLanguage language,
+                              LanguageDifficulty difficulty) {
+    Language toReturn = new Language(language,difficulty);
+    if(!this.userLanguages.keySet().contains(userID)) {
+      userLanguages.put(userID, new ArrayList<Language>());
+      userLanguages.get(userID).add(toReturn);
+    }
+    else {
+      this.userLanguages.get(userID).add(toReturn);
+    }
+    return toReturn;
     }
 
-    @Test
-    void testAddLanguage() {
-        Language addedLanguage = languageList.addLanguage(userID, language1, difficulty);
-        assertNotNull(addedLanguage);
-        assertEquals(language1, addedLanguage.getForeignLanguage());
-        assertEquals(difficulty, addedLanguage.getDifficulty());
-    }
+  /** Goes through the list of a user's languages and if the user
+   * has added the foreign language requested, it will return that 
+   * language. If the user requested a language they have not 
+   * added, then it returns null
+   * @param userID of the user to get their languages
+   * @param language the foreign language requested by user
+   * @return Language requested by user
+   */
+  public Language getLanguage(UUID userID, ForeignLanguage language) {
 
-    @Test
-    void testGetLanguage() {
-        languageList.addLanguage(userID, language1, difficulty);
-        Language retrievedLanguage = languageList.getLanguage(userID, language1);
-        assertNotNull(retrievedLanguage);
-        assertEquals(language1, retrievedLanguage.getForeignLanguage());
+    for(int i = 0; i < userLanguages.get(userID).size(); ++i) {
+      if(userLanguages.get(userID).get(i).getForeignLanguage().equals(language))
+        return userLanguages.get(userID).get(i);
     }
+    return null;
+  }
 
-    @Test
-    void testGetLanguage_NotAdded() {
-        languageList.addLanguage(userID, language1, difficulty);
-        Language retrievedLanguage = languageList.getLanguage(userID, language2);
-        assertNull(retrievedLanguage);
-    }
+  /** Returns an ArrayList of all the languages added by a user
+   * @param userID Of the user
+   * @return ArrayList<Language> All of the languages added by user
+   */
+  public ArrayList<Language> getAllLanguages(UUID userID) {
+    return userLanguages.get(userID);
+  }
 
-    @Test
-    void testGetAllLanguages() {
-        languageList.addLanguage(userID, language1, difficulty);
-        languageList.addLanguage(userID, language2, difficulty);
-        ArrayList<Language> allLanguages = languageList.getAllLanguages(userID);
-        assertEquals(2, allLanguages.size());
-        assertTrue(allLanguages.stream().anyMatch(lang -> lang.getForeignLanguage().equals(language1)));
-        assertTrue(allLanguages.stream().anyMatch(lang -> lang.getForeignLanguage().equals(language2)));
-    }
+
 }

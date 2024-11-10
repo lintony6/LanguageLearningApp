@@ -1,5 +1,7 @@
 package library;
 import static org.junit.jupiter.api.Assertions.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterAll;
@@ -9,12 +11,15 @@ import java.util.UUID;
 import java.util.ArrayList;
 
 public class LanguageLearningSystemFacadeTests {
+  private static final Logger logger = LoggerFactory.getLogger(LanguageLearningSystemFacadeTests.class);
   private static LanguageLearningSystemFacade facade;
 
   @BeforeAll
   public static void oneTimeSetup() {   
     facade = LanguageLearningSystemFacade.getInstance();
     facade.login("JimSmith01", "SmithRocks");
+   // logger.info(String.valueOf(DataConstants.isJunitTest()));
+
   }
         
   @AfterAll
@@ -35,6 +40,7 @@ public class LanguageLearningSystemFacadeTests {
   public void testSingleton() {
   LanguageLearningSystemFacade facade2 = LanguageLearningSystemFacade.getInstance();
   assertEquals(facade,facade2);
+
   }
     
   @Test
@@ -214,4 +220,5 @@ public class LanguageLearningSystemFacadeTests {
     facade.endLesson(ForeignLanguage.SPANISH, lesson);
     assertTrue(facade.getLesson() == null);
   }
+
 }

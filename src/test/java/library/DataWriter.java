@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,7 +35,35 @@ public class DataWriter extends DataConstants{
       JSONObject userJSON = new JSONObject();
       savePersonalData(user, userJSON);
       saveFriends(user, userJSON);
-      if(user.getLanguage()!= null) {
+      saveProgress(user, userJSON);
+      usersJSON.add(userJSON);
+    }   
+      String filePath = getFileWritingPath(USER_JSON, USER_JUNIT);
+      String current = new File(".").getAbsolutePath();
+      System.out.println(current);
+      FileWriter writer = new FileWriter(filePath);
+      writer.write(usersJSON.toJSONString());
+      writer.flush();
+    } catch (Exception e) {
+        System.out.println(e);
+    }
+  }
+
+  private static void saveFriends(User user, JSONObject userJSON) {
+    JSONArray friendsJSON = new JSONArray();
+    ArrayList<User> friendList = user.getFriendList();
+    for(User friend : friendList) {
+      JSONObject friendJSON = new JSONObject();
+      friendJSON.put(USER_ID, friend.getUserID().toString());
+      friendJSON.put(USER_USERNAME, friend.getUserName());
+      friendsJSON.add(friendJSON);
+    }
+    userJSON.put(USER_FRIENDS, friendsJSON);
+  }
+
+  private static void saveProgress(User user, JSONObject userJSON) {
+    if(user.getLanguage()!= null) {
+      ArrayList<Object> addedQuestions = new ArrayList<>();
       JSONArray languagesArray = new JSONArray();
       JSONObject spanishObject = new JSONObject();
       spanishObject.put(FOREIGN_LANGUAGE, String.valueOf(user.getLanguage()));
@@ -67,10 +96,25 @@ public class DataWriter extends DataConstants{
       spanishObject.put(TROUBLE,troubleArray);
        JSONArray incompleteArray = new JSONArray();
        for(LessonTopic topic : LessonTopic.values()) {
-        if(!(user.getIncomplete(topic) == null)) {
-         JSONObject incompleteObject = new JSONObject();
+        JSONObject topicObject = new JSONObject();
+        switch(topic) {
+          case SCHOOL: topicObject.put(TOPIC, SCHOOL); break;
+          case FAMILY: topicObject.put(TOPIC, FAMILY); break;
+          case WEATHER: topicObject.put(TOPIC, WEATHER); break;
+          case FOOD: topicObject.put(TOPIC, FOOD); break;
+          case PETS: topicObject.put(TOPIC, PETS); break;
+         }
+         if((user.getIncomplete(topic) == null)) {
+          System.out.println(topic);
+          incompleteArray.add(topicObject);
+          continue;
+         }
+        else if(!(user.getIncomplete(topic) == null)) {
          JSONArray questionTypes = new JSONArray();
          for(Object object : user.getIncomplete(topic)) {
+          if(addedQuestions.contains(object)) {
+            continue;
+          }
           JSONObject questionObj = new JSONObject();
             if(object instanceof Matching) {
               questionObj.put(QUESTIONTYPE, MATCHING);
@@ -89,17 +133,10 @@ public class DataWriter extends DataConstants{
               questionObj.put(QUESTIONTYPE, FLASHCARD);
             }
             questionTypes.add(questionObj);
+            addedQuestions.add(object);
          }
-         switch(topic) {
-          case SCHOOL: incompleteObject.put(TOPIC, SCHOOL); break;
-          case FAMILY: incompleteObject.put(TOPIC, FAMILY); break;
-          case WEATHER: incompleteObject.put(TOPIC, WEATHER); break;
-          case FOOD: incompleteObject.put(TOPIC, FOOD); break;
-          case PETS: incompleteObject.put(TOPIC, PETS); break;
-         }
-
-         incompleteObject.put(QUESTIONTYPE,questionTypes);
-         incompleteArray.add(incompleteObject);
+         topicObject.put(QUESTIONTYPE,questionTypes);
+         incompleteArray.add(topicObject);
         }
        }
        spanishObject.put(TROUBLE, troubleArray);
@@ -107,30 +144,9 @@ public class DataWriter extends DataConstants{
        languagesArray.add(spanishObject);
        userJSON.put(USER_LANGUAGES,languagesArray);
       }
-        usersJSON.add(userJSON);
-    }   
-      String filePath = getFileWritingPath(USER_JSON, USER_JUNIT);
-      FileWriter writer = new FileWriter(filePath);
-      writer.write(usersJSON.toJSONString());
-      writer.flush();
-    } catch (Exception e) {
-        System.out.println(e);
-    }
   }
 
-  public static void saveFriends(User user, JSONObject userJSON) {
-    JSONArray friendsJSON = new JSONArray();
-    ArrayList<User> friendList = user.getFriendList();
-    for(User friend : friendList) {
-      JSONObject friendJSON = new JSONObject();
-      friendJSON.put(USER_ID, friend.getUserID().toString());
-      friendJSON.put(USER_USERNAME, friend.getUserName());
-      friendsJSON.add(friendJSON);
-    }
-    userJSON.put(USER_FRIENDS, friendsJSON);
-  }
-
-  public static void savePersonalData (User user, JSONObject userJSON) {
+  private static void savePersonalData (User user, JSONObject userJSON) {
     userJSON.put(USER_ID, user.getUserID().toString());
     userJSON.put(USER_FIRST_NAME, user.getFirstName());
     userJSON.put(USER_LAST_NAME, user.getLastName());
@@ -151,7 +167,7 @@ public class DataWriter extends DataConstants{
    * @param object to be differentiated
    * @return casted version of the object 
    */
-  public static Object getQuestionType(Object object) {
+  private static Object getQuestionType(Object object) {
     if (object instanceof MultipleChoice) 
       return (MultipleChoice) object;
     else if (object instanceof FillBlank) 
@@ -165,7 +181,7 @@ public class DataWriter extends DataConstants{
     return null;
   }
 
-  public static String getFileWritingPath(String filePath, String junitFilePath) {
+  private static String getFileWritingPath(String filePath, String junitFilePath) {
     try {
       if(isJunitTest()) {
         URI url = DataWriter.class.getResource(junitFilePath).toURI();

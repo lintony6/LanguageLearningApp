@@ -1,75 +1,141 @@
 package library;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
-class UserListTest {
-    private UserList userList;
+/**
+ * The class UserList maintains a collection of Users using a 
+ * HashMap with UUID as the key and the User as the value;
+ * @author Tony Lin and Ishaan Cheema
+ */
 
-    @BeforeEach
-    void setUp() {
-        userList = UserList.getInstance(); // Singleton instance
-    }
+public class UserList {
+  private HashMap<UUID, User> users;
+  private static UserList userList;
+  private int size;
 
-    @Test
-    void testAddUser() {
-        UUID userID = UUID.randomUUID();
-        User user = userList.addUser("John", "Doe", "jdoe", "password123", "jdoe@example.com", userID);
-        assertNotNull(user);
-        assertEquals("John", user.getFirstName());
-        assertEquals(userID, user.getUserID());
-    }
+   /**
+   * Private constructor to prevent direct instantiation.
+   */
 
-    @Test
-    void testGetUser() {
-        UUID userID = UUID.randomUUID();
-        userList.addUser("Jane", "Doe", "janedoe", "securepass", "jane@example.com", userID);
-        User user = userList.getUser(userID);
-        assertNotNull(user);
-        assertEquals("Jane", user.getFirstName());
-    }
+  UserList() {
+    users = new HashMap<>();
+    size = 0;
+  }
 
-    @Test
-    void testEditUser() {
-        UUID userID = UUID.randomUUID();
-        userList.addUser("Sam", "Smith", "ssmith", "samspass", "sam@example.com", userID);
-        userList.editUser(userID, 1, "Johnson"); // Edit last name
-        User user = userList.getUser(userID);
-        assertEquals("Johnson", user.getLastName());
-    }
+    /**
+     * Gets the single instance of {@code UserList}. 
+     * Creates it if it doesn’t exist.
+     * 
+     * @return the singleton instance of {@code UserList}
+     */
 
-    @Test
-    void testRemoveUser() {
-        UUID userID = UUID.randomUUID();
-        userList.addUser("Alex", "Brown", "abrown", "alexpass", "alex@example.com", userID);
-        boolean removed = userList.removeUser(userID);
-        assertTrue(removed);
-        assertNull(userList.getUser(userID));
+  public static synchronized UserList getInstance() {
+    if (userList == null) {
+      userList = new UserList();
+      DataLoader.loadUsers(userList);
     }
+    return userList;
+  }
 
-    @Test
-    void testLogin() {
-        UUID userID = UUID.randomUUID();
-        userList.addUser("Chris", "White", "cwhite", "chrispass", "chris@example.com", userID);
-        User user = userList.login("cwhite", "chrispass");
-        assertNotNull(user);
-        assertEquals("Chris", user.getFirstName());
-    }
+    /*
+     * Adds a new user. 
+     * Adds all of the information as well.
+    */
 
-    @Test
-    void testGetUserID() {
-        UUID userID = UUID.randomUUID();
-        userList.addUser("Katie", "Green", "kgreen", "kpass", "katie@example.com", userID);
-        UUID retrievedID = userList.getUserID("kgreen");
-        assertEquals(userID, retrievedID);
-    }
+  public User addUser(String firstName, String lastName,
+                      String userName, String password, String email,
+                      UUID userID) {
+    User toAdd = new User(firstName, lastName, userName, password, email, userID);
+    users.put(userID, toAdd);
+    ++size;
+    return toAdd;
+  }
 
-    @Test
-    void testGetSize() {
-        int initialSize = userList.getSize();
-        userList.addUser("Leo", "Black", "lblack", "leopass", "leo@example.com", UUID.randomUUID());
-        assertEquals(initialSize + 1, userList.getSize());
+  /*
+  * Gets a user by {@code UUID}. 
+  */
+
+  public User getUser(UUID userID) {
+    return users.get(userID);
+  }
+
+  /*
+  * Edits a user’s info by field index. 
+  */
+
+  public User editUser(UUID userID, int change, String updated) {
+    switch(change) {
+      case 0: users.get(userID).setFirstName(updated); break;
+      case 1: users.get(userID).setLastName(updated); break;
+      case 2: users.get(userID).setUserName(updated); break;
+      case 3: users.get(userID).setPassword(updated); break;
+      case 4: users.get(userID).setEmail(updated); break;
     }
+    return users.get(userID);
+  }
+
+  /*
+  * Removes a user by {@code UUID}. 
+  */
+
+  public boolean removeUser(UUID userID) {
+    users.remove(userID);
+    --size;
+    return true;
+  }
+
+  /*
+  * Authenticates a user by username and password. 
+  */
+
+  public User login(String userName, String password) {
+    for (User user : users.values()) {
+      if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
+        return user;
+      }
+    }
+    return null;
+  }
+
+  /*
+  * Finds a user’s {@code UUID} by username. 
+  */
+
+  public UUID getUserID(String userName) {
+    for (User user : users.values()) {
+      if (user.getUserName().equals(userName)) {
+        return user.getUserID();
+      }
+    }
+    return null;
+  }
+
+  /*
+  * Saves the user list. 
+  */
+
+  public void saveUsers() {
+    DataWriter.saveUsers(getAllUsers());
+  }
+
+  /*
+  * Gets the number of users. 
+  */
+
+  public Integer getSize() {
+    return this.size;
+  }
+
+  /*
+  * Returns a list of all users. 
+  */
+
+  public ArrayList<User> getAllUsers() {
+    ArrayList<User> toReturn = new ArrayList<>();
+    for(User user : users.values())
+      toReturn.add(user);
+    return toReturn;
+  }
 }
